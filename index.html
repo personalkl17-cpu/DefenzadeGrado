@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15 Temas — Defensa de Grado CE.FO.TE.S. 2026</title>
+<style>
+:root{
+  --bg1:#0f1708; --bg2:#1e2c11; --bg3:#141e0a;
+  --gold:#c9a227; --gold-l:#e8c95a; --gold-d:#8a6f12;
+  --cream:#f2ecd8; --muted:#a9b78e;
+  --line:rgba(201,162,39,.30);
+  --card:rgba(255,255,255,.055); --card-2:rgba(201,162,39,.09);
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:#050803;font-family:var(--font);color:var(--cream)}
+
+/* ================= HEADER + MENÚ ================= */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:linear-gradient(180deg,rgba(15,23,8,.98),rgba(15,23,8,.92));
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  padding:10px 24px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.topbar .brand{
+  display:flex;align-items:center;gap:12px;
+  font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold-l);
+}
+.topbar .brand img{width:38px;height:38px;object-fit:contain}
+.topbar .brand .sep{width:1px;height:28px;background:var(--line)}
+.topbar .brand .title{font-size:11px;color:var(--muted);letter-spacing:.05em;font-weight:600;text-transform:none}
+
+.menu-wrap{
+  flex:1;min-width:280px;max-width:640px;position:relative;
+}
+.menu-toggle{
+  width:100%;
+  background:rgba(201,162,39,.10);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px 14px;
+  color:var(--cream);font-family:inherit;
+  font-size:13.5px;font-weight:700;
+  text-align:left;cursor:pointer;
+  display:flex;align-items:center;gap:10px;
+  transition:all .25s;
+}
+.menu-toggle:hover{background:rgba(201,162,39,.20);border-color:var(--gold)}
+.menu-toggle .num{
+  background:var(--gold);color:#1a2410;
+  font-size:11px;font-weight:900;
+  padding:2px 8px;border-radius:20px;letter-spacing:.05em;
+}
+.menu-toggle .lbl{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.menu-toggle .arrow{
+  transition:transform .3s;font-size:11px;color:var(--gold);
+}
+.menu-toggle.open .arrow{transform:rotate(180deg)}
+
+.menu-panel{
+  position:absolute;top:calc(100% + 8px);left:0;right:0;
+  background:linear-gradient(150deg,#0d1406,#1f2c12);
+  border:1px solid var(--line);
+  border-radius:12px;
+  box-shadow:0 20px 50px rgba(0,0,0,.75);
+  max-height:70vh;overflow-y:auto;
+  padding:8px;
+  display:none;
+  z-index:110;
+}
+.menu-panel.open{display:block;animation:fadeMenu .25s ease}
+@keyframes fadeMenu{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.menu-panel button{
+  width:100%;text-align:left;
+  background:transparent;border:none;
+  color:var(--cream);font-family:inherit;
+  font-size:13px;padding:10px 12px;
+  border-radius:8px;cursor:pointer;
+  display:flex;align-items:center;gap:12px;
+  transition:all .18s;
+  border-left:3px solid transparent;
+}
+.menu-panel button:hover{background:rgba(201,162,39,.12);border-left-color:var(--gold)}
+.menu-panel button.active{
+  background:rgba(201,162,39,.20);border-left-color:var(--gold-l);
+  font-weight:800;color:var(--gold-l);
+}
+.menu-panel button .n{
+  width:28px;height:28px;flex-shrink:0;
+  display:grid;place-items:center;
+  background:rgba(201,162,39,.15);
+  border-radius:7px;
+  font-size:11px;font-weight:800;color:var(--gold);
+}
+.menu-panel button.active .n{background:var(--gold);color:#1a2410}
+
+/* ================= STAGE / DECK ================= */
+.stage{
+  padding:24px 16px 100px;
+  display:flex;justify-content:center;
+}
+.deck{
+  width:1280px;height:720px;position:relative;
+  box-shadow:0 30px 90px rgba(0,0,0,.75);
+  border-radius:8px;overflow:hidden;
+  background:linear-gradient(150deg,var(--bg1),var(--bg2) 55%,var(--bg3));
+  border:1px solid rgba(201,162,39,.35);
+  transform-origin:center top;
+  transition:transform .2s ease;
+}
+/* LOGO UNIPOL fijo */
+.deck-logo-unipol{
+  position:absolute;top:12px;right:18px;width:78px;height:78px;z-index:30;
+  object-fit:contain;pointer-events:none;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.7));
+}
+.icon{width:22px;height:22px;flex-shrink:0;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.icon.lg{width:30px;height:30px}
+
+/* ================= SLIDE ================= */
+.slide{
+  position:absolute;inset:0;padding:32px 58px 44px;
+  display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transform:translateY(14px) scale(.99);
+  transition:opacity .5s ease,transform .5s ease,visibility .5s;
+  background:linear-gradient(150deg,var(--bg1),var(--bg2) 55%,var(--bg3));
+}
+.slide.active{opacity:1;visibility:visible;transform:none}
+.slide::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:7px;
+  background:linear-gradient(180deg,var(--gold),var(--gold-d));
+}
+
+/* PORTADA DE TEMA */
+.slide.tcover{
+  justify-content:center;align-items:center;text-align:center;padding:44px 80px;
+  background:radial-gradient(760px 420px at 50% 42%, rgba(201,162,39,.18), transparent 70%),
+    linear-gradient(150deg,#0d1406,#1f2c12 55%,#0d1406);
+}
+.slide.tcover::before{background:linear-gradient(180deg,var(--gold),#1f5c1f)}
+.tnum{font-size:12.5px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.cefotes-logo{width:145px;height:145px;margin:4px 0 8px;object-fit:contain;filter:drop-shadow(0 10px 28px rgba(0,0,0,.7))}
+.tcover-title{font-size:30px;line-height:1.15;font-weight:900;letter-spacing:-.5px;color:var(--cream);max-width:1050px;margin-bottom:8px}
+.tcover-sub{font-size:13px;color:var(--muted);max-width:880px;line-height:1.5;margin-bottom:16px}
+.tcover-foot{display:flex;gap:44px;justify-content:center;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:14px;width:100%;max-width:1000px}
+.tcover-foot div{font-size:12px;color:var(--muted);line-height:1.5;text-align:center}
+.tcover-foot strong{display:block;color:var(--cream);font-size:13.5px;font-weight:700}
+.tcover-foot em{font-style:normal;color:var(--gold);font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:3px;font-weight:800}
+
+/* SLIDE INTERIOR */
+.kicker{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.stitle{font-size:26px;line-height:1.12;font-weight:800;color:var(--cream);letter-spacing:-.3px;padding-bottom:8px;border-bottom:2px solid var(--line);margin-bottom:12px}
+.sbody{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  min-height:0;
+  overflow:visible;
+  justify-content:space-evenly;   /* ← ESTO ES LA CLAVE */
+  padding:6px 0;                  /* pequeño respiro arriba/abajo */
+}
+
+/* COMPONENTES */
+ul.bullets{list-style:none;display:flex;flex-direction:column;gap:6px}
+ul.bullets li{position:relative;padding-left:22px;font-size:13.8px;line-height:1.45;color:var(--cream)}
+ul.bullets li::before{content:"";position:absolute;left:0;top:6px;width:8px;height:8px;border-radius:2px;background:var(--gold);transform:rotate(45deg)}
+ul.bullets li b{color:var(--gold-l)}
+
+.cards{display:grid;gap:9px}
+.cards.c2{grid-template-columns:repeat(2,1fr)}
+.cards.c3{grid-template-columns:repeat(3,1fr)}
+.cards.c4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:9px;padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.card-head{display:flex;align-items:center;gap:7px}
+.card-head .icon{width:17px;height:17px}
+.card-head h4{font-size:12.8px;color:var(--gold-l);font-weight:800;letter-spacing:.02em;line-height:1.18}
+.card p{font-size:11.6px;line-height:1.4;color:var(--cream);opacity:.94}
+
+.quote{background:var(--card-2);border-left:4px solid var(--gold-l);border-radius:9px;padding:11px 15px;font-size:13.4px;line-height:1.45;color:var(--cream);font-style:italic}
+.quote span{display:block;margin-top:4px;font-size:11.5px;font-style:normal;color:var(--gold-l);font-weight:700}
+
+.highlight{
+  background:linear-gradient(135deg,rgba(201,162,39,.20),rgba(201,162,39,.06));
+  border:1px solid rgba(201,162,39,.42);border-radius:9px;
+  padding:10px 14px;font-size:13px;line-height:1.42;color:var(--cream);
+  display:flex;align-items:center;gap:10px;
+}
+.highlight b{color:var(--gold-l)}
+
+.pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:8px;padding:7px 11px;font-size:11.8px;color:var(--cream)}
+.pill .icon{width:17px;height:17px}
+.pill b{color:var(--gold-l)}
+.pills-row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.pills-row.c2{grid-template-columns:repeat(2,1fr)}
+.pills-row.c4{grid-template-columns:repeat(4,1fr)}
+
+.icon-strip{display:flex;justify-content:space-around;align-items:center;gap:12px;background:var(--card-2);border:1px solid var(--line);border-radius:10px;padding:9px 14px}
+.icon-strip .item{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;text-align:center}
+.icon-strip .item .icon{width:24px;height:24px;stroke:var(--gold-l)}
+.icon-strip .item span{font-size:10.3px;color:var(--cream);font-weight:700;letter-spacing:.02em;line-height:1.2}
+
+/* CIERRE */
+.cierre-idea{
+  display:flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,rgba(201,162,39,.22),rgba(201,162,39,.06));
+  border:1px solid rgba(201,162,39,.42);
+  border-left:5px solid var(--gold-l);
+  border-radius:10px;padding:10px 14px;
+  font-size:12.8px;line-height:1.4;color:var(--cream);
+}
+.cierre-idea .tag{
+  flex-shrink:0;display:inline-flex;align-items:center;gap:6px;
+  background:var(--gold);color:#1a2410;
+  font-size:10px;font-weight:900;letter-spacing:.12em;
+  padding:4px 9px;border-radius:20px;text-transform:uppercase;
+}
+.cierre-idea .tag svg{width:12px;height:12px;stroke:#1a2410;fill:none;stroke-width:2.4}
+.cierre-idea b{color:var(--gold-l)}
+
+/* Pie de slide */
+.slide-number{position:absolute;right:58px;bottom:14px;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.08em}
+.footer-brand{position:absolute;left:58px;bottom:14px;font-size:10.5px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+
+/* ================= CONTROLES ================= */
+.progress{position:fixed;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.08);z-index:50}
+.progress__bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold-d),var(--gold-l));transition:width .35s ease}
+
+.controls{
+  position:fixed;right:16px;bottom:16px;z-index:60;
+  display:flex;gap:8px;align-items:center;
+  background:rgba(15,22,8,.85);border:1px solid var(--line);
+  backdrop-filter:blur(8px);padding:6px 10px;border-radius:999px;
+}
+.controls button{
+  width:32px;height:32px;border-radius:50%;border:none;cursor:pointer;
+  background:rgba(201,162,39,.18);color:var(--cream);font-size:15px;
+  display:grid;place-items:center;transition:background .2s;
+}
+.controls button:hover{background:var(--gold);color:#1a2410}
+.controls .counter{
+  font-size:12px;color:var(--cream);font-weight:700;
+  padding:0 8px;min-width:62px;text-align:center;font-variant-numeric:tabular-nums;
+}
+.hint{
+  position:fixed;left:16px;bottom:16px;z-index:60;
+  font-size:11px;color:rgba(242,236,216,.45);letter-spacing:.04em;
+}
+
+/* RESPONSIVE */
+@media (max-width:1400px){
+  .deck{transform:scale(.85)}
+}
+@media (max-width:1180px){
+  .deck{transform:scale(.7)}
+}
+@media (max-width:960px){
+  .deck{transform:scale(.55)}
+  .topbar{padding:8px 12px}
+  .topbar .brand .title{display:none}
+}
+@media (max-width:720px){
+  .deck{transform:scale(.42)}
+  .hint{display:none}
+}
+
+/* PRINT */
+@media print{
+  @page{size:1280px 720px;margin:0}
+  html,body{overflow:visible;background:#fff}
+  .topbar,.controls,.progress,.hint{display:none !important}
+  .stage{padding:0}
+  .deck{transform:none !important;width:1280px;height:auto;box-shadow:none;border-radius:0}
+  .slide{position:relative;opacity:1 !important;visibility:visible !important;transform:none !important;width:1280px;height:720px;page-break-after:always}
+  .slide:last-child{page-break-after:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= BIBLIOTECA DE ICONOS ================= -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 0-2 2V5z"/><path d="M21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 1 2 2V5z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3z"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18M6 21h12M3 8h18M6 8l-3 6h6L6 8zM18 8l-3 6h6l-3-6z"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.4"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 20c0-2.2 1.5-4 3.5-4S22 17.8 22 20"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="M15 15l6 6"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M4 15l1-6h14l1 6v4h-3v-2H7v2H4v-4z"/><circle cx="7" cy="15" r="1.6"/><circle cx="17" cy="15" r="1.6"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l5 5v13H6z"/><path d="M14 3v6h6M9 13h8M9 17h8"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></symbol>
+  <symbol id="i-brain" viewBox="0 0 24 24"><path d="M9 4a4 4 0 0 0-4 4 4 4 0 0 0-1 7 4 4 0 0 0 5 5V4zM15 4a4 4 0 0 1 4 4 4 4 0 0 1 1 7 4 4 0 0 1-5 5V4z"/><path d="M9 9h6M9 14h6"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-5M12 16V8M16 16v-8M20 16v-3"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5M12 18h.01"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 4 3 14 0 18M12 3c-3 4-3 14 0 18"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 3v18M5 4h13l-2 4 2 4H5"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.8 6 6.2.9-4.5 4.4 1 6.2L12 17.6 6.5 20.5l1-6.2L3 9.9 9.2 9 12 3z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></symbol>
+  <symbol id="i-gavel" viewBox="0 0 24 24"><path d="M14 4l6 6-3 3-6-6zM11 11l-7 7 3 3 7-7zM13 13l-2 2"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 13V5a1.5 1.5 0 0 1 3 0v6M11 11V4a1.5 1.5 0 0 1 3 0v7M14 11V5a1.5 1.5 0 0 1 3 0v8M17 13V8a1.5 1.5 0 0 1 3 0v7a6 6 0 0 1-6 6h-2a6 6 0 0 1-6-6v-3l-2 2"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 7l1.5-3h5L16 7"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M14 9l2 2"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s-7-7.5-7-12a7 7 0 0 1 14 0c0 4.5-7 12-7 12z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5z"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M9 4h9v16H9z"/><path d="M6 6v14h9"/></symbol>
+  <symbol id="i-hex" viewBox="0 0 24 24"><path d="M12 2l9 5v10l-9 5-9-5V7l9-5z"/></symbol>
+  <symbol id="i-medal" viewBox="0 0 24 24"><circle cx="12" cy="14" r="6"/><path d="M8 3l4 5 4-5M12 11v6M9.5 14l5 0"/></symbol>
+  <symbol id="i-camera2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M3 20l6-6M21 4l-6 6"/></symbol>
+</svg>
+
+<!-- ================= TOPBAR ================= -->
+<div class="topbar">
+  <div class="brand">
+    <img src="logo-unipol.png" alt="UNIPOL" onerror="this.style.display='none'">
+    <div class="sep"></div>
+    <div>
+      <div>CE.FO.TE.S. Santa Cruz · 2026</div>
+      <div class="title">Defensa de Grado — 15 Unidades Temáticas</div>
+    </div>
+  </div>
+  <div class="menu-wrap">
+    <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+      <span class="num" id="menuNum">01</span>
+      <span class="lbl" id="menuLbl">DOCTRINA E HISTORIA POLICIAL</span>
+      <span class="arrow">▼</span>
+    </button>
+    <div class="menu-panel" id="menuPanel"></div>
+  </div>
+</div>
+
+<!-- ================= STAGE ================= -->
+<div class="stage">
+  <div class="deck" id="deck">
+    <img src="logo-unipol.png" alt="UNIPOL" class="deck-logo-unipol" onerror="this.style.display='none'">
+    <div id="slidesContainer"></div>
+  </div>
+</div>
+
+<!-- Progreso -->
+<div class="progress"><div class="progress__bar" id="bar"></div></div>
+
+<!-- Controles -->
+<div class="controls">
+  <button id="prev" title="Anterior (←)">‹</button>
+  <span class="counter" id="counter">1 / 6</span>
+  <button id="next" title="Siguiente (→)">›</button>
+  <button id="full" title="Pantalla completa (F)">⛶</button>
+</div>
+
+<div class="hint">← → navegar · F pantalla completa · Ctrl+P exportar a PDF</div>
+
+<script>
+/* ============================================================
+   DATOS: 15 TEMAS · 6 DIAPOSITIVAS CADA UNO
+   ============================================================ */
+const temas = [
+/* ============================================================
+   TEMA 1 — DOCTRINA E HISTORIA POLICIAL
+   ============================================================ */
+{
+  id:1, titulo:"DOCTRINA E HISTORIA POLICIAL",
+  subtitulo:"Formación histórica de la institución policial boliviana y elementos conceptuales que estructuran su doctrina: evolución normativa, principios, valores, deberes, fuentes y gestión doctrinal.",
+  slides:[
+    {
+      tipo:"tcover",
+      titulo:"DOCTRINA E HISTORIA POLICIAL",
+      subtitulo:"Formación histórica de la institución policial boliviana y elementos conceptuales que estructuran su doctrina: evolución normativa, principios, valores, deberes, fuentes y gestión doctrinal."
+    },
+    {
+      kicker:"Unidad 01 · Doctrina e Historia Policial",
+      titulo:"Antecedentes históricos y evolución institucional",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-book"/></svg><h4>Época precolombina</h4></div><p>Mecanismos de autoridad, vigilancia comunitaria y sanción en el ayllu; sin policía profesional.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Época colonial</h4></div><p>Funciones dispersas entre cabildos, corregidores y alcaldes; control urbano y cumplimiento de ordenanzas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-doc"/></svg><h4>Ley Reglamentaria de 1826</h4></div><p>Primer marco normativo republicano: organiza funciones policiales, autoridades y competencias.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-star"/></svg><h4>Tendencia institucional</h4></div><p>Centralización, profesionalización y consolidación de la identidad policial boliviana.</p></div>
+        </div>
+        <div class="icon-strip">
+          <div class="item"><svg class="icon"><use href="#i-flag"/></svg><span>Gendarmería<br>1826</span></div>
+          <div class="item"><svg class="icon"><use href="#i-shield"/></svg><span>Guardia Nac.<br>1831</span></div>
+          <div class="item"><svg class="icon"><use href="#i-users"/></svg><span>Cuerpo Nac.<br>1937</span></div>
+          <div class="item"><svg class="icon"><use href="#i-medal"/></svg><span>Policía Bol.<br>1961</span></div>
+          <div class="item"><svg class="icon"><use href="#i-hex"/></svg><span>Guardia<br>1965</span></div>
+          <div class="item"><svg class="icon"><use href="#i-star"/></svg><span>Policía Bol.<br>2009</span></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Reformas clave:</b> 1826 Gendarmería e Intendencia · 1831 Guardia Nacional · 1937 Cuerpo Nacional de Policías y Carabineros · 1961 Policía Boliviana · 1965 Guardia Nacional de Seguridad Pública · 1967 Policía Nacional · 2009 Policía Boliviana constitucional.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 01 · Doctrina e Historia Policial",
+      titulo:"Doctrina institucional: dimensión, etimología y definición",
+      contenido:`
+        <div class="pills-row">
+          <div class="pill"><svg class="icon"><use href="#i-scale"/></svg><span><b>Jurídica</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-chart"/></svg><span><b>Organizacional</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-users"/></svg><span><b>Social</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-heart"/></svg><span><b>Ética</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-target"/></svg><span><b>Operativa</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-book"/></svg><span><b>Histórica</b></span></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Etimología:</b> del latín <i>doctrina</i> — enseñanza, instrucción y conocimiento transmitido; es esencialmente formativa.</li>
+          <li><b>Definición:</b> conjunto sistemático y dinámico de principios, valores, normas, conocimientos, tradiciones, experiencias y criterios institucionales que orientan la formación, organización, decisión y actuación policial.</li>
+        </ul>
+        <div class="quote">
+          «La doctrina policial es el sistema institucional de pensamiento, identidad y acción que integra historia, normativa, principios, valores, tradiciones y experiencia profesional.»
+          <span>Definición doctrinal consolidada de la Policía Boliviana</span>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 01 · Doctrina e Historia Policial",
+      titulo:"Principios, valores y características institucionales",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Principios</h4></div><p>Legalidad, disciplina, jerarquía, unidad, profesionalismo, imparcialidad, responsabilidad, respeto a los DDHH, servicio a la sociedad y uso racional de la fuerza.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-star"/></svg><h4>Valores</h4></div><p>Honor, honestidad, lealtad, respeto, solidaridad, valentía, justicia, integridad, vocación de servicio y compromiso.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Características</h4></div><p>Institución fundamental del Estado: organizada, jerarquizada, disciplinada, profesional, permanente, de alcance nacional y orientada al servicio público.</p></div>
+        </div>
+        <div class="highlight"><svg class="icon lg"><use href="#i-hand"/></svg><span><b>Deontología policial:</b> conjunto de deberes, obligaciones y reglas éticas propias de la profesión; la eficacia se subordina a la legalidad y a la dignidad humana.</span></div>
+        <ul class="bullets">
+          <li><b>Diferencia clave:</b> los <b>principios</b> son fundamentos normativos (legalidad, jerarquía); los <b>valores</b> son cualidades éticas interiorizadas (honor, honestidad). Se complementan.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 01 · Doctrina e Historia Policial",
+      titulo:"Deberes, fuentes, ciclo doctrinal y gestión PDCA",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Deberes del policía</h4></div><p>Con la disciplina, patria, institución, superiores, camaradas, subalternos, familia y Madre Tierra. Fortalecen cohesión interna y legitimidad social.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-book"/></svg><h4>Fuentes de la doctrina</h4></div><p><b>Historia</b> (experiencias y logros), <b>normativa</b> (Constitución, leyes, reglamentos, manuales) y <b>tradiciones y costumbres</b> compatibles con legalidad y DDHH.</p></div>
+        </div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-clock"/></svg><h4>Ciclo de la doctrina</h4></div><p>Diagnóstico → formulación → validación → aprobación → difusión → aplicación → evaluación → retroalimentación.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Gestión doctrinal (PDCA)</h4></div><p><b>Planificar</b> · <b>Hacer</b> · <b>Verificar</b> · <b>Actuar</b> — mejora continua de la doctrina institucional.</p></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Deberes específicos:</b> con la disciplina (cumplimiento consciente), con la patria (respeto constitucional), con la institución (prestigio y bienes), con superiores (respeto y veracidad), camaradas (solidaridad), subalternos (justicia y capacitación), familia (responsabilidad) y Madre Tierra (prevención ambiental).</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 01 · Doctrina e Historia Policial",
+      titulo:"Conclusión y ejemplo práctico: Plan Halcón",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> historia y doctrina son componentes inseparables de la identidad institucional; la doctrina adquiere valor cuando se comprende, aplica y evalúa en la práctica cotidiana.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Planificar</h4></div><p>Identificar zonas de riesgo en accesos al Urubó (Plan Halcón, Comando Departamental Santa Cruz).</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Hacer</h4></div><p>Control de vehículos y documentación aplicando legalidad y proporcionalidad.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chart"/></svg><h4>Verificar</h4></div><p>Tras 48 horas: más de 3.700 vehículos controlados y 200 infracciones.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-bolt"/></svg><h4>Actuar</h4></div><p>Corregir protocolos y capacitar al personal según resultados obtenidos.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>La historia, la doctrina, los principios, valores, deberes y la mejora continua (PDCA) se integran en una actuación real: <b>planificar, hacer, verificar y actuar</b>.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 2 — PATRULLAJE POLICIAL
+   ============================================================ */
+{
+  id:2, titulo:"PATRULLAJE POLICIAL",
+  subtitulo:"Servicio preventivo, dinámico y territorial que materializa la presencia del Estado: observación, prevención, disuasión, intervención, comunicación y documentación.",
+  slides:[
+    { tipo:"tcover", titulo:"PATRULLAJE POLICIAL",
+      subtitulo:"Servicio preventivo, dinámico y territorial que materializa la presencia del Estado: observación, prevención, disuasión, intervención, comunicación y documentación." },
+    {
+      kicker:"Unidad 02 · Patrullaje Policial",
+      titulo:"Fundamentos, principios y marco jurídico",
+      contenido:`
+        <div class="icon-strip">
+          <div class="item"><svg class="icon"><use href="#i-eye"/></svg><span>Preventivo</span></div>
+          <div class="item"><svg class="icon"><use href="#i-shield"/></svg><span>Protector</span></div>
+          <div class="item"><svg class="icon"><use href="#i-users"/></svg><span>Disuasivo</span></div>
+          <div class="item"><svg class="icon"><use href="#i-bolt"/></svg><span>Reactivo</span></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Concepto y naturaleza:</b> servicio preventivo, dinámico y territorial; no es recorrido mecánico, sino vigilancia consciente, conocimiento del sector y decisión oportuna.</li>
+          <li><b>Principios rectores:</b> legalidad, necesidad, proporcionalidad, oportunidad y responsabilidad. Complementan: disciplina operativa, autocontrol, imparcialidad, trato respetuoso y comunicación clara.</li>
+          <li><b>Marco jurídico:</b> CPE (2009), Ley Orgánica (1985), Ley N.º 264 (2012) de Seguridad Ciudadana, CPP (1999), Código de Conducta de la ONU (1979).</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 02 · Patrullaje Policial",
+      titulo:"Organización y planificación del servicio",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Organización operativa</h4></div><p>Distribuye autoridad, personal, medios, sectores y responsabilidades. Define mando, comunicaciones, relevo, supervisión y apoyo logístico.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chart"/></svg><h4>Diagnóstico y riesgos</h4></div><p>Integra denuncias, llamadas, partes, mapas, horarios y percepción ciudadana. Valora probabilidad, impacto, vulnerabilidad y capacidad de respuesta.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-doc"/></svg><h4>Plan y órdenes</h4></div><p>Traduce el diagnóstico en objetivos, tareas, sectores, horarios, recursos e indicadores. Órdenes con finalidad, condiciones y límites.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-check"/></svg><h4>Supervisión</h4></div><p>Verifica presencia, cumplimiento, disciplina y trato ciudadano. Evalúa con indicadores cuantitativos y cualitativos; ajusta rutas y técnicas.</p></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Objetivos del patrullaje preventivo:</b> proteger a la comunidad mediante presencia, vigilancia y respuesta oportuna. Prevenir delitos, reducir riesgos, auxiliar, mantener el orden, obtener información y orientar.</li>
+          <li><b>Responsabilidades:</b> conocer el sector, portar equipo, mantener comunicación, cumplir órdenes legales, tratar dignamente y documentar actuaciones.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 02 · Patrullaje Policial",
+      titulo:"Clasificación, modalidades y técnicas",
+      contenido:`
+        <div class="icon-strip">
+          <div class="item"><svg class="icon"><use href="#i-user"/></svg><span>A pie</span></div>
+          <div class="item"><svg class="icon"><use href="#i-car"/></svg><span>Motorizado</span></div>
+          <div class="item"><svg class="icon"><use href="#i-bolt"/></svg><span>Motocicleta</span></div>
+          <div class="item"><svg class="icon"><use href="#i-hex"/></svg><span>Bicicleta</span></div>
+          <div class="item"><svg class="icon"><use href="#i-globe"/></svg><span>Fluvial</span></div>
+          <div class="item"><svg class="icon"><use href="#i-target"/></svg><span>Aéreo</span></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Por finalidad:</b> preventivo, reactivo, de control, comunitario, especializado.</li>
+          <li><b>Por ejecución:</b> fijo, móvil, sectorizado, por rutas, focalizado.</li>
+          <li><b>Cobertura territorial:</b> por sector, por ruta, focalizado y aleatorio — equilibrio entre familiaridad y sorpresa operativa.</li>
+          <li><b>Observación y vigilancia:</b> atención sistemática a personas, vehículos, objetos y entorno; evaluar por contexto, no por apariencia.</li>
+          <li><b>Aproximación e intervención:</b> considerar distancia, cobertura, iluminación, número de personas, armas y rutas de escape; escalar solo si hay resistencia o amenaza; cesar al neutralizar el riesgo.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 02 · Patrullaje Policial",
+      titulo:"Policía comunitaria, Radio 110, DDHH y uso de la fuerza",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Policía comunitaria</h4></div><p>Proximidad, prevención, corresponsabilidad y solución de problemas. El ciudadano participa como fuente de información y aliado preventivo.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chat"/></svg><h4>Radio Patrulla 110</h4></div><p>Recepción, despacho y coordinación. Clasificar llamada, verificar datos, asignar unidad adecuada y mantener seguimiento.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Derechos humanos</h4></div><p>Dignidad y centralidad de la persona, legalidad, no discriminación, protección de víctimas y grupos vulnerables.</p></div>
+        </div>
+        <div class="highlight"><svg class="icon lg"><use href="#i-shield"/></svg><span><b>Uso progresivo de la fuerza:</b> selección de medios según conducta, amenaza y resistencia. Las armas de fuego son recurso extremo ante amenaza grave e inminente; no se dispara por fuga o desobediencia.</span></div>
+        <ul class="bullets">
+          <li><b>Acción directa:</b> actuación inmediata de la primera unidad — proteger vida, controlar riesgos, aprehender en flagrancia, preservar el lugar, identificar y comunicar.</li>
+          <li><b>Preservación del lugar:</b> impedir alteración, pérdida o contaminación; registrar quién entra, por qué y cuándo.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 02 · Patrullaje Policial",
+      titulo:"Conclusión y ejemplo práctico: Monseñor Rivero",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> el patrullaje policial es un servicio preventivo, estratégico y permanente que materializa la presencia del Estado. Su eficacia depende de observar, prevenir, intervenir, comunicar y documentar.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-search"/></svg><h4>Diagnóstico</h4></div><p>Denuncias, llamadas al 110 y observación del sector. Identificación de puntos críticos: paradas, cajeros y esquinas con poca iluminación.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Plan focalizado</h4></div><p>Patrullas a pie y motorizadas, contacto directo a comerciantes y transeúntes, comunicación radial constante.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chart"/></svg><h4>Evaluación</h4></div><p>Reducción de robos, aumento de contactos comunitarios y disminución de llamadas de emergencia.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-bolt"/></svg><h4>Ajuste</h4></div><p>Reajuste de rutas y horarios; coordinación con el municipio para mejorar iluminación en dos esquinas críticas.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>Un patrullaje profesional combina <b>prevención, proximidad, análisis de riesgos, uso racional de recursos y mejora continua</b>.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 3 — SEGURIDAD DE INSTALACIONES
+   ============================================================ */
+{
+  id:3, titulo:"SEGURIDAD DE INSTALACIONES",
+  subtitulo:"Organización de recursos humanos, técnicos, físicos y administrativos para resguardar vida, bienes, información y continuidad institucional.",
+  slides:[
+    { tipo:"tcover", titulo:"SEGURIDAD DE INSTALACIONES",
+      subtitulo:"Organización de recursos humanos, técnicos, físicos y administrativos para resguardar vida, bienes, información y continuidad institucional." },
+    {
+      kicker:"Unidad 03 · Seguridad de Instalaciones",
+      titulo:"Definición operativa y pilares de la seguridad",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-shield"/></svg><span><b>Seguridad física:</b> conjunto planificado de medidas humanas, técnicas, arquitectónicas y procedimentales para prevenir, detectar, retardar y responder ante actos que afecten personas, bienes, información y continuidad operativa.</span></div>
+        <div class="icon-strip">
+          <div class="item"><svg class="icon"><use href="#i-eye"/></svg><span>Prevención</span></div>
+          <div class="item"><svg class="icon"><use href="#i-shield"/></svg><span>Disuasión</span></div>
+          <div class="item"><svg class="icon"><use href="#i-alert"/></svg><span>Detección</span></div>
+          <div class="item"><svg class="icon"><use href="#i-clock"/></svg><span>Retardo</span></div>
+          <div class="item"><svg class="icon"><use href="#i-bolt"/></svg><span>Respuesta</span></div>
+          <div class="item"><svg class="icon"><use href="#i-check"/></svg><span>Recuperación</span></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Estructura y diseño:</b> parte del diagnóstico de amenazas, activos críticos y vulnerabilidades; se organiza en capas: perímetro, accesos, áreas internas y zonas restringidas.</li>
+          <li>Ningún pilar es suficiente por separado; su efectividad depende de la <b>articulación sistémica</b>.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 03 · Seguridad de Instalaciones",
+      titulo:"Sistema de seguridad integral",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Definición</h4></div><p>Enfoque que considera todos los riesgos y coordina medidas bajo una dirección común: seguridad física, personal, documental, tecnológica, operativa y de continuidad.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Medios humanos</h4></div><p>Personal que vigila, controla, informa, interviene y coordina. Su eficacia depende de selección, formación, disciplina, supervisión y conocimiento de protocolos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-camera"/></svg><h4>Medios técnicos</h4></div><p>Videovigilancia, alarmas, sensores, controles biométricos, radios, botones de pánico y respaldos energéticos e informáticos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-doc"/></svg><h4>Medios organizativos</h4></div><p>Normas, funciones, procedimientos, registros, cadenas de mando y coordinación; manuales, consignas, planes de emergencia y matrices de responsabilidad.</p></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 03 · Seguridad de Instalaciones",
+      titulo:"Protección perimetral y medios pasivos",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Protección perimetral electrónica</h4></div><p>Detecta aproximación, intrusión, corte, escalamiento o cruce no autorizado. Integra barreras infrarrojas, microondas, sensores de vibración, cable sensor, radar y cámaras con analítica.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Funciones perimetrales</h4></div><p>Delimitar, disuadir, detectar, canalizar, retardar y facilitar la intervención. Se integra con iluminación, vigilancia, comunicaciones y rutas de reacción.</p></div>
+        </div>
+        <div class="pills-row c2">
+          <div class="pill"><svg class="icon"><use href="#i-home"/></svg><span><b>Medios pasivos físicos:</b> muros, cercas, puertas reforzadas, rejas, vidrios de seguridad, bolardos y compartimentación interna.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-lock"/></svg><span><b>Medios pasivos mecánicos:</b> cerraduras, cerrojos, candados, cilindros, barras antipánico, cajas fuertes y dispositivos de bloqueo.</span></div>
+        </div>
+        <div class="highlight"><svg class="icon"><use href="#i-clock"/></svg><span>Los medios pasivos <b>crean resistencia y aumentan el tiempo de reacción</b>; su función es retardar al agresor hasta la llegada de la respuesta.</span></div>
+      `
+    },
+    {
+      kicker:"Unidad 03 · Seguridad de Instalaciones",
+      titulo:"Gestión de riesgos, protocolos y entidades financieras",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-chart"/></svg><span><b>Fórmula del riesgo:</b> RIESGO = AMENAZA × VULNERABILIDAD. El riesgo aumenta cuando una amenaza relevante coincide con una vulnerabilidad significativa.</span></div>
+        <div class="pills-row">
+          <div class="pill"><svg class="icon"><use href="#i-target"/></svg><span><b>Diagnóstico de seguridad</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-alert"/></svg><span><b>Plan de contingencia</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-home"/></svg><span><b>Entidades financieras</b></span></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Gestión:</b> evitar, reducir, transferir, compartir, aceptar o monitorear el riesgo según costo, impacto y legalidad.</li>
+          <li><b>Protocolos:</b> diagnóstico (recopilación documental, entrevistas, inspección física, matriz de riesgos) y contingencia (escenarios, mando, evacuación, continuidad, recuperación).</li>
+          <li><b>Entidades financieras:</b> proteger vida, valores, información, instalaciones y continuidad. Prioridad: vida e integridad, luego dinero, equipos, documentos, datos e imagen.</li>
+          <li><b>Mirar vs. observar:</b> mirar es dirigir la vista; observar es atención intencional, comparación, interpretación y registro de detalles.</li>
+          <li><b>Áreas de seguridad:</b> pública, controlada, restringida y de alta seguridad.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 03 · Seguridad de Instalaciones",
+      titulo:"Conclusión y ejemplo práctico: EPI Santa Cruz",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> la seguridad de instalaciones es una función estratégica y permanente que integra recursos humanos, medios técnicos, barreras físicas, procedimientos organizativos y gestión de riesgos.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Activos críticos</h4></div><p>Armero, sala de comunicaciones y archivo de investigaciones.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Seguridad por capas</h4></div><p>Perímetro con cerco electrónico y bolardos; acceso con esclusa y ADM; sistema N.I.A.; videovigilancia con analítica; botones de pánico.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Plan de contingencia</h4></div><p>Ante intrusión, incendio o amenaza de bomba: roles definidos, rutas de evacuación y coordinación con bomberos y unidades especializadas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chart"/></svg><h4>Reevaluación trimestral</h4></div><p>Aplicación de la fórmula RIESGO = AMENAZA × VULNERABILIDAD y ajuste de medidas.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>La seguridad de instalaciones protege <b>vida, bienes, información y continuidad operativa</b> de la EPI.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 4 — INVESTIGACIÓN CRIMINAL
+   ============================================================ */
+{
+  id:4, titulo:"INVESTIGACIÓN CRIMINAL",
+  subtitulo:"Proceso técnico, científico y jurídico que convierte la noticia de un hecho presuntamente delictivo en información objetiva, verificable y útil para la justicia.",
+  slides:[
+    { tipo:"tcover", titulo:"INVESTIGACIÓN CRIMINAL",
+      subtitulo:"Proceso técnico, científico y jurídico que convierte la noticia de un hecho presuntamente delictivo en información objetiva, verificable y útil para la justicia." },
+    {
+      kicker:"Unidad 04 · Investigación Criminal",
+      titulo:"Definición, funciones y actos iniciales",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-search"/></svg><span><b>Investigación policial:</b> conjunto sistemático de actos técnicos, operativos y documentales ejecutados por personal competente para conocer un hecho presuntamente delictivo, verificar circunstancias, individualizar autores o partícipes y asegurar elementos relevantes — bajo dirección funcional fiscal.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Ministerio Público</h4></div><p>Dirige funcionalmente la investigación, define estrategia jurídica y promueve la acción penal pública.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Policía Boliviana</h4></div><p>Ejecuta diligencias técnico-operativas, preserva escenarios, individualiza personas y recolecta elementos conforme a instrucciones fiscales.</p></div>
+        </div>
+        <div class="pills-row">
+          <div class="pill"><svg class="icon"><use href="#i-bolt"/></svg><span><b>Acción directa</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-chat"/></svg><span><b>Denuncia</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-gavel"/></svg><span><b>Querella</b></span></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Investigación preliminar:</b> verificar existencia del hecho, relevancia penal, personas vinculadas y diligencias necesarias. Prioriza actos urgentes y fuentes perecederas.</li>
+          <li><b>Cuaderno de investigaciones:</b> soporte físico o digital donde se incorporan cronológicamente denuncias, informes, actas, pericias y resoluciones.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 04 · Investigación Criminal",
+      titulo:"Lugar del hecho, procesamiento e inspección",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-pin"/></svg><h4>Lugar del hecho</h4></div><p>Espacio físico o virtual relacionado con preparación, ejecución, resultado u ocultamiento. Puede ser primario/secundario, abierto/cerrado, fijo/móvil.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-camera2"/></svg><h4>Procesamiento</h4></div><p>Protección, observación, fijación, búsqueda, señalización, recolección, embalaje y entrega de indicios; actas, fotografía, video, croquis y notas técnicas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-eye"/></svg><h4>Inspección técnica ocular</h4></div><p>Examen sistemático, directo y especializado para reconocer configuración, identificar indicios y establecer relaciones espaciales.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-search"/></svg><h4>Reveladores de huellas</h4></div><p>Pulverulentos (no porosas), químicos (porosos o antiguos), gaseosos (cianoacrilato) y líquidos (adhesivos y húmedos).</p></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 04 · Investigación Criminal",
+      titulo:"Indicio, evidencia, prueba y papiloscopia",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Indicio</h4></div><p>Signo inicialmente relacionado con el hecho.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Evidencia</h4></div><p>Elemento localizado y técnicamente tratado que aporta información.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-gavel"/></svg><h4>Prueba</h4></div><p>Resultado procesalmente incorporado y controvertido ante la autoridad jurisdiccional.</p></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Clasificación de evidencias:</b> directa o testifical, circunstancial y real/física/material.</li>
+          <li><b>Papiloscopia:</b> disciplina de identificación humana que estudia crestas y surcos papilares. Principios: inmutabilidad, perennidad, universalidad y variedad infinita.</li>
+          <li><b>Ramas:</b> dactiloscopia, palametoscopia, queiloscopia, pelmatoscopia, paloscopia y poroscopia.</li>
+          <li><b>Sistema Vucetich — 4 tipos:</b> Arco, presilla interna, presilla externa, verticilo.</li>
+          <li><b>Fórmula dactiloscópica:</b> Serie (mano derecha) + Sección (mano izquierda).</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 04 · Investigación Criminal",
+      titulo:"Cadena de custodia, autopsia y coordinación",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-hand"/></svg><span><b>Cadena de custodia:</b> sistema documentado de control que acompaña a indicios, evidencias y muestras desde su localización hasta su disposición final, preservando identidad, integridad, continuidad y trazabilidad.</span></div>
+        <div class="pills-row c4">
+          <div class="pill"><svg class="icon"><use href="#i-search"/></svg><span><b>Colección</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-lock"/></svg><span><b>Custodia</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-brain"/></svg><span><b>Análisis</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-check"/></svg><span><b>Disposición</b></span></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Autopsia médico forense:</b> examen sistemático externo e interno para establecer causa y mecanismo de muerte, estimar data, identificar lesiones y obtener muestras. Obligatoria en muertes violentas, sospechosas o bajo custodia.</li>
+          <li><b>Coordinación interinstitucional:</b> MP, Policía, IDIF, laboratorios y otras entidades articulan competencias, información y recursos.</li>
+          <li><b>Declaración en juicio oral:</b> comunicar de forma clara, objetiva y técnica lo realizado y observado personalmente, sin especular.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 04 · Investigación Criminal",
+      titulo:"Conclusión y ejemplo práctico: domicilio Santa Cruz",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> la investigación criminal es un proceso técnico, científico, jurídico y coordinado que convierte la noticia de un hecho presuntamente delictivo en información objetiva, verificable y útil para la justicia.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Primer respondiente</h4></div><p>Delimita el lugar con cinta, impide el ingreso de curiosos y comunica al fiscal de turno.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-search"/></svg><h4>Inspección técnica</h4></div><p>Fotografía de lo general a lo particular, fijación de posiciones, búsqueda de huellas con reactivos pulverulentos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-hand"/></svg><h4>Cadena de custodia</h4></div><p>Levantamiento con guantes y embalaje individual; registro de cada transferencia.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-gavel"/></svg><h4>Coordinación</h4></div><p>Medicina forense para levantamiento legal del cadáver y autopsia; fiscal dirige; Policía ejecuta.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>La investigación criminal integra <b>coordinación institucional, legalidad, método científico y documentación técnica</b>.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 5 — EDUCACIÓN VIAL E INVESTIGACIÓN DE ACCIDENTES
+   ============================================================ */
+{
+  id:5, titulo:"EDUCACIÓN VIAL E INVESTIGACIÓN DE ACCIDENTES DE TRÁNSITO",
+  subtitulo:"Campos complementarios: la educación vial previene riesgos mediante formación de usuarios; la investigación reconstruye técnicamente el suceso e identifica causas.",
+  slides:[
+    { tipo:"tcover", titulo:"EDUCACIÓN VIAL E INVESTIGACIÓN DE ACCIDENTES DE TRÁNSITO",
+      subtitulo:"Campos complementarios: la educación vial previene riesgos mediante formación de usuarios; la investigación reconstruye técnicamente el suceso e identifica causas." },
+    {
+      kicker:"Unidad 05 · Educación Vial",
+      titulo:"Consideraciones generales, legales y elementos del tránsito",
+      contenido:`
+        <div class="pills-row c2">
+          <div class="pill"><svg class="icon"><use href="#i-scale"/></svg><span><b>Jurisdicción:</b> potestad estatal de administrar justicia.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-target"/></svg><span><b>Competencia:</b> medida concreta por materia, territorio, grado o función.</span></div>
+        </div>
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-user"/></svg><h4>Factor humano</h4></div><p>Capacidades, decisiones, conocimientos, estados físicos y emocionales de conductores, peatones y pasajeros.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-car"/></svg><h4>Factor vehículo</h4></div><p>Frenos, dirección, neumáticos, luces, suspensión, carga y mantenimiento.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-pin"/></svg><h4>Factor vía</h4></div><p>Diseño geométrico, superficie, señalización, iluminación, visibilidad, drenaje, obstáculos y clima.</p></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Responsabilidad penal y civil:</b> penal cuando la conducta encuadra en delito con dolo o culpa; civil cuando existe obligación de reparar daños. Ambas pueden coexistir.</li>
+          <li><b>Disposiciones:</b> ordenan circulación, deberes, condiciones técnicas de vehículos y mecanismos de control. Finalidad: reducir riesgos, preservar la vida y asegurar convivencia vial organizada.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 05 · Educación Vial",
+      titulo:"Normas de circulación, señalización e infracciones",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-car"/></svg><h4>Circulación urbana</h4></div><p>Alta interacción entre vehículos, peatones, ciclistas y transporte público; velocidades moderadas, controles semafóricos y restricciones de estacionamiento.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-pin"/></svg><h4>Circulación rural</h4></div><p>Mayores velocidades, curvas prolongadas, pendientes, animales, baja iluminación y distancias extensas; planificar adelantamientos y distancia de frenado.</p></div>
+        </div>
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Reglamentarias</h4></div><p>Imponen conductas de cumplimiento obligatorio.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-eye"/></svg><h4>Preventivas</h4></div><p>Advierten riesgos en la vía.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chat"/></svg><h4>Informativas</h4></div><p>Orientan sobre destinos y servicios.</p></div>
+        </div>
+        <div class="pills-row">
+          <div class="pill"><svg class="icon"><use href="#i-note"/></svg><span><b>Multas</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-doc"/></svg><span><b>Suspensión de autorizaciones</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-lock"/></svg><span><b>Retención de documentos o vehículos</b></span></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 05 · Educación Vial",
+      titulo:"Terminología del accidente de tránsito",
+      contenido:`
+        <div class="cards c4">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-car"/></svg><h4>Colisión</h4></div><p>Encuentro violento entre dos o más vehículos en movimiento.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Choque</h4></div><p>Impacto contra objeto fijo o relativamente inmóvil.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-user"/></svg><h4>Atropello</h4></div><p>Impacto contra una persona con proyección, caída o contacto secundario.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-bolt"/></svg><h4>Atrocionamiento</h4></div><p>Compresión entre dos superficies, una en movimiento.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Arrollamiento</h4></div><p>Ruedas pasan sobre el cuerpo tras el contacto inicial.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-hex"/></svg><h4>Vuelco</h4></div><p>Pérdida de estabilidad con rotación sobre el eje longitudinal o transversal.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-pin"/></svg><h4>Embarrancamiento</h4></div><p>Caída por pendiente, barranco o desnivel fuera de la plataforma vial.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Encuentamiento</h4></div><p>Salida de la calzada con ingreso del vehículo a una cuneta lateral.</p></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Nomenclatura de impactos:</b> referencias frontal, posterior, lateral, angular y otras.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 05 · Educación Vial",
+      titulo:"Etapas de la investigación y cadena de acontecimientos",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-search"/></svg><h4>Averiguación</h4></div><p>Entrevistas, estado físico y anímico, condiciones del vehículo, de la vía y del tiempo; daños físicos y materiales.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Anotación</h4></div><p>Medición de huellas, croquis, fotografía y levantamiento de indicios; declaraciones y peritajes.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-brain"/></svg><h4>Análisis</h4></div><p>Estimados de velocidad, ayuda técnica de laboratorio, inspecciones oculares y reconstrucción del accidente.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Determinación de causas</h4></div><p><b>Directa</b> (inmediata), <b>mediata</b> (previa) y <b>remota</b> (estructural o distante).</p></div>
+        </div>
+        <div class="highlight"><svg class="icon"><use href="#i-clock"/></svg><span><b>Cadena de acontecimientos:</b> punto de sorpresa → punto de no escape → punto llave o clave → punto de mayor contacto → punto de descanso.</span></div>
+        <ul class="bullets">
+          <li><b>Procedimientos:</b> recepción de denuncia, preparativos, acción directa, análisis del lugar, descripción escrita, gráfica y fotográfica, identificación, descripción de daños y acciones complementarias.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 05 · Educación Vial",
+      titulo:"Conclusión y ejemplo práctico: colisión en Santa Cruz",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> la educación vial y la investigación de hechos de tránsito requieren visión integral que articule norma, técnica y prevención. La actuación policial debe preservar la vida, asegurar el lugar, registrar evidencia y construir explicaciones causales verificables.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Auxilio y protección</h4></div><p>Patrulla llega, auxilia al motociclista lesionado, solicita ambulancia y delimita el área.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-camera"/></svg><h4>Fijación</h4></div><p>Medición de huellas de frenado, fotografías, posición final de vehículos, verificación de daños y condiciones de la vía.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Entrevistas</h4></div><p>Protagonistas y testigos por separado, con preguntas claras y no sugestivas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Determinación</h4></div><p><b>Directa:</b> invasión de carril. <b>Mediata:</b> velocidad inadecuada. <b>Remota:</b> falta de señalización.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>La educación vial y la investigación técnica se integran para <b>reconstruir el hecho, determinar causas y prevenir</b> futuros accidentes.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 6 — PROCEDIMIENTOS POLICIALES
+   ============================================================ */
+{
+  id:6, titulo:"PROCEDIMIENTOS POLICIALES",
+  subtitulo:"Actuaciones operativas que orientan la intervención institucional frente a situaciones que afectan seguridad, orden, protección de personas y esclarecimiento inicial de hechos.",
+  slides:[
+    { tipo:"tcover", titulo:"PROCEDIMIENTOS POLICIALES",
+      subtitulo:"Actuaciones operativas que orientan la intervención institucional frente a situaciones que afectan seguridad, orden, protección de personas y esclarecimiento inicial de hechos." },
+    {
+      kicker:"Unidad 06 · Procedimientos Policiales",
+      titulo:"Uso de la fuerza y principios rectores",
+      contenido:`
+        <div class="cards c4">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Legalidad</h4></div><p>Actuar dentro de las atribuciones institucionales.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Necesidad</h4></div><p>Determinar si la intervención resulta indispensable.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chart"/></svg><h4>Proporcionalidad</h4></div><p>Relacionar respuesta e intensidad del riesgo.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-clock"/></svg><h4>Oportunidad</h4></div><p>Elegir el momento más adecuado para actuar.</p></div>
+        </div>
+        <div class="highlight"><svg class="icon lg"><use href="#i-shield"/></svg><span><b>Pirámide o modelo progresivo y diferenciado:</b> guía de adaptación que ordena la respuesta desde la presencia policial hasta la fuerza letal — no es una secuencia mecánica.</span></div>
+        <ul class="bullets">
+          <li><b>Verbalización y negociación:</b> herramientas prioritarias de disuasión que permiten obtener información, reducir tensión y favorecer soluciones sin escalar el conflicto.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 06 · Procedimientos Policiales",
+      titulo:"Orden público y acción directa",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Mantenimiento del orden</h4></div><p>Previene que una situación colectiva evolucione hacia escenarios de riesgo: observación del lugar, identificación de actores, reconocimiento de puntos críticos, coordinación y adaptación del despliegue.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-bolt"/></svg><h4>Restablecimiento del orden</h4></div><p>Recupera condiciones de seguridad cuando el orden ya ha sido alterado; requiere coordinación entre equipos y previsión de cursos de acción.</p></div>
+        </div>
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Atención a víctima</h4></div><p>Priorizar seguridad, identificar riesgos activos y facilitar atención médica.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-lock"/></svg><h4>Preservación</h4></div><p>Impedir alteración, destrucción o contaminación; controlar accesos y registrar novedades.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-doc"/></svg><h4>Acta de Acción Directa</h4></div><p>Clara, cronológica, objetiva; distingue hechos observados de versiones de terceros.</p></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 06 · Procedimientos Policiales",
+      titulo:"Operativos especializados",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Lucha contra el narcotráfico</h4></div><p>Planificación, coordinación, reserva y análisis previo. Transformar reportes aislados en patrones que orienten el despliegue operativo.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Seguridad de personas importantes</h4></div><p>Anticipación de amenazas y vulnerabilidades; reconocimiento de lugares, análisis de rutas, identificación de puntos críticos y actualización permanente.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-lock"/></svg><h4>Seguridad penitenciaria</h4></div><p>Observación, control, prevención y respuesta; detección temprana de conflictos y redes internas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-globe"/></svg><h4>Control migratorio</h4></div><p>Verificar identidad, documentación, movimientos; comprobar datos, evitar conclusiones precipitadas y comunicar oportunamente.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-bolt"/></svg><h4>Bombería y salvataje</h4></div><p>Decisiones rápidas sustentadas en observación del entorno, identificación de peligros, priorización de personas expuestas y coordinación de recursos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-key"/></svg><h4>Allanamientos</h4></div><p>Planificación, identificación del objetivo, distribución de funciones, análisis de riesgos, control de la información y documentación.</p></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 06 · Procedimientos Policiales",
+      titulo:"Inteligencia básica policial",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-brain"/></svg><span><b>Inteligencia básica policial:</b> proceso mediante el cual datos de distintas fuentes se seleccionan, valoran, integran y analizan hasta convertirse en conocimiento útil para la función policial.</span></div>
+        <div class="pills-row c2">
+          <div class="pill"><svg class="icon"><use href="#i-note"/></svg><span><b>Dato</b> — elemento aislado.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-chat"/></svg><span><b>Información</b> — dato contextualizado.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-brain"/></svg><span><b>Inteligencia</b> — conocimiento orientado a la decisión.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-target"/></svg><span><b>Amenaza</b> — factor de riesgo identificado.</span></div>
+        </div>
+        <div class="highlight"><svg class="icon"><use href="#i-target"/></svg><span><b>Ciclo de producción:</b> necesidad de conocimiento → obtención → organización y valoración → análisis → producto → difusión → retroalimentación.</span></div>
+        <ul class="bullets">
+          <li><b>Clasificación:</b> estratégica (amenazas amplias), operacional (planificación de operaciones) y táctica (necesidades inmediatas).</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 06 · Procedimientos Policiales",
+      titulo:"Conclusión y ejemplo práctico: concentración pública",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> los procedimientos policiales se articulan en una respuesta organizada, legal y técnicamente documentada. La inteligencia básica transforma datos en conocimiento oportuno, pertinente y orientado a una necesidad concreta.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Orden público</h4></div><p>Observación del escenario, identificación de actores y puntos críticos; verbalización y negociación para reducir tensión.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Uso progresivo</h4></div><p>Ante agresión persistente: medios menos letales, cesando cuando la amenaza se controla.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Acción directa</h4></div><p>Auxilio a heridos, protección a vulnerables, preservación del lugar y Acta de Acción Directa con hechos observados.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-brain"/></svg><h4>Inteligencia</h4></div><p>Integración de datos sobre actores, horarios, rutas y patrones para orientar futuras decisiones operativas.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>Los procedimientos policiales se articulan en una respuesta <b>organizada, legal y técnicamente documentada</b>.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 7 — FUNDAMENTOS JURÍDICOS
+   ============================================================ */
+{
+  id:7, titulo:"FUNDAMENTOS JURÍDICOS DE LA FUNCIÓN POLICIAL",
+  subtitulo:"Legitimidad, límites y responsabilidades del ejercicio de la autoridad pública conforme a la Constitución, el ordenamiento jurídico y los derechos fundamentales.",
+  slides:[
+    { tipo:"tcover", titulo:"FUNDAMENTOS JURÍDICOS DE LA FUNCIÓN POLICIAL EN EL ESTADO CONSTITUCIONAL DE DERECHO",
+      subtitulo:"Legitimidad, límites y responsabilidades del ejercicio de la autoridad pública conforme a la Constitución, el ordenamiento jurídico y los derechos fundamentales." },
+    {
+      kicker:"Unidad 07 · Fundamentos Jurídicos",
+      titulo:"Estado Constitucional de Derecho y CPE",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-scale"/></svg><span><b>Estado Constitucional de Derecho:</b> sistema político-jurídico en el que la Constitución posee fuerza normativa, organiza los órganos del poder, reconoce derechos y establece controles frente a posibles abusos.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Características</h4></div><p>Supremacía constitucional, separación y coordinación de funciones, reconocimiento de derechos fundamentales, control de constitucionalidad, responsabilidad de servidores públicos y garantías jurisdiccionales.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-star"/></svg><h4>Principios</h4></div><p>Dignidad humana, libertad, igualdad, justicia, legalidad, seguridad jurídica, responsabilidad y control del poder.</p></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Constitución Política del Estado:</b> estructura en bases fundamentales, derechos, garantías, organización funcional y territorial, régimen económico y reforma. Valores: justicia, igualdad, libertad, solidaridad, dignidad, unidad y paz social.</li>
+          <li><b>Supremacía constitucional:</b> la Constitución ocupa la posición superior del ordenamiento; una instrucción jerárquica contraria a ella carece de legitimidad.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 07 · Fundamentos Jurídicos",
+      titulo:"Principios constitucionales de la función policial",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Legalidad</h4></div><p>Norma vigente, autoridad competente y respeto al procedimiento establecido.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Igualdad</h4></div><p>Sin discriminación, con medidas diferenciadas ante condiciones objetivas de vulnerabilidad.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Seguridad jurídica</h4></div><p>Previsibilidad de las normas y de la actuación estatal; procedimientos claros y decisiones motivadas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-gavel"/></svg><h4>Debido proceso</h4></div><p>Defensa, autoridad competente, presunción de inocencia, motivación, plazo razonable.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chart"/></svg><h4>Proporcionalidad</h4></div><p>Medida idónea, necesaria y equilibrada respecto del beneficio esperado.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-brain"/></svg><h4>Razonabilidad</h4></div><p>Decisiones apoyadas en hechos verificables y relación lógica entre problema, fin y medida.</p></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 07 · Fundamentos Jurídicos",
+      titulo:"Derechos fundamentales y ordenamiento jurídico",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-user"/></svg><h4>Civiles</h4></div><p>Vida, integridad, libertad, privacidad, honra, propiedad, circulación y otras facultades de autonomía personal.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Políticos</h4></div><p>Voto, organización, deliberación y acceso a funciones públicas. La Policía garantiza su ejercicio con neutralidad.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Sociales</h4></div><p>Salud, educación, trabajo, vivienda, seguridad social y protección de grupos vulnerables.</p></div>
+        </div>
+        <div class="pills-row c2">
+          <div class="pill"><svg class="icon"><use href="#i-note"/></svg><span><b>Jerarquía normativa:</b> Constitución → leyes → reglamentos → actos particulares.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-check"/></svg><span><b>Control de constitucionalidad</b> y <b>bloque de constitucionalidad</b>.</span></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Interpretación jurídica:</b> criterios gramatical, sistemático, histórico, teleológico y constitucional.</li>
+          <li><b>Vigencia, ámbito espacial y temporal:</b> determinar qué norma corresponde aplicar según el momento y lugar del hecho. Integración jurídica para resolver lagunas.</li>
+          <li><b>Acto jurídico y hecho jurídico:</b> el hecho es un acontecimiento al que la norma atribuye consecuencias; el acto es manifestación de voluntad dirigida a producir efectos jurídicos.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 07 · Fundamentos Jurídicos",
+      titulo:"Función pública policial, responsabilidades y uso de la fuerza",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Función pública policial</h4></div><p>Pública, institucional, reglada y orientada al interés general. Combina potestad pública, deber de servicio y responsabilidad reforzada.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Finalidad constitucional</h4></div><p>Defender a la sociedad, preservar el orden público, garantizar el cumplimiento de las leyes y contribuir a la seguridad.</p></div>
+        </div>
+        <div class="cards c4">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Administrativa</h4></div><p>Incumplimiento de normas de gestión.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Disciplinaria</h4></div><p>Infracciones al régimen interno.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Penal</h4></div><p>Conducta que reúne elementos de delito.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-hand"/></svg><h4>Civil</h4></div><p>Reparación de daños patrimoniales.</p></div>
+        </div>
+        <div class="highlight"><svg class="icon"><use href="#i-hand"/></svg><span><b>Uso legítimo de la fuerza:</b> legalidad, necesidad, proporcionalidad y rendición de cuentas. La fuerza nunca puede utilizarse como castigo, represalia o intimidación.</span></div>
+      `
+    },
+    {
+      kicker:"Unidad 07 · Fundamentos Jurídicos",
+      titulo:"Conclusión y ejemplo práctico: intervención preventiva",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> la autoridad legítima no se define solo por la capacidad de imponer decisiones, sino por la obligación de actuar dentro de la Constitución, respetar los derechos fundamentales y responder por los resultados de cada intervención.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Base legal</h4></div><p>Identificación de la Constitución, la Ley Orgánica de la Policía y las normas de seguridad ciudadana aplicables.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Necesidad y proporcionalidad</h4></div><p>Verificación de finalidad legítima antes de actuar; respeto a los derechos fundamentales de los participantes.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chat"/></svg><h4>Verbalización</h4></div><p>Diferenciación entre quienes protestan pacíficamente y quienes generan violencia; uso de técnicas de diálogo antes de la fuerza.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-doc"/></svg><h4>Documentación</h4></div><p>Informe con registros verificables, responsabilidad por los actos y coordinación con la comunidad.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>La actuación policial alcanza legitimidad cuando respeta la <b>Constitución, los derechos fundamentales y los principios del Estado Constitucional de Derecho</b>.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 8 — DERECHOS HUMANOS
+   ============================================================ */
+{
+  id:8, titulo:"DERECHOS HUMANOS APLICADOS A LA FUNCIÓN POLICIAL",
+  subtitulo:"Marco ético, jurídico y operativo que orienta toda actuación destinada a prevenir el delito, mantener el orden, proteger a las personas y hacer cumplir la ley.",
+  slides:[
+    { tipo:"tcover", titulo:"DERECHOS HUMANOS APLICADOS A LA FUNCIÓN POLICIAL",
+      subtitulo:"Marco ético, jurídico y operativo que orienta toda actuación destinada a prevenir el delito, mantener el orden, proteger a las personas y hacer cumplir la ley." },
+    {
+      kicker:"Unidad 08 · Derechos Humanos",
+      titulo:"Evolución histórica y generaciones de derechos",
+      contenido:`
+        <div class="icon-strip">
+          <div class="item"><svg class="icon"><use href="#i-book"/></svg><span>Ciro</span></div>
+          <div class="item"><svg class="icon"><use href="#i-doc"/></svg><span>Carta Magna</span></div>
+          <div class="item"><svg class="icon"><use href="#i-flag"/></svg><span>1789</span></div>
+          <div class="item"><svg class="icon"><use href="#i-globe"/></svg><span>DUDH 1948</span></div>
+          <div class="item"><svg class="icon"><use href="#i-star"/></svg><span>CPE 2009</span></div>
+        </div>
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-user"/></svg><h4>Civiles y políticos</h4></div><p>Vida, integridad, libertad, seguridad, privacidad, igualdad ante la ley, debido proceso, expresión, reunión y participación.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Económicos, sociales y culturales</h4></div><p>Trabajo, salud, educación, seguridad social, alimentación, vivienda y participación cultural.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-globe"/></svg><h4>Solidaridad y tecnológicos</h4></div><p>Paz, desarrollo, ambiente; datos personales, vigilancia, inteligencia artificial y seguridad digital.</p></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Ámbito nacional:</b> Revolución de 1952, periodos dictatoriales, retorno a la democracia y CPE 2009.</li>
+          <li><b>Derechos en progreso:</b> el reconocimiento es dinámico; nuevos riesgos se interpretan con principios consolidados — dignidad, igualdad, privacidad, participación y protección frente al abuso de poder.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 08 · Derechos Humanos",
+      titulo:"Mecanismos de protección y prohibición de la tortura",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-globe"/></svg><h4>Sistemas internacionales</h4></div><p>Sistema Universal (ONU) y sistemas regionales: Interamericano (CIDH, Corte IDH), Europeo, Africano y Árabe.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Sistema nacional</h4></div><p>Defensoría del Pueblo y garantías jurisdiccionales: libertad, amparo, privacidad, inconstitucionalidad, cumplimiento y acción popular.</p></div>
+        </div>
+        <div class="highlight"><svg class="icon lg"><use href="#i-alert"/></svg><span><b>Prohibición absoluta de la tortura:</b> ninguna emergencia, orden superior, sospecha delictiva, necesidad investigativa o presión operativa puede justificarla. <b>La obediencia debida no exime responsabilidad.</b></span></div>
+        <ul class="bullets">
+          <li><b>Tratos crueles, inhumanos o degradantes:</b> humillaciones, amenazas, exposición innecesaria, privación injustificada de necesidades básicas o uso abusivo de restricciones.</li>
+          <li><b>Aplicación estricta:</b> prevención operativa, supervisión, registro de custodia, examen médico, acceso a defensa, condiciones dignas de detención e investigación pronta e imparcial.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 08 · Derechos Humanos",
+      titulo:"Protección a poblaciones específicas",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-star"/></svg><h4>Niñez y adolescencia</h4></div><p>Interés superior, no discriminación, derecho a ser escuchados, supervivencia y desarrollo; lenguaje comprensible, sin exposición mediática y con garantías reforzadas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Comunidad LGTB</h4></div><p>Identidad, privacidad, igualdad y libre desarrollo de la personalidad; excluir burlas, exposiciones y registros basados en prejuicios.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Personas con discapacidad</h4></div><p>Accesibilidad física, comunicacional y procedimental; ajustes razonables; no confundir discapacidad con incapacidad para decidir.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-user"/></svg><h4>Adultos mayores</h4></div><p>Seguridad, salud, autonomía y vida digna; considerar riesgos de abandono, violencia patrimonial y dificultades de movilidad.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-hand"/></svg><h4>Mujeres e igualdad de género</h4></div><p>Marco CEDAW e instrumentos regionales para erradicar discriminación y violencia de género; evitar estereotipos y valorar riesgo.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Enfoque transversal</h4></div><p>Trato digno, comunicación accesible, no discriminación, debida diligencia y coordinación interinstitucional.</p></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 08 · Derechos Humanos",
+      titulo:"Uso de la fuerza y control de multitudes",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Principios</h4></div><p>Legalidad, necesidad, proporcionalidad, precaución, diferenciación y rendición de cuentas. Son criterios acumulativos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chart"/></svg><h4>Progresividad</h4></div><p>Relaciona cooperación, resistencia o agresión con la respuesta razonablemente necesaria; no obliga a recorrer mecánicamente todos los niveles.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-doc"/></svg><h4>FEHCL</h4></div><p>Deberes de servicio, protección de la dignidad, uso excepcional de la fuerza, atención médica, prohibición de corrupción y deber de informar violaciones.</p></div>
+        </div>
+        <div class="pills-row c4">
+          <div class="pill"><svg class="icon"><use href="#i-users"/></svg><span><b>Aglomeración:</b> circunstancial.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-hand"/></svg><span><b>Multitud:</b> identidad compartida.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-alert"/></svg><span><b>Disturbio:</b> altera gravemente el orden.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-shield"/></svg><span><b>Control:</b> distinguir pacíficos, vulnerables y agresores.</span></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Principios de Robert Peel:</b> la misión policial es prevenir el delito; la eficacia depende de la cooperación pública; la fuerza solo cuando persuasión y advertencia son insuficientes.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 08 · Derechos Humanos",
+      titulo:"Conclusión y ejemplo práctico: concentración pública",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> los derechos humanos aplicados a la función policial constituyen una estructura práctica de decisión que vincula historia, normas, protección diferenciada, ética profesional y empleo legítimo de la fuerza. <b>La eficacia policial no se contrapone al respeto de derechos.</b></span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Identificación</h4></div><p>Distinguir participantes pacíficos, personas vulnerables y agresores dentro de la concentración.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chat"/></svg><h4>Diálogo</h4></div><p>Canales con organizadores, rutas seguras y advertencias sobre consecuencias de la violencia.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Aislamiento de agresores</h4></div><p>Equipos específicos sin dispersar indiscriminadamente a toda la concentración.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Asistencia y documentación</h4></div><p>Atención médica a heridos, informe con registros verificables y coordinación con Defensoría y MP.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>Los derechos humanos, los principios del uso de la fuerza y el respeto irrestricto a la dignidad se integran en una intervención <b>profesional y legal</b>.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 9 — DERECHO PENAL Y PROCESAL PENAL
+   ============================================================ */
+{
+  id:9, titulo:"DERECHO PENAL Y DERECHO PROCESAL PENAL",
+  subtitulo:"Conocimiento jurídico, disciplina procedimental y comprensión de los límites que protegen la dignidad humana en el sistema penal.",
+  slides:[
+    { tipo:"tcover", titulo:"DERECHO PENAL Y DERECHO PROCESAL PENAL APLICADOS A LA FUNCIÓN POLICIAL",
+      subtitulo:"Conocimiento jurídico, disciplina procedimental y comprensión de los límites que protegen la dignidad humana en el sistema penal." },
+    {
+      kicker:"Unidad 09 · Derecho Penal",
+      titulo:"Fundamentos y principios rectores",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Derecho Penal</h4></div><p>Define conductas consideradas delitos, establece consecuencias jurídicas y fija límites al poder punitivo. Protege bienes jurídicos relevantes.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-gavel"/></svg><h4>Derecho Procesal Penal</h4></div><p>Regula actos, etapas, sujetos, plazos y garantías para investigar, determinar responsabilidad y ejecutar decisiones judiciales.</p></div>
+        </div>
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Legalidad</h4></div><p>Norma previa, clara y aplicable; no crear delitos por analogía.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Presunción de inocencia</h4></div><p>Tratar como no culpable mientras no exista sentencia firme.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Objetividad</h4></div><p>Investigar tanto lo incriminatorio como lo que descarta o favorece.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chart"/></svg><h4>Proporcionalidad</h4></div><p>Intensidad acorde con el riesgo; escoger la opción menos restrictiva.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-check"/></svg><h4>Non bis in idem</h4></div><p>Prohibición de sancionar dos veces por el mismo hecho y fundamento.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Debido proceso</h4></div><p>Conocimiento de cargos, defensa y control de decisiones.</p></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 09 · Derecho Penal",
+      titulo:"Función policial y Policía Judicial",
+      contenido:`
+        <ul class="bullets">
+          <li><b>Órgano auxiliar del Ministerio Público:</b> ejecuta diligencias bajo dirección funcional fiscal, combinando conducción jurídica y capacidad operativa especializada.</li>
+          <li><b>Prevención del delito y protección de víctimas:</b> evitar consumación, reducir riesgos, impedir nuevas agresiones y preservar la participación procesal.</li>
+          <li><b>Conservación del lugar y recolección de indicios:</b> evitar alteraciones, contaminación o pérdida; técnica, selectiva, documentada y compatible con la cadena de custodia.</li>
+          <li><b>Identificación de autores y partícipes:</b> establecer quién ejecutó, quién determinó y quién colaboró. Datos verificables y convergentes.</li>
+          <li><b>Aprehensión en flagrancia:</b> inmediatez temporal y relación objetiva con el evento; información de derechos y comunicación a la autoridad.</li>
+          <li><b>Policía Judicial:</b> averiguación inicial, identificación de personas, conservación de fuentes de prueba y ejecución de diligencias.</li>
+          <li><b>Requisa personal y de vehículos:</b> búsqueda limitada con razones legalmente relevantes; respetar dignidad, proporcionalidad y documentación.</li>
+          <li><b>Coordinación con el IDIF:</b> pericias médicas, biológicas, químicas, balísticas y documentológicas.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 09 · Derecho Penal",
+      titulo:"Teoría del delito y medidas coercitivas",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-user"/></svg><h4>Conducta</h4></div><p>Comportamiento humano voluntario, activo u omisivo.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Tipicidad</h4></div><p>Correspondencia con la descripción legal del delito.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Antijuridicidad</h4></div><p>Contradicción con el orden jurídico; puede haber causas de justificación.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-brain"/></svg><h4>Culpabilidad</h4></div><p>Imputabilidad, conocimiento y exigibilidad de conducta conforme a derecho.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Autoría y participación</h4></div><p>Autor controla el hecho; partícipe induce o coopera. La distinción depende del aporte concreto.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-clock"/></svg><h4>Iter criminis</h4></div><p>Idea, preparación, ejecución, tentativa y consumación.</p></div>
+        </div>
+        <div class="highlight"><svg class="icon"><use href="#i-lock"/></svg><span><b>Medidas coercitivas:</b> arresto, aprehensión y detención en flagrancia; incautación de objetos; preservación de evidencias; registro del lugar del hecho. Deben aplicarse con base legal, necesidad, proporcionalidad, motivación y control.</span></div>
+      `
+    },
+    {
+      kicker:"Unidad 09 · Derecho Penal",
+      titulo:"Jurisdicción, acción penal y juicio oral",
+      contenido:`
+        <div class="pills-row">
+          <div class="pill"><svg class="icon"><use href="#i-scale"/></svg><span><b>Pública</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-users"/></svg><span><b>Pública a instancia de parte</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-user"/></svg><span><b>Privada</b></span></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Jurisdicción penal:</b> potestad estatal de conocer y resolver hechos delictivos mediante jueces y tribunales.</li>
+          <li><b>Competencia territorial y funcional:</b> distribuye la jurisdicción según territorio, materia, etapa o función.</li>
+          <li><b>Derechos del imputado:</b> conocer el hecho atribuido, defensa, silencio, trato digno, comunicación y cuestionamiento de actuaciones.</li>
+          <li><b>Derechos de la víctima:</b> protección, información, trato digno, participación, reparación y acceso a mecanismos institucionales.</li>
+          <li><b>Participación policial en juicio oral:</b> el policía como testigo, presentación y ratificación de informes técnicos, custodia de evidencias y seguridad del tribunal.</li>
+          <li><b>Objetividad e imparcialidad:</b> declarar sin favorecer a una parte y respetar la valoración del tribunal.</li>
+          <li><b>Fundamentación y plazos (Ley N.º 1970):</b> explican razones fácticas y jurídicas; su incumplimiento puede producir nulidades o responsabilidades.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 09 · Derecho Penal",
+      titulo:"Conclusión y ejemplo práctico: robo en Santa Cruz",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> el Derecho Penal y el Procesal Penal constituyen un sistema inseparable para la función policial. La eficacia no puede evaluarse únicamente por el número de aprehensiones; combina resultados con respeto de derechos, fundamentación, proporcionalidad, objetividad y trazabilidad.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-search"/></svg><h4>Calificación preliminar</h4></div><p>Identificación tentativa del tipo penal (hurto o robo) según las circunstancias observadas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-lock"/></svg><h4>Aprehensión en flagrancia</h4></div><p>Control del riesgo, información de derechos, comunicación al fiscal de turno y preservación de objetos vinculados.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-check"/></svg><h4>Respeto de garantías</h4></div><p>Presunción de inocencia, debido proceso, objetividad (buscar lo favorable y lo desfavorable).</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-doc"/></svg><h4>Documentación</h4></div><p>Requisa, cadena de custodia, informe técnico y comparecencia como testigo en juicio oral.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>El Derecho Penal, el Procesal Penal, los principios, la función policial, la teoría del delito y las medidas coercitivas se integran en una actuación <b>legal, técnica y respetuosa de los derechos</b>.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 10 — GÉNERO Y VIOLENCIA INTRAFAMILIAR
+   ============================================================ */
+{
+  id:10, titulo:"GÉNERO Y VIOLENCIA INTRAFAMILIAR",
+  subtitulo:"Marco constitucional, obligaciones internacionales, legislación penal y procedimientos operativos frente a la violencia en razón de género y violencia intrafamiliar.",
+  slides:[
+    { tipo:"tcover", titulo:"GÉNERO Y VIOLENCIA INTRAFAMILIAR",
+      subtitulo:"Marco constitucional, obligaciones internacionales, legislación penal y procedimientos operativos frente a la violencia en razón de género y violencia intrafamiliar." },
+    {
+      kicker:"Unidad 10 · Género y Violencia Intrafamiliar",
+      titulo:"Marco jurídico nacional",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Constitución Política del Estado</h4></div><p><b>Art. 15.II:</b> derecho de las mujeres a no sufrir violencia física, sexual o psicológica. <b>Art. 251.I:</b> misión policial de proteger a la víctima, restablecer seguridad y hacer cumplir medidas de protección.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Ley N.º 734</h4></div><p>Orgánica de la Policía: fundamenta la intervención preventiva, auxiliadora e investigativa y el deber de cooperación institucional.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Ley N.º 348</h4></div><p>Ley Integral para Garantizar a las Mujeres una Vida Libre de Violencia: define violencia, formas de agresión, principios de atención y responsabilidades. Art. 53 crea la FELCV.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-gavel"/></svg><h4>Ley N.º 260 y CPP</h4></div><p>MP: dirección funcional (Art. 77), informes objetivos (78), actos urgentes (79), coordinación (80). CP: Art. 154 Bis sanciona el incumplimiento de deberes de protección.</p></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Ley 348:</b> Art. 44 investigación especializada; 45 dirección funcional; 46 garantías de atención; 47 división especializada; 53 FELCV; 54 recepción de denuncias; 55 unidades móviles; 57 investigación especializada; 58 actuaciones inmediatas; 59 investigación sin impulso de la víctima; 60 condiciones materiales y personal capacitado.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 10 · Género y Violencia Intrafamiliar",
+      titulo:"Marco internacional y conceptual",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-globe"/></svg><h4>CEDAW</h4></div><p>Elimina normas, prácticas y estereotipos discriminatorios. Recomendación General N.º 19: la violencia basada en el sexo es forma de discriminación. Observaciones finales al Estado boliviano.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Belém do Pará</h4></div><p>Define la violencia contra la mujer en ámbitos público y privado; reconoce el derecho a una vida libre de violencia y exige debida diligencia.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Violencia (Art. 6 Ley 348)</h4></div><p>Toda acción u omisión, abierta o encubierta, que cause muerte, sufrimiento o daño físico, sexual, psicológico, económico o patrimonial a una mujer, por el solo hecho de ser mujer.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Género y situación</h4></div><p>Género: roles y relaciones socialmente construidos. Situación de violencia: contexto concreto que debe analizarse como proceso, no como episodio aislado.</p></div>
+        </div>
+        <div class="highlight"><svg class="icon"><use href="#i-alert"/></svg><span><b>Conceptos clave:</b> víctima, derechos humanos, violencia de género, violencia contra las mujeres, situación de violencia — todos con definiciones legales precisas.</span></div>
+      `
+    },
+    {
+      kicker:"Unidad 10 · Género y Violencia Intrafamiliar",
+      titulo:"Tipos de violencia (Ley N.º 348)",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Física</h4></div><p>Acción que ocasiona lesión o daño corporal interno, externo o ambos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-brain"/></svg><h4>Psicológica</h4></div><p>Desvalorización, intimidación, control, aislamiento, amenazas o humillación.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Sexual</h4></div><p>Vulnera el derecho a decidir libremente sobre la vida sexual.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Patrimonial y económica</h4></div><p>Control, limitación, daño o sustracción de recursos, ingresos o bienes.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-cross"/></svg><h4>Feminicida</h4></div><p>Forma extrema que viola el derecho a la vida; puede culminar en muerte violenta por razones de género.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-camera"/></svg><h4>Mediática</h4></div><p>Difusión de mensajes o imágenes que promueven explotación, humillación o estereotipos lesivos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-star"/></svg><h4>Simbólica</h4></div><p>Mensajes, valores, signos o prácticas que reproducen dominación y subordinación.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-user"/></svg><h4>Contra la dignidad y honra</h4></div><p>Conductas verbales, escritas o públicas que desacreditan, difaman o humillan.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Derechos reproductivos</h4></div><p>Limitan información, atención o decisión libre sobre reproducción, embarazo y maternidad.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-cross"/></svg><h4>En servicios de salud</h4></div><p>Trato deshumanizado, negligente, discriminatorio o coercitivo.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Laboral</h4></div><p>Discriminación, hostigamiento, acoso, exclusión o restricción de oportunidades.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-book"/></svg><h4>En el Sistema Educativo</h4></div><p>Discriminación, acoso, abuso, castigo o exclusión en espacios educativos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-flag"/></svg><h4>En política y liderazgo</h4></div><p>Impedir, restringir o menoscabar la participación y representación de las mujeres.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-home"/></svg><h4>Institucional</h4></div><p>Acciones u omisiones que retrasan, obstaculizan o impiden el ejercicio de derechos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>En la familia</h4></div><p>Agresión física, psicológica, sexual, económica o de otra naturaleza en relaciones familiares o afectivas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-lock"/></svg><h4>Contra libertad sexual</h4></div><p>Limitan autodeterminación, consentimiento y libertad de decidir.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Cualquier otra forma</h4></div><p>Cláusula abierta para conductas no descritas que produzcan daño por razones de género.</p></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 10 · Género y Violencia Intrafamiliar",
+      titulo:"Intervención policial, denuncia y actos investigativos",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>No revictimización</h4></div><p>Evitar repeticiones innecesarias del relato, culpabilización y exposición de información íntima.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-check"/></svg><h4>No formalismo</h4></div><p>La protección no puede depender de requisitos innecesarios cuando existe riesgo o noticia de delito.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-user"/></svg><h4>Espacio adecuado</h4></div><p>Ambiente privado, seguro, accesible y sin presencia del agresor. Atención gratuita.</p></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Reacción de la víctima:</b> miedo, silencio, ambivalencia, confusión, llanto, aparente calma o retractación. Ninguna reacción determina por sí sola la veracidad.</li>
+          <li><b>Evaluación de riesgo:</b> amenazas, armas, estrangulamiento, escalamiento, celos, separación, consumo de sustancias y vulnerabilidades.</li>
+          <li><b>Medidas de protección:</b> alejamiento, prohibición de contacto, salida del domicilio y resguardo.</li>
+          <li><b>Actos investigativos:</b> recepción de declaración, documentación de respuestas, investigación preliminar, actas, recolección de indicios, certificado médico forense y cadena de custodia.</li>
+          <li><b>Etapas:</b> preliminar (inicio, culminación, ampliación), informe preliminar, preparatoria, informe conclusivo, juicio oral y testimonio.</li>
+          <li><b>FELCV:</b> organismo especializado para prevención, auxilio, investigación, identificación y aprehensión de presuntos responsables bajo dirección funcional fiscal.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 10 · Género y Violencia Intrafamiliar",
+      titulo:"Conclusión y ejemplo práctico: FELCV Santa Cruz",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> la respuesta policial eficaz depende de la integración entre normas, conceptos, habilidades de atención y técnica investigativa. Cada denuncia puede revelar un proceso de violencia más amplio; la ausencia de lesiones visibles no elimina el riesgo.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Recepción y protección</h4></div><p>Separar a las partes, asegurar a la víctima en espacio privado, evaluar riesgo preliminar (amenazas, acceso a armas, estrangulamiento previo).</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chat"/></svg><h4>Información de derechos</h4></div><p>Evitar preguntas culpabilizantes; no obligar a repetir el relato innecesariamente.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-gavel"/></svg><h4>Coordinación</h4></div><p>Fiscal de turno, preservación de escena, recolección de indicios con cadena de custodia, certificado médico forense.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-doc"/></svg><h4>Investigación y juicio</h4></div><p>Entrevistas, pericias y seguimiento de medidas. Declaración objetiva en juicio oral ratificando informe.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>El marco jurídico nacional e internacional, los tipos de violencia, la intervención policial, la recepción de denuncia, los actos investigativos y las etapas procesales se integran para <b>proteger a la víctima y sancionar la violencia</b>.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 11 — LEGISLACIÓN POLICIAL Y SEGURIDAD CIUDADANA
+   ============================================================ */
+{
+  id:11, titulo:"LEGISLACIÓN POLICIAL Y SEGURIDAD CIUDADANA",
+  subtitulo:"Marco normativo que orienta, limita y legitima la actuación de la Policía Boliviana: Constitución, leyes sectoriales, régimen orgánico y disciplinario, y responsabilidad funcional.",
+  slides:[
+    { tipo:"tcover", titulo:"LEGISLACIÓN POLICIAL Y SEGURIDAD CIUDADANA",
+      subtitulo:"Marco normativo que orienta, limita y legitima la actuación de la Policía Boliviana: Constitución, leyes sectoriales, régimen orgánico y disciplinario, y responsabilidad funcional." },
+    {
+      kicker:"Unidad 11 · Legislación Policial",
+      titulo:"Bloque de constitucionalidad y leyes sectoriales",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Constitución Política del Estado</h4></div><p>Fuente principal de legitimidad. Establece organización del Estado, derechos fundamentales y misión policial. Toda política de seguridad debe formularse desde objetivos constitucionales.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Ley N.º 264 y D.S. 1436</h4></div><p>Arquitectura institucional de la seguridad ciudadana. Distribuye responsabilidades, promueve coordinación y concibe la prevención como tarea integral.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Ley N.º 259 y D.S. 1347</h4></div><p>Control al expendio y consumo de bebidas alcohólicas, horarios y restricciones en espacios públicos; intervención coordinada con municipios.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-globe"/></svg><h4>Ley N.º 263 y D.S. 1486</h4></div><p>Trata y tráfico de personas: detección temprana, protección inmediata y coordinación especializada, evitando responsabilizar a la víctima.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Ley N.º 348 y D.S. 2145</h4></div><p>Mecanismos e instituciones de protección para garantizar a las mujeres una vida libre de violencia. Para la Policía: atención inmediata, valoración de riesgo, medidas de protección, coordinación con fiscalía.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Otras normas</h4></div><p>Normas complementarias según naturaleza del servicio. Toda actuación policial debe apoyarse en una norma aplicable y no en analogías que amplíen indebidamente atribuciones.</p></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 11 · Legislación Policial",
+      titulo:"Régimen orgánico y disciplinario",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Ley N.º 734</h4></div><p>Estructura orgánica, misión constitucional, atribuciones y mando policial. Evita duplicidad y actuaciones sin competencia.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Ley N.º 101</h4></div><p>Régimen disciplinario: faltas leves y graves, sanciones y preservación de la disciplina. Aplicación con legalidad, tipicidad, debido proceso, proporcionalidad y defensa.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-gavel"/></svg><h4>Órganos disciplinarios</h4></div><p>Fiscalía Policial (investiga o acusa) y tribunales disciplinarios departamentales y superior (resuelven según competencia).</p></div>
+        </div>
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span>La disciplina <b>no equivale a obediencia ciega</b>; toda orden debe interpretarse dentro de la Constitución y la ley.</span></div>
+      `
+    },
+    {
+      kicker:"Unidad 11 · Legislación Policial",
+      titulo:"Desconcentración, policía comunitaria y tecnología",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-home"/></svg><h4>Desconcentración policial</h4></div><p>R.A. N.º 272/2014 y R.M. N.º 097/2015: despliegue operativo y administrativo mediante Estaciones Policiales Integrales (EPI) y módulos policiales.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Filosofía comunitaria</h4></div><p>Modelo proactivo basado en la alianza entre Policía, autoridades locales y vecindario; no delega funciones coercitivas a vecinos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-hand"/></svg><h4>Participación ciudadana</h4></div><p>Escuelas de Seguridad Ciudadana, Brigadas Vecinales, Brigadas Escolares y Voluntariado Civil (GACIP).</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-camera"/></svg><h4>Tecnología operativa</h4></div><p>Plataforma BOL-110, Centros Automáticos de Despacho Integral (CADI), videovigilancia y georreferenciación del delito.</p></div>
+        </div>
+        <div class="highlight"><svg class="icon"><use href="#i-target"/></svg><span><b>Análisis territorial:</b> georreferenciación del delito y tecnologías de rastreo e identificación para la prevención inteligente. Deben emplearse con finalidad legítima, autorización y control.</span></div>
+      `
+    },
+    {
+      kicker:"Unidad 11 · Legislación Policial",
+      titulo:"Administración pública y responsabilidad funcional",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chart"/></svg><h4>Planificar y organizar</h4></div><p>SPIE, POA, SOA y Presupuesto: convierten prioridades en objetivos, operaciones, estructuras y recursos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Ejecutar</h4></div><p>SAP, SABS, STCP y Contabilidad Integrada: administran personas, bienes, servicios, liquidez y registros contables.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-eye"/></svg><h4>Controlar</h4></div><p>Control gubernamental interno y externo posterior bajo rectoría de la Contraloría General del Estado.</p></div>
+        </div>
+        <div class="cards c4">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Administrativa</h4></div><p>Disciplina y legalidad interna.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Ejecutiva</h4></div><p>Gestión deficiente o negligente.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Civil</h4></div><p>Daño económico computable en dinero al Estado.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-gavel"/></svg><h4>Penal</h4></div><p>Comisión de delitos tipificados en el Código Penal.</p></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Aspectos procesales:</b> causales de exención de responsabilidad (prueba o decisión basada en beneficio público) y plazos de prescripción. Interpretación restrictiva y acreditación objetiva.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 11 · Legislación Policial",
+      titulo:"Conclusión y ejemplo práctico: EPI Santa Cruz",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> la legislación policial y de seguridad ciudadana conforma un sistema integral que articula supremacía constitucional, leyes sectoriales, organización institucional, desconcentración territorial, participación ciudadana, tecnología, administración pública y responsabilidad funcional.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-search"/></svg><h4>Identificación normativa</h4></div><p>Ante denuncias vecinales: aplicación de Ley 264, Ley 259 y D.S. 1347.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Coordinación</h4></div><p>Trabajo articulado con el gobierno municipal para control de expendio y con la Defensoría de la Niñez.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chart"/></svg><h4>Planificación SAFCO</h4></div><p>Asignación de personal (SAP), programación de operaciones (POA), control de recursos y evaluación de resultados.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-gavel"/></svg><h4>Responsabilidad</h4></div><p>Si se detecta falta disciplinaria: Ley 101. Si hay indicios de delito: remisión al Ministerio Público.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>La legislación policial, la seguridad ciudadana, la desconcentración, la participación y la responsabilidad funcional se integran en una respuesta <b>legal, coordinada y orientada a proteger a la sociedad</b>.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 12 — EXPRESIÓN ORAL, ÉTICA Y RELACIONES HUMANAS
+   ============================================================ */
+{
+  id:12, titulo:"EXPRESIÓN ORAL, ÉTICA Y RELACIONES HUMANAS",
+  subtitulo:"Deontología y doctrina policial, liderazgo, correspondencia, relaciones humanas y públicas, y expresión oral y escrita en la formación policial.",
+  slides:[
+    { tipo:"tcover", titulo:"EXPRESIÓN ORAL, ÉTICA Y RELACIONES HUMANAS",
+      subtitulo:"Deontología y doctrina policial, liderazgo, correspondencia, relaciones humanas y públicas, y expresión oral y escrita en la formación policial." },
+    {
+      kicker:"Unidad 12 · Expresión Oral y Ética",
+      titulo:"Deontología policial y doctrina institucional",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-hand"/></svg><span><b>Deontología:</b> ciencia de los deberes profesionales; traduce valores en exigencias concretas — legalidad, imparcialidad, reserva, probidad, respeto a los DDHH, uso responsable de la fuerza y rendición de cuentas.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-book"/></svg><h4>Doctrina policial</h4></div><p>Sistema institucional de ideas, normas, valores y experiencias; su naturaleza es jurídica, ética, histórica, operativa y pedagógica.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Vocación de servicio</h4></div><p>Disposición consciente y permanente para atender necesidades colectivas, proteger derechos y contribuir a la convivencia pacífica.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Código de Ética</h4></div><p>Guía vinculante para resolver dilemas profesionales: valores, deberes, prohibiciones y responsabilidades.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Honor, disciplina y autoridad</h4></div><p>Ninguna orden puede justificar actos manifiestamente ilegales; la obediencia debe ser consciente y compatible con la Constitución.</p></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 12 · Expresión Oral y Ética",
+      titulo:"Liderazgo policial",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Liderazgo, mando y subordinación</h4></div><p>Liderar orienta conductas hacia un objetivo legítimo; mandar ejerce autoridad formal; la subordinación voluntaria surge al reconocer competencia, justicia y ejemplo.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Obediencia reflexiva vs. ciega</h4></div><p>La reflexiva cumple órdenes comprendiendo finalidad, legalidad y límites; admite aclaraciones y rechazo de instrucciones manifiestamente ilícitas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-user"/></svg><h4>Jefe coercitivo vs. líder institucional</h4></div><p>El primero depende del temor y la amenaza; el segundo combina autoridad legal con influencia positiva, ejemplo y desarrollo del personal.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Estilos de liderazgo</h4></div><p>Autocrático (alto riesgo), democrático (proyectos preventivos), laissez-faire (peligros latentes) y transformacional (EPIs).</p></div>
+        </div>
+        <div class="highlight"><svg class="icon"><use href="#i-check"/></svg><span><b>Gestión profesional de errores:</b> distinguir entre error involuntario, negligencia y falta disciplinaria. El castigo indiscriminado inhibe el aprendizaje; la retroalimentación constructiva analiza causas y medidas de mejora.</span></div>
+      `
+    },
+    {
+      kicker:"Unidad 12 · Expresión Oral y Ética",
+      titulo:"Correspondencia policial",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-doc"/></svg><h4>Definición</h4></div><p>Conjunto organizado de documentos mediante los cuales las dependencias policiales comunican asuntos de servicio. Interna o externa, física o digital.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-check"/></svg><h4>Características</h4></div><p>Formalidad, claridad, concisión, objetividad, exactitud, oportunidad, jerarquía, trazabilidad y reserva cuando corresponde.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-star"/></svg><h4>Valor probatorio</h4></div><p>Un documento puede acreditar hechos si cumple autenticidad, integridad, competencia y conservación.</p></div>
+        </div>
+        <div class="pills-row c2">
+          <div class="pill"><svg class="icon"><use href="#i-chat"/></svg><span><b>Por naturaleza:</b> informativa, dispositiva, consultiva, solicitante, de coordinación o de respuesta.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-lock"/></svg><span><b>Por confidencialidad:</b> circulación ordinaria o sujeta a reserva y acceso restringido.</span></div>
+        </div>
+        <div class="highlight"><svg class="icon"><use href="#i-note"/></svg><span><b>Documentación policial:</b> actas, informes, partes, formularios, libros y órdenes que acreditan la actividad policial. Debe ser auténtica, íntegra, legible, cronológica, objetiva, completa, pertinente y segura.</span></div>
+      `
+    },
+    {
+      kicker:"Unidad 12 · Expresión Oral y Ética",
+      titulo:"Relaciones humanas y expresión oral",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Relaciones humanas y públicas</h4></div><p>Las humanas mejoran la convivencia interpersonal; las públicas administran el vínculo entre institución y públicos; el trato social regula cortesía y respeto.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Buen trato policial</h4></div><p>Dignidad, igualdad, cortesía, empatía, paciencia y ausencia de discriminación. No significa renunciar a la firmeza.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chat"/></svg><h4>Oratoria</h4></div><p>Preparación del contenido, dominio de la voz, lenguaje corporal, adaptación al público y manejo del tiempo.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Estructura del discurso</h4></div><p><b>Introducción</b> (capta atención), <b>desarrollo</b> (ordena argumentos y evidencias) y <b>conclusión</b> (sintetiza y orienta la acción).</p></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Comunicación:</b> proceso de intercambio de significados; puede verse afectada por ruido, emociones, prejuicios y diferencias culturales.</li>
+          <li><b>Lenguaje y gramática:</b> vocabulario preciso, sintaxis clara, ortografía adecuada, coherencia y ausencia de ambigüedad.</li>
+          <li><b>Miedo escénico:</b> se reduce mediante preparación, práctica gradual, respiración, dominio temático y estructura.</li>
+          <li><b>Lenguaje y voz:</b> volumen, ritmo, tono, articulación, pausas y énfasis. Una voz firme no requiere gritar.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 12 · Expresión Oral y Ética",
+      titulo:"Conclusión y ejemplo práctico: EPI Santa Cruz",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> la formación policial integral exige comprender que ética, liderazgo, documentación, relaciones humanas y expresión son dimensiones de una misma competencia profesional.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Atención a víctima</h4></div><p>Recibir con respeto, escucha activa y lenguaje claro; aplicar buen trato y evitar revictimización.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Liderazgo institucional</h4></div><p>El comandante explica misión, distribuye funciones según competencias, escucha observaciones y supervisa el cumplimiento.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chat"/></svg><h4>Retroalimentación constructiva</h4></div><p>Ante error involuntario, analizar causas y corregir el procedimiento en lugar de castigar punitivamente.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-doc"/></svg><h4>Correspondencia y reunión</h4></div><p>Elaboración de oficios e informes con claridad y trazabilidad. Reunión vecinal: información verificada, escucha sin confrontación, acuerdos por escrito.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>Deontología, liderazgo, correspondencia, relaciones humanas y expresión oral se integran en una actuación <b>profesional, ética y cercana a la sociedad</b>.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 13 — PSICOLOGÍA GENERAL Y APLICADA
+   ============================================================ */
+{
+  id:13, titulo:"PSICOLOGÍA GENERAL Y APLICADA",
+  subtitulo:"Marco científico para comprender la conducta, los procesos mentales y las relaciones humanas en la labor policial.",
+  slides:[
+    { tipo:"tcover", titulo:"PSICOLOGÍA GENERAL Y APLICADA",
+      subtitulo:"Marco científico para comprender la conducta, los procesos mentales y las relaciones humanas en la labor policial." },
+    {
+      kicker:"Unidad 13 · Psicología",
+      titulo:"Introducción y procesos psicológicos",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-brain"/></svg><span><b>Psicología:</b> disciplina científica que estudia la conducta observable y los procesos internos. <b>Concepción bio-psico-social:</b> el ser humano es una unidad donde interactúan condiciones orgánicas, procesos psicológicos y relaciones sociales.</span></div>
+        <div class="cards c4">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-eye"/></svg><h4>Sensación</h4></div><p>Receptores detectan estímulos y los convierten en señales nerviosas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-brain"/></svg><h4>Percepción</h4></div><p>Organiza e interpreta la información; influida por expectativas y contexto.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Atención</h4></div><p>Selectiva, sostenida o dividida; disminuye por fatiga y sobrecarga.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Memoria</h4></div><p>Codifica, almacena y recupera; el recuerdo es reconstrucción.</p></div>
+        </div>
+        <div class="pills-row c4">
+          <div class="pill"><svg class="icon"><use href="#i-check"/></svg><span><b>Aprendizaje</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-chat"/></svg><span><b>Pensamiento y lenguaje</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-bolt"/></svg><span><b>Motivación</b></span></div>
+          <div class="pill"><svg class="icon"><use href="#i-heart"/></svg><span><b>Emoción</b></span></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Campos de acción:</b> clínico, educativo, laboral, social, comunitario, jurídico, forense, penitenciario y de investigación.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 13 · Psicología",
+      titulo:"Psicología del testimonio",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chat"/></svg><h4>Entrevista a sospechoso</h4></div><p>Obtener información verificable mediante trato legal, respeto de derechos, escucha activa y preguntas no coercitivas. La conducta nerviosa no es prueba de culpabilidad.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Interferencias en la percepción</h4></div><p>Poca iluminación, distancia, brevedad, ruido, consumo de sustancias, miedo, presencia de armas, expectativas y atención focalizada.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Pautas para testigos</h4></div><p>Rapport, relato libre, preguntas abiertas, evitar sugestiones, respetar pausas, separar testigos y registrar palabras del testigo.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-eye"/></svg><h4>Gestos y mentira</h4></div><p>Los gestos aportan indicios de emoción o tensión, pero no permiten diagnosticar mentira automáticamente.</p></div>
+        </div>
+        <div class="pills-row c4">
+          <div class="pill"><svg class="icon"><use href="#i-user"/></svg><span><b>Simulación</b> — fingir síntomas</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-eye"/></svg><span><b>Disimulación</b> — ocultar síntomas</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-bolt"/></svg><span><b>Sobresimulación</b> — amplificar síntomas reales</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-note"/></svg><span><b>Pruebas psicotécnicas</b> — instrumentos estandarizados</span></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 13 · Psicología",
+      titulo:"Personalidad y personalidad criminal",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-user"/></svg><h4>Persona y personalidad</h4></div><p>Sujeto integral (biológico, psicológico, social y moral). Personalidad: organización relativamente estable de rasgos y estilos de relación.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-hex"/></svg><h4>Temperamento y carácter</h4></div><p>Temperamento: base biológica. Carácter: hábitos y valores aprendidos. Personalidad: integra ambos con cogniciones y relaciones.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-star"/></svg><h4>Clases de temperamento</h4></div><p>Sanguíneo, colérico, melancólico y flemático. Valor descriptivo limitado; no sustituyen evaluación psicológica contemporánea.</p></div>
+        </div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-brain"/></svg><h4>Personalidad criminal</h4></div><p>Campo de análisis de rasgos, aprendizajes, cogniciones y patrones vinculados con determinados delitos. Evitar determinismo.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Agresividad y violencia</h4></div><p>Agresividad: tendencia a responder hostilmente. Violencia: uso intencional de fuerza o poder con posibilidad de causar daño o privación.</p></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Concepto diferencial del delincuente:</b> clasificaciones orientativas e históricas (anormales: psicótico, psicópata, neurótico; normales: por crisis, profesionales, por instintos primitivos). No reemplazan individualización.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 13 · Psicología",
+      titulo:"Psicología forense, PAP y salud mental",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Psicología Forense</h4></div><p>Evaluación psicológica con fines judiciales: competencias, daño, riesgo, dinámica familiar, conducta delictiva y adaptación penitenciaria.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-cross"/></svg><h4>Psiquiatría Forense</h4></div><p>Especialidad médica orientada al diagnóstico y tratamiento de trastornos mentales, incluyendo medicamentos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Ciencias afines</h4></div><p>Criminal (factores del delito), criminalística (apoyo a la investigación) y penitenciaria (adaptación y reinserción).</p></div>
+        </div>
+        <div class="highlight"><svg class="icon lg"><use href="#i-heart"/></svg><span><b>Primeros Auxilios Psicológicos (PAP):</b> ayuda humana, práctica y respetuosa para reducir malestar inmediato. Se resumen en <b>observar, escuchar y conectar</b>. No equivalen a psicoterapia ni interrogatorio.</span></div>
+        <ul class="bullets">
+          <li><b>Componentes del PAP:</b> evaluar seguridad y necesidades urgentes, contacto respetuoso, escuchar sin presionar, brindar información, facilitar apoyos sociales y vincular con servicios.</li>
+          <li><b>Salud mental:</b> estado dinámico de bienestar que permite afrontar tensiones y trabajar. Estrés laboral y burnout requieren prevención organizacional y atención individual.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 13 · Psicología",
+      titulo:"Conclusión y ejemplo práctico: EPI Santa Cruz",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> la psicología general y aplicada fortalece la función policial porque permite comprender científicamente la percepción, el recuerdo, la emoción, la motivación, la personalidad y la conducta social.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Recepción de víctima</h4></div><p>La víctima llega llorando y confundida. El policía reconoce que el estrés altera atención y memoria; evita presionarla y usa preguntas abiertas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>PAP aplicado</h4></div><p>Separar a las partes, proteger privacidad, observar seguridad, escuchar sin juzgar y conectar con apoyo médico y familiar.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-check"/></svg><h4>Sin diagnósticos</h4></div><p>Registrar objetivamente sin diagnósticos ni etiquetas. Comprender que la ambivalencia puede deberse a miedo o dependencia.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Coordinación y autocuidado</h4></div><p>Coordinar con FELCV y fiscal, preservar evidencia y evitar revictimización. El mando cuida la salud mental del personal.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>Psicología general, procesos psicológicos, testimonio, personalidad, psicología forense, PAP y salud mental se integran en una actuación <b>profesional, ética y humana</b>.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 14 — SOPORTE VITAL BÁSICO
+   ============================================================ */
+{
+  id:14, titulo:"SOPORTE VITAL BÁSICO",
+  subtitulo:"Actuaciones iniciales para reconocer amenazas inmediatas para la vida, mantener funciones esenciales y reducir el deterioro hasta la atención sanitaria de mayor complejidad.",
+  slides:[
+    { tipo:"tcover", titulo:"SOPORTE VITAL BÁSICO",
+      subtitulo:"Actuaciones iniciales para reconocer amenazas inmediatas para la vida, mantener funciones esenciales y reducir el deterioro hasta la atención sanitaria de mayor complejidad." },
+    {
+      kicker:"Unidad 14 · Soporte Vital Básico",
+      titulo:"Atención de hemorragias: generalidades y tipos",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Capilar</h4></div><p>Vasos microscópicos; rezumado superficial y difuso. Característica de abrasiones; pérdida lenta y limitada.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-bolt"/></svg><h4>Venosa</h4></div><p>Flujo continuo, rojo oscuro, sin patrón pulsátil. Una vena de gran calibre puede producir pérdidas importantes.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Arterial</h4></div><p>Sangre rojo brillante a presión o pulsátil; pérdida rápida que compromete la vida en minutos. Requiere control inmediato.</p></div>
+        </div>
+        <div class="pills-row c2">
+          <div class="pill"><svg class="icon"><use href="#i-eye"/></svg><span><b>Evaluación:</b> peligros, número de afectados, mecanismo del evento, recursos.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-user"/></svg><span><b>Signos:</b> palidez, piel fría, sudoración, taquicardia, disminución de conciencia.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-search"/></svg><span><b>Descubrimiento:</b> exponer solo el área necesaria, sin arrancar material adherido.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-target"/></svg><span><b>Verificación:</b> heridas de entrada y salida en lesiones penetrantes.</span></div>
+        </div>
+        <div class="highlight"><svg class="icon"><use href="#i-alert"/></svg><span>La <b>ausencia de sangre visible no excluye hemorragia interna</b>. En trauma, una hemorragia importante puede evolucionar rápidamente hacia shock.</span></div>
+      `
+    },
+    {
+      kicker:"Unidad 14 · Soporte Vital Básico",
+      titulo:"Control de hemorragias y shock",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-hand"/></svg><h4>Presión directa</h4></div><p>Fuerza firme y sostenida sobre la zona sangrante con gasa o apósito. Medida inicial preferente.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-lock"/></svg><h4>Vendaje de presión</h4></div><p>Mantiene compresión continua sin comprometer circulación distal. Reevaluar sangrado y perfusión.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Empaquetadura</h4></div><p>Introducir gasa dentro de cavidad hemorrágica profunda y mantener presión firme.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-clock"/></svg><h4>Torniquete táctico (CAT)</h4></div><p>Proximal a la herida, evitar articulaciones. Ajustar hasta cese del sangrado. <b>Registrar hora.</b> No aflojar periódicamente.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-cross"/></svg><h4>Agente hemostático</h4></div><p>Complementa empaquetadura y presión directa; no sustituye técnica correcta.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Shock</h4></div><p>Insuficiencia circulatoria. Piel fría, pálida y húmeda; taquicardia; hipotensión tardía. Evitar hipotermia.</p></div>
+        </div>
+        <ul class="bullets">
+          <li><b>Tipos de shock:</b> hipovolémico (disminución crítica del volumen circulante) y neurogénico (pérdida del tono vascular por lesión medular).</li>
+          <li><b>Objetivos:</b> detener la pérdida sanguínea, preservar perfusión de órganos vitales, prevenir shock, proteger la herida y facilitar traslado. Registrar mecanismo, medidas aplicadas y hora de torniquete.</li>
+        </ul>
+      `
+    },
+    {
+      kicker:"Unidad 14 · Soporte Vital Básico",
+      titulo:"Vías aéreas y ventilación",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-eye"/></svg><h4>Obstrucción parcial</h4></div><p>Existe paso de aire: puede toser, emitir sonidos o respirar con dificultad. Favorecer la tos y vigilar estrechamente.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Obstrucción total</h4></div><p>Paso de aire mínimo o inexistente. Respuesta inmediata con maniobras de desobstrucción según edad y estado.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chat"/></svg><h4>Boca a boca</h4></div><p>Sellar boca de la víctima y administrar aire exhalado; observar elevación torácica. Preferible usar barreras o dispositivos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Boca a dispositivo / barrera</h4></div><p>Mejoran sellado y reducen exposición a secreciones; pueden incluir válvulas unidireccionales.</p></div>
+        </div>
+        <div class="highlight"><svg class="icon lg"><use href="#i-heart"/></svg><span><b>Respiración artificial:</b> mantener vía aérea abierta, sellado adecuado y ventilaciones suficientes para elevar el tórax sin exceso de volumen o presión.</span></div>
+      `
+    },
+    {
+      kicker:"Unidad 14 · Soporte Vital Básico",
+      titulo:"Heridas, clasificación y manejo",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-user"/></svg><h4>Abrasivas</h4></div><p>Capas superficiales por fricción.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Cortantes</h4></div><p>Bordes definidos producidos por objetos afilados.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-pin"/></svg><h4>Punzantes</h4></div><p>Orificio pequeño con posible trayecto profundo.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-alert"/></svg><h4>Por arma de fuego</h4></div><p>Heridas penetrantes complejas con trayectos, cavitación y múltiples estructuras lesionadas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-check"/></svg><h4>Manejo inicial</h4></div><p>Higiene de manos o guantes, control de sangrado, limpieza superficial cuando sea apropiado, cobertura con material limpio o estéril.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Objetos empalados</h4></div><p><b>No retirar.</b> Estabilizar con material acolchado, controlar sangrado alrededor sin presionar sobre el objeto y trasladar.</p></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 14 · Soporte Vital Básico",
+      titulo:"RCP y conclusión",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>RCP en adultos</h4></div><p>Compresiones torácicas de alta calidad, mínimas interrupciones y uso temprano de desfibrilador externo automático cuando esté disponible.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-shield"/></svg><h4>Ventilaciones de rescate</h4></div><p>Integradas por respondientes entrenados según protocolo, con barreras o dispositivos que reduzcan la exposición.</p></div>
+        </div>
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> el soporte vital básico es competencia esencial para la primera respuesta policial. La capacitación práctica, la actualización de protocolos y el uso correcto de equipos acompañan el conocimiento conceptual.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>Escena segura</h4></div><p>Los funcionarios aseguran la escena, controlan el tránsito y solicitan ambulancia.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-hand"/></svg><h4>Control de hemorragia</h4></div><p>Presión directa con gasa limpia, refuerzo con vendaje y verificación de pulso distal.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Vía aérea</h4></div><p>Verificación del inconsciente: observación de respiración, detección de obstrucción parcial, posición segura compatible con trauma.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-heart"/></svg><h4>RCP y traslado</h4></div><p>Compresiones y ventilaciones con mascarilla de barrera, vigilancia del shock, cubrir para evitar hipotermia, entregar información clara a la ambulancia.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>Atención de hemorragias, verificación de vía aérea, RCP y coordinación con salud se integran en una respuesta policial <b>técnica y humana</b>.</span>
+        </div>
+      `
+    }
+  ]
+},
+/* ============================================================
+   TEMA 15 — METODOLOGÍA DE LA INVESTIGACIÓN CIENTÍFICA
+   ============================================================ */
+{
+  id:15, titulo:"METODOLOGÍA DE LA INVESTIGACIÓN CIENTÍFICA",
+  subtitulo:"Sistema ordenado de decisiones conceptuales, técnicas y operativas para estudiar un problema de manera verificable, coherente y útil en el ámbito policial.",
+  slides:[
+    { tipo:"tcover", titulo:"METODOLOGÍA DE LA INVESTIGACIÓN CIENTÍFICA",
+      subtitulo:"Sistema ordenado de decisiones conceptuales, técnicas y operativas para estudiar un problema de manera verificable, coherente y útil en el ámbito policial." },
+    {
+      kicker:"Unidad 15 · Metodología de la Investigación",
+      titulo:"Planteamiento del problema y justificación",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-search"/></svg><h4>Identificación</h4></div><p>Reconocer una situación concreta con brecha entre condición esperada y realidad observada. Examinar antecedentes, datos, síntomas y actores.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Descripción</h4></div><p>Desarrollar características, antecedentes, magnitud, contexto, población afectada y posibles relaciones entre variables o categorías.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chat"/></svg><h4>Pregunta de investigación</h4></div><p>Expresar de forma interrogativa el núcleo del problema. Clara, delimitada, viable y susceptible de respuesta mediante procedimientos científicos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-users"/></svg><h4>Justificación social</h4></div><p>Beneficios para la población, convivencia comunitaria, seguridad ciudadana, prevención del delito y confianza institucional.</p></div>
+        </div>
+        <div class="pills-row c3">
+          <div class="pill"><svg class="icon"><use href="#i-target"/></svg><span><b>Justificación técnica:</b> mejora de procedimientos.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-star"/></svg><span><b>Institucional:</b> fortalecer funciones y políticas.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-scale"/></svg><span><b>Jurídica:</b> relación con normas y derechos.</span></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 15 · Metodología de la Investigación",
+      titulo:"Sustento teórico, delimitación y objetivos",
+      contenido:`
+        <div class="cards c4">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Marco conceptual</h4></div><p>Define los términos fundamentales del estudio y precisa su significado.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-book"/></svg><h4>Marco teórico</h4></div><p>Integra enfoques, proposiciones y antecedentes científicos que explican el fenómeno.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-scale"/></svg><h4>Marco legal</h4></div><p>Identifica normas aplicables, su jerarquía y relación con funciones y derechos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-home"/></svg><h4>Marco institucional</h4></div><p>Describe organización, competencias, procesos y unidades relacionadas.</p></div>
+        </div>
+        <div class="pills-row c2">
+          <div class="pill"><svg class="icon"><use href="#i-target"/></svg><span><b>Delimitación temática:</b> contenido específico; excluye lo no pertinente.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-pin"/></svg><span><b>Delimitación espacial:</b> ámbito geográfico o institucional.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-clock"/></svg><span><b>Delimitación temporal:</b> periodo de datos y trabajo de campo.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-check"/></svg><span><b>Objetivos:</b> general (propósito) y específicos (resultados parciales).</span></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 15 · Metodología de la Investigación",
+      titulo:"Metodología, técnicas e instrumentos",
+      contenido:`
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chart"/></svg><h4>Cuantitativo</h4></div><p>Medición, variables y análisis numérico.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chat"/></svg><h4>Cualitativo</h4></div><p>Comprensión de significados, experiencias, procesos y contextos.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-hex"/></svg><h4>Mixto</h4></div><p>Integra ambos tipos de evidencia cuando la complejidad lo requiere.</p></div>
+        </div>
+        <div class="cards c3">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-eye"/></svg><h4>Observación</h4></div><p>Guía de observación: categorías, indicadores, frecuencias, tiempos y notas de campo.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chat"/></svg><h4>Entrevista</h4></div><p>Guía de entrevista: temas y preguntas; permite profundizar sin inducir respuestas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-note"/></svg><h4>Encuesta</h4></div><p>Cuestionario: preguntas cerradas, abiertas o escalas; evita ambigüedades y dobles preguntas.</p></div>
+        </div>
+        <div class="highlight"><svg class="icon"><use href="#i-check"/></svg><span><b>Población y muestra:</b> conjunto total de unidades que cumplen criterios definidos y parte seleccionada para obtener información según enfoque, diseño y acceso. <b>Tipo y diseño:</b> descriptivo, correlacional, explicativo o aplicado; con frecuencia no experimental en investigaciones policiales.</span></div>
+      `
+    },
+    {
+      kicker:"Unidad 15 · Metodología de la Investigación",
+      titulo:"Análisis, propuesta, conclusiones y recomendaciones",
+      contenido:`
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chart"/></svg><h4>Diagnóstico y resultados</h4></div><p>Integrar resultados para caracterizar el problema, identificar patrones, fortalezas, deficiencias y relaciones relevantes. Presentación clara y ordenada con tablas, gráficos, categorías o descripciones.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-brain"/></svg><h4>Interpretación</h4></div><p>Explicar el significado de los hallazgos y su relación con pregunta, objetivos, sustento teórico y contexto. No confundir correlación con causalidad.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Propuesta de investigación</h4></div><p>Título, objetivo (cambio práctico) y desarrollo (componentes, actividades, responsables, recursos, cronograma y seguimiento).</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-check"/></svg><h4>Conclusiones y recomendaciones</h4></div><p>Conclusiones: proposiciones finales que responden a los objetivos. Recomendaciones: acciones prácticas, ajustes institucionales y nuevas investigaciones.</p></div>
+        </div>
+        <div class="pills-row c2">
+          <div class="pill"><svg class="icon"><use href="#i-book"/></svg><span><b>Referencias bibliográficas</b> en formato APA 7.</span></div>
+          <div class="pill"><svg class="icon"><use href="#i-doc"/></svg><span><b>Anexos:</b> instrumentos, matrices, autorizaciones, fotografías y evidencias.</span></div>
+        </div>
+      `
+    },
+    {
+      kicker:"Unidad 15 · Metodología de la Investigación",
+      titulo:"Conclusión y ejemplo práctico: robos de motocicletas",
+      contenido:`
+        <div class="highlight"><svg class="icon lg"><use href="#i-check"/></svg><span><b>Conclusión:</b> la metodología de la investigación científica ofrece una estructura lógica para convertir problemas institucionales y sociales en procesos sistemáticos de producción de conocimiento. La calidad depende de la coherencia interna: problema → preguntas → objetivos → sustento teórico → metodología → análisis → conclusiones.</span></div>
+        <div class="cards c2">
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-search"/></svg><h4>Planteamiento</h4></div><p>Robos de motocicletas concentrados en horarios y lugares específicos, afectando a repartidores y estudiantes.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chat"/></svg><h4>Pregunta y justificación</h4></div><p>¿Qué factores operativos y situacionales se relacionan con el incremento? Justificación social, técnica, institucional y jurídica.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-chart"/></svg><h4>Metodología mixta</h4></div><p>Cuantitativa (registros de denuncias) y cualitativa (entrevistas a funcionarios y víctimas). Observación, entrevistas semiestructuradas, encuestas.</p></div>
+          <div class="card"><div class="card-head"><svg class="icon"><use href="#i-target"/></svg><h4>Conclusiones y propuesta</h4></div><p>Robos concentrados entre 18:00 y 22:00 con menor cobertura de patrullaje. Propuesta: plan operativo de redistribución preventiva para horarios de mayor incidencia.</p></div>
+        </div>
+        <div class="cierre-idea">
+          <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg>Idea clave</span>
+          <span>La metodología de la investigación científica se aplica íntegramente para <b>diagnosticar, analizar y proponer soluciones basadas en evidencia</b>.</span>
+        </div>
+      `
+    }
+  ]
+}
+];
+
+/* ============================================================
+   ESTADO GLOBAL
+   ============================================================ */
+let temaActual = 0;
+let slideActual = 0;
+let totalSlides = 0;
+
+/* ============================================================
+   RENDER: CONSTRUIR SLIDES DEL TEMA ACTIVO
+   ============================================================ */
+function renderTema(idTema){
+  temaActual = idTema;
+  slideActual = 0;
+  const tema = temas[idTema];
+  totalSlides = tema.slides.length;
+
+  const container = document.getElementById('slidesContainer');
+  let html = '';
+
+  tema.slides.forEach((sl, i) => {
+    if (sl.tipo === 'tcover'){
+      html += `
+        <section class="slide tcover ${i===0?'active':''}">
+          <div class="tnum">Unidad Temática N.º ${String(tema.id).padStart(2,'0')}</div>
+          <img src="logo-cefotes.png" alt="CE.FO.TE.S." class="cefotes-logo" onerror="this.style.display='none'">
+          <h2 class="tcover-title">${sl.titulo}</h2>
+          <p class="tcover-sub">${sl.subtitulo}</p>
+          <div class="tcover-foot">
+            <div><em>Programa</em><strong>Nivelación Profesional · Técnico Superior</strong></div>
+<div><em>Centro</em><strong>CE.FO.TE.S. — Santa Cruz</strong></div>
+<div><em>Gestión</em><strong>2026</strong></div>
+          </div>
+          <div class="slide-number">${String(i+1).padStart(2,'0')}</div>
+        </section>
+      `;
+    } else {
+      html += `
+        <section class="slide ${i===0?'active':''}">
+          <div class="kicker">${sl.kicker}</div>
+          <h2 class="stitle">${sl.titulo}</h2>
+          <div class="sbody">${sl.contenido}</div>
+          <div class="footer-brand">CE.FO.TE.S. · Defensa de Grado 2026</div>
+          <div class="slide-number">${String(i+1).padStart(2,'0')}</div>
+        </section>
+      `;
+    }
+  });
+
+  container.innerHTML = html;
+  render();
+}
+
+/* ============================================================
+   RENDER: ACTUALIZAR VISIBILIDAD Y PROGRESO
+   ============================================================ */
+function render(){
+  const slides = document.querySelectorAll('.slide');
+  slides.forEach((s,i)=> s.classList.toggle('active', i === slideActual));
+  document.getElementById('counter').textContent = (slideActual+1) + ' / ' + totalSlides;
+  const bar = document.getElementById('bar');
+  bar.style.width = ((slideActual+1)/totalSlides*100) + '%';
+}
+
+/* ============================================================
+   NAVEGACIÓN
+   ============================================================ */
+function ir(n){
+  slideActual = Math.max(0, Math.min(totalSlides-1, n));
+  render();
+}
+const siguiente = ()=>ir(slideActual+1);
+const anterior   = ()=>ir(slideActual-1);
+
+document.getElementById('next').onclick = siguiente;
+document.getElementById('prev').onclick = anterior;
+document.getElementById('full').onclick = ()=>{
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+  else document.exitFullscreen();
+};
+
+document.addEventListener('keydown', e=>{
+  if (e.target.tagName === 'INPUT') return;
+  switch(e.key){
+    case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown':
+      e.preventDefault(); siguiente(); break;
+    case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+      e.preventDefault(); anterior(); break;
+    case 'Home': e.preventDefault(); ir(0); break;
+    case 'End':  e.preventDefault(); ir(totalSlides-1); break;
+    case 'f': case 'F':
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+      break;
+  }
+});
+
+/* Swipe táctil */
+let touchX = null;
+document.addEventListener('touchstart', e=>touchX = e.touches[0].clientX, {passive:true});
+document.addEventListener('touchend', e=>{
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 50) dx < 0 ? siguiente() : anterior();
+  touchX = null;
+}, {passive:true});
+
+/* ============================================================
+   MENÚ DESPLEGABLE
+   ============================================================ */
+function toggleMenu(){
+  const panel = document.getElementById('menuPanel');
+  const btn = document.getElementById('menuToggle');
+  const open = panel.classList.toggle('open');
+  btn.classList.toggle('open', open);
+}
+
+function construirMenu(){
+  const panel = document.getElementById('menuPanel');
+  panel.innerHTML = '';
+  temas.forEach((t, i)=>{
+    const b = document.createElement('button');
+    b.innerHTML = `<span class="n">${String(t.id).padStart(2,'0')}</span><span>${t.titulo}</span>`;
+    b.dataset.id = i;
+    b.onclick = ()=>{
+      renderTema(i);
+      actualizarMenu(i);
+      panel.classList.remove('open');
+      document.getElementById('menuToggle').classList.remove('open');
+      window.scrollTo({top:0, behavior:'smooth'});
+    };
+    panel.appendChild(b);
+  });
+}
+
+function actualizarMenu(i){
+  document.querySelectorAll('#menuPanel button').forEach(b=>{
+    b.classList.toggle('active', parseInt(b.dataset.id) === i);
+  });
+  document.getElementById('menuNum').textContent = String(temas[i].id).padStart(2,'0');
+  document.getElementById('menuLbl').textContent = temas[i].titulo;
+}
+
+/* Cerrar menú al hacer clic fuera */
+document.addEventListener('click', e=>{
+  const wrap = document.querySelector('.menu-wrap');
+  if (wrap && !wrap.contains(e.target)){
+    document.getElementById('menuPanel').classList.remove('open');
+    document.getElementById('menuToggle').classList.remove('open');
+  }
+});
+
+/* ============================================================
+   AUTOFIT: Ajustar contenido si excede el alto disponible
+   ============================================================ */
+/* ============================================================
+   AUTOFIT v4 — Distribución vertical + escalado inteligente
+   Elimina espacios vacíos en TODAS las diapositivas
+   ============================================================ */
+function fitSlides(){
+  document.querySelectorAll('.slide .sbody').forEach(body=>{
+    // Resetear estilos previos
+    body.style.transform = '';
+    body.style.transformOrigin = '';
+    body.style.width = '';
+    body.style.justifyContent = '';
+    body.style.gap = '';
+
+    // Forzar reflow para medir correctamente
+    void body.offsetHeight;
+
+    const availH   = body.clientHeight;
+    const contentH = body.scrollHeight;
+
+    if (contentH === 0 || availH === 0) return;
+
+    const ratio = availH / contentH;
+
+    /* ========================================================
+       CASO 1: El contenido NO CABE → escalar hacia abajo
+       ======================================================== */
+    if (contentH > availH + 2){
+      const scale = Math.max(0.40, (availH - 4) / contentH);
+      body.style.transformOrigin = 'top left';
+      body.style.transform = `scale(${scale})`;
+      body.style.width = `${100/scale}%`;
+      body.style.justifyContent = 'flex-start';
+      return;
+    }
+
+    /* ========================================================
+       CASO 2: Contenido MUY pequeño (ocupa < 50%) →
+       escalar hacia arriba + distribuir verticalmente
+       ======================================================== */
+    if (ratio > 2.0){
+      const scale = Math.min(2.3, ratio * 0.85);
+      body.style.transformOrigin = 'top left';
+      body.style.transform = `scale(${scale})`;
+      body.style.width = `${100/scale}%`;
+      body.style.justifyContent = 'space-evenly';
+      return;
+    }
+
+    /* ========================================================
+       CASO 3: Contenido pequeño-medio (ocupa 50-87%) →
+       escalar moderadamente + distribuir
+       ======================================================== */
+    if (ratio > 1.15){
+      const scale = Math.min(1.45, ratio * 0.92);
+      body.style.transformOrigin = 'top left';
+      body.style.transform = `scale(${scale})`;
+      body.style.width = `${100/scale}%`;
+      body.style.justifyContent = 'space-evenly';
+      return;
+    }
+
+    /* ========================================================
+       CASO 4: Contenido casi perfecto (ocupa 87-100%) →
+       solo distribuir verticalmente el poco espacio sobrante
+       ======================================================== */
+    if (ratio > 1.02){
+      body.style.justifyContent = 'space-evenly';
+    }
+
+    /* CASO 5: ratio ≈ 1.0 → no hacer nada (ajuste perfecto) */
+  });
+}
+
+/* ============================================================
+   AJUSTE DE ESCALA DEL DECK SEGÚN VIEWPORT
+   ============================================================ */
+function resizeDeck(){
+  const deck = document.getElementById('deck');
+  const stage = deck.parentElement;
+  const availW = stage.clientWidth;
+  const availH = window.innerHeight - 130;
+  const scale = Math.min(availW/1280, availH/720, 1);
+  deck.style.transform = `scale(${scale})`;
+  deck.style.marginBottom = `${(scale - 1) * 720}px`;
+}
+window.addEventListener('resize', ()=>{ resizeDeck(); fitSlides(); });
+
+/* ============================================================
+   INICIALIZACIÓN
+   ============================================================ */
+window.addEventListener('load', ()=>{
+  construirMenu();
+  actualizarMenu(0);
+  renderTema(0);
+  setTimeout(()=>{ fitSlides(); resizeDeck(); }, 100);
+});
+construirMenu();
+actualizarMenu(0);
+renderTema(0);
+setTimeout(()=>{ fitSlides(); resizeDeck(); }, 200);
+</script>
+
+</body>
+</html>
