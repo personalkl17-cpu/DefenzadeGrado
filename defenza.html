@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación Defensa de Grado - 15 Temas | CEFOTES</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif; }
+        body { background: #0a120a; height: 100vh; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+
+        /* ===== MENÚ PRINCIPAL ===== */
+        .menu-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 30%, #1f3f1f, #0a120a);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 1000; transition: opacity 0.5s ease, transform 0.5s ease;
+            padding: 20px; overflow-y: auto;
+        }
+        .menu-container.hidden { opacity: 0; transform: scale(1.05); pointer-events: none; }
+        .menu-logo { width: 120px; margin-bottom: 15px; border-radius: 50%; border: 3px solid #e6c84c; padding: 8px; background: #ffffff10; }
+        .menu-title { color: #ffe066; font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 5px; text-shadow: 3px 3px 0 #0a120a; }
+        .menu-subtitle { color: #ffd633; font-size: 1.1rem; margin-bottom: 25px; letter-spacing: 1px; border-bottom: 1px solid #e6c84c60; padding-bottom: 10px; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; width: 90%; max-width: 1100px; padding-bottom: 20px; }
+        .menu-item {
+            background: #1f3f1f; border: 2px solid #e6c84c; border-radius: 12px; padding: 15px 20px;
+            color: #ffe066; cursor: pointer; transition: all 0.2s ease; text-align: left;
+            display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 0.95rem;
+        }
+        .menu-item:hover { background: #2a5a2a; transform: translateY(-3px); box-shadow: 0 6px 0 #0a120a, 0 0 20px #e6c84c40; }
+        .menu-item .num { background: #e6c84c; color: #0a120a; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; }
+
+        /* ===== CONTENEDOR DE DIAPOSITIVAS ===== */
+        .slides-container { position: relative; width: 1280px; height: 720px; max-width: 96vw; max-height: 92vh; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 0 3px #e6c84c; display: none; }
+        .slides-container.active { display: block; }
+        
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #1e3a1e; border-radius: 20px; padding: 28px 38px 25px 38px; display: flex; flex-direction: column; opacity: 0; transform: translateX(60px) scale(0.98); transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1), transform 0.55s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; overflow: hidden; }
+        .slide.active { opacity: 1; transform: translateX(0) scale(1); pointer-events: auto; z-index: 10; }
+        .slide.salir-izquierda { opacity: 0; transform: translateX(-60px) scale(0.98); pointer-events: none; z-index: 5; }
+        .slide.entrar-derecha { opacity: 0; transform: translateX(60px) scale(0.98); pointer-events: none; }
+
+        /* Animaciones */
+        .slide.active .node, .slide.active .card-conclusion, .slide.active .portada-logo, .slide.active .titulo-portada, .slide.active .subtitulo-portada, .slide.active .badge-tema { animation: fadeInUp 0.6s ease forwards; opacity: 0; }
+        .slide.active .node:nth-child(1) { animation-delay: 0.05s; } .slide.active .node:nth-child(2) { animation-delay: 0.12s; } .slide.active .node:nth-child(3) { animation-delay: 0.19s; } .slide.active .node:nth-child(4) { animation-delay: 0.26s; } .slide.active .node:nth-child(5) { animation-delay: 0.33s; } .slide.active .node:nth-child(6) { animation-delay: 0.40s; } .slide.active .node:nth-child(7) { animation-delay: 0.47s; } .slide.active .node:nth-child(8) { animation-delay: 0.54s; }
+        .slide.active .portada-logo { animation-delay: 0.1s; } .slide.active .titulo-portada { animation-delay: 0.2s; } .slide.active .subtitulo-portada { animation-delay: 0.3s; } .slide.active .badge-tema { animation-delay: 0.05s; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Logo UNIPOL */
+        .logo-unipol { position: absolute; top: 16px; right: 28px; width: 95px; height: auto; z-index: 10; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.7)); border-radius: 50%; background-color: #ffffff10; padding: 4px; border: 2px solid #e6c84c60; }
+        .portada-logo { display: flex; justify-content: center; align-items: center; margin: 0 0 8px 0; }
+        .portada-logo img { width: 150px; height: auto; filter: drop-shadow(0 8px 16px #00000090); border-radius: 50%; background-color: #ffffff12; padding: 10px; border: 3px solid #e6c84c; }
+        .titulo-portada { font-size: 2.5rem; font-weight: 800; text-align: center; color: #ffe066; text-shadow: 3px 3px 0 #0a120a, 0 0 25px #e6c84c90; letter-spacing: 1.5px; line-height: 1.15; margin: 4px 0 2px 0; text-transform: uppercase; }
+        .subtitulo-portada { font-size: 1.15rem; text-align: center; color: #ffd633; font-weight: 500; letter-spacing: 2px; margin-bottom: 10px; border-bottom: 2px solid #e6c84c80; padding-bottom: 8px; width: 70%; margin-left: auto; margin-right: auto; }
+        .badge-tema { background-color: #e6c84c; color: #0f1a0f; font-weight: 800; padding: 5px 22px; border-radius: 30px; font-size: 0.95rem; letter-spacing: 1.5px; display: inline-block; margin-bottom: 6px; }
+
+        /* Títulos y Nodos */
+        .slide-title { font-size: 1.6rem; font-weight: 800; color: #ffe066; text-shadow: 2px 2px 0 #0a120a; border-left: 10px solid #e6c84c; padding-left: 18px; margin-bottom: 14px; margin-top: 2px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+        .slide-title span { font-size: 0.9rem; color: #e6c84c; font-weight: 500; margin-left: auto; background-color: #0a120a90; padding: 4px 16px; border-radius: 30px; letter-spacing: 1px; border: 1px solid #e6c84c60; }
+        
+        /* REJILLA INTELIGENTE: Se estira para llenar el espacio vertical */
+        .map-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 16px 18px; 
+            flex: 1; /* Esto hace que ocupe todo el alto disponible */
+            align-content: stretch; /* Distribuye las tarjetas para llenar el espacio */
+            margin-top: 4px; 
+            overflow-y: auto; 
+            padding-right: 4px; 
+        }
+        .map-grid::-webkit-scrollbar { width: 6px; } .map-grid::-webkit-scrollbar-thumb { background: #e6c84c; border-radius: 10px; }
+        
+        .node { 
+            background: linear-gradient(145deg, #1f3f1f, #152b15); 
+            border: 2px solid #e6c84c; 
+            border-radius: 16px; 
+            padding: 16px 20px; 
+            color: #ffe066; 
+            box-shadow: 0 5px 0 #0a120a, 0 8px 16px #00000070; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-start; /* Alinea el texto arriba si el cuadro se estira */
+        }
+        .node h3 { font-size: 1.1rem; font-weight: 700; color: #ffd633; margin-bottom: 8px; border-bottom: 1px dashed #e6c84c; padding-bottom: 6px; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+        .node h3 .icono { font-size: 1.3rem; line-height: 1; }
+        .node p, .node ul { font-size: 0.95rem; line-height: 1.5; color: #f5e6b0; flex-grow: 1; }
+        .node ul { list-style: none; padding-left: 0; }
+        .node ul li { margin-bottom: 6px; padding-left: 22px; position: relative; }
+        .node ul li::before { content: "▹"; color: #e6c84c; font-weight: bold; position: absolute; left: 2px; }
+        .node strong { color: #ffe066; }
+        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; flex: 1; align-content: stretch; }
+        .card-conclusion { background: #1f3f1f; border: 3px solid #e6c84c; border-radius: 22px; padding: 25px 35px; color: #ffe066; box-shadow: 0 7px 0 #0a120a; margin-top: 6px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .card-conclusion h3 { font-size: 1.4rem; margin-bottom: 12px; border-bottom: 2px solid #e6c84c; padding-bottom: 8px; display: flex; align-items: center; gap: 12px; color: #ffd633; }
+        .card-conclusion p { font-size: 1.05rem; line-height: 1.6; color: #f5e6b0; margin-bottom: 10px; }
+        
+        .footer-slide { margin-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: #d4c28a; border-top: 1px solid #e6c84c50; padding-top: 8px; letter-spacing: 1px; flex-shrink: 0; }
+        .footer-slide .num { background-color: #e6c84c20; padding: 3px 14px; border-radius: 30px; border: 1px solid #e6c84c; font-weight: 600; color: #ffe066; }
+
+        /* Controles */
+        .nav-controls { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); display: none; align-items: center; gap: 14px; z-index: 100; background: #0a120a80; padding: 8px 20px; border-radius: 50px; backdrop-filter: blur(10px); border: 1px solid #e6c84c60; box-shadow: 0 4px 20px #00000080; }
+        .nav-controls.active { display: flex; }
+        .nav-btn { background: #e6c84c20; border: 2px solid #e6c84c; color: #ffe066; width: 42px; height: 42px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; user-select: none; }
+        .nav-btn:hover { background: #e6c84c; color: #0a120a; transform: scale(1.08); box-shadow: 0 0 18px #e6c84c80; }
+        .nav-btn:active { transform: scale(0.95); }
+        .slide-counter { color: #ffe066; font-weight: 700; font-size: 0.95rem; min-width: 60px; text-align: center; letter-spacing: 1px; }
+        .progress-bar { position: fixed; bottom: 0; left: 0; height: 4px; background: #e6c84c; transition: width 0.4s ease; z-index: 110; box-shadow: 0 0 12px #e6c84c; display: none; }
+        .progress-bar.active { display: block; }
+
+        .btn-back-menu { position: fixed; top: 20px; left: 20px; z-index: 200; background: #e6c84c; color: #0a120a; border: none; padding: 8px 16px; border-radius: 30px; font-weight: 700; cursor: pointer; display: none; box-shadow: 0 4px 10px #00000080; transition: all 0.2s; }
+        .btn-back-menu.active { display: block; }
+        .btn-back-menu:hover { background: #ffe066; transform: scale(1.05); }
+
+        @media (max-width: 1350px) { .slides-container { width: 96vw; height: calc(96vw * 9 / 16); max-height: 90vh; } }
+        @media (max-width: 900px) { .slide { padding: 18px 20px; } .titulo-portada { font-size: 2rem; } .portada-logo img { width: 120px; } .logo-unipol { width: 70px; top: 12px; right: 14px; } .map-grid { grid-template-columns: 1fr 1fr; } .grid-2 { grid-template-columns: 1fr; } .slide-title { font-size: 1.3rem; } }
+        @media (max-width: 600px) { .map-grid { grid-template-columns: 1fr; } .slide-title { font-size: 1.1rem; } .logo-unipol { width: 50px; } .nav-btn { width: 34px; height: 34px; font-size: 1rem; } .nav-controls { gap: 8px; padding: 6px 12px; } }
+        img { display: block; }
+    </style>
+</head>
+<body>
+
+    <!-- MENÚ PRINCIPAL -->
+    <div class="menu-container" id="menuContainer">
+        <img src="cefotes.png" alt="Logo CEFOTES" class="menu-logo">
+        <h1 class="menu-title">DEFENSA DE GRADO</h1>
+        <div class="menu-subtitle">Selecciona un Tema para Presentar</div>
+        <div class="menu-grid" id="menuGrid">
+            <!-- Items generados por JS -->
+        </div>
+    </div>
+
+    <!-- BOTÓN VOLVER AL MENÚ -->
+    <button class="btn-back-menu" id="btnBackMenu">← Volver al Menú</button>
+
+    <!-- CONTENEDOR DE DIAPOSITIVAS -->
+    <div class="slides-container" id="slidesContainer">
+        <!-- Diapositivas generadas por JS -->
+    </div>
+
+    <!-- CONTROLES -->
+    <div class="nav-controls" id="navControls">
+        <button class="nav-btn" id="prevBtn" aria-label="Anterior">◀</button>
+        <span class="slide-counter" id="counter">1 / 7</span>
+        <button class="nav-btn" id="nextBtn" aria-label="Siguiente">▶</button>
+    </div>
+    <div class="progress-bar" id="progressBar" style="width: 14.28%;"></div>
+
+    <script>
+        // ============================================================
+        // DATOS DE LOS 15 TEMAS (Contenido ampliado para llenar las diapositivas)
+        // ============================================================
+        const temas = [
+            // TEMA 1
+            {
+                titulo: "Doctrina e Historia Policial",
+                icono: "📜",
+                diapositivas: [
+                    { portada: true, titulo: "DOCTRINA E HISTORIA<br>POLICIAL", subtitulo: "MAPA CONCEPTUAL PARA DEFENSA DE GRADO" },
+                    { titulo: "📌 INTRODUCCIÓN E HISTORIA INSTITUCIONAL", tag: "I", contenido: `
+                        <div class="node"><h3>🎯 Propósito del Tema</h3><p>Estudiar la formación histórica de la institución policial boliviana y los elementos conceptuales que estructuran su doctrina: evolución normativa, transformaciones orgánicas, principios, valores, deberes, fuentes y gestión doctrinal.</p></div>
+                        <div class="node"><h3>🏛️ Doctrina Institucional</h3><p>Articula identidad, misión, principios, valores y criterios de actuación que orientan de manera uniforme el servicio policial (Policía Boliviana, 2025). La doctrina no es estática, se nutre de la experiencia y se adapta a los nuevos desafíos sociales.</p></div>
+                        <div class="node" style="grid-column: span 2; border-color: #ffd633;"><h3>📜 Línea de Tiempo: Desde el Ayllu hasta la Constitución de 2009</h3><ul style="columns: 2; column-gap: 30px;"><li><strong>Precolombina:</strong> autoridad, vigilancia comunitaria y control social en el ayllu.</li><li><strong>Colonia:</strong> función policial dispersa (cabildos, corregidores, alcaldes).</li><li><strong>1826 – Ley Reglamentaria:</strong> primer marco normativo republicano.</li><li><strong>1826 – Gendarmería e Intendencia:</strong> vigilancia y control administrativo.</li><li><strong>1831 – Guardia Nacional:</strong> apoyo a defensa del orden interno.</li><li><strong>1937 – Cuerpo Nacional de Policías y Carabineros:</strong> integración y profesionalización.</li><li><strong>1961 – Policía Boliviana:</strong> consolidación institucional e identidad propia.</li><li><strong>1965 – Guardia Nacional de Seguridad Pública:</strong> énfasis en seguridad pública.</li><li><strong>1967 – Policía Nacional:</strong> carácter unitario y cobertura estatal.</li><li><strong>2009 – Policía Boliviana:</strong> legalidad, derechos humanos, interculturalidad y servicio a la sociedad.</li></ul></div>
+                    `},
+                    { titulo: "⚖️ DOCTRINA INSTITUCIONAL: DIMENSIÓN, ETIMOLOGÍA Y DEFINICIÓN", tag: "II", contenido: `
+                        <div class="node"><h3>🧭 Dimensión de la Policía Boliviana</h3><ul><li><strong>Jurídica:</strong> competencias y límites</li><li><strong>Organizacional:</strong> estructura y mando</li><li><strong>Social:</strong> vínculo con la comunidad</li><li><strong>Ética:</strong> orienta la conducta</li><li><strong>Operativa:</strong> traduce la misión en servicios</li><li><strong>Histórica:</strong> preserva la memoria</li><li><strong>Cultural:</strong> fortalece la identidad</li></ul><p style="margin-top: 6px; font-style: italic; color: #ffd633;">Sistema integral e interrelacionado.</p></div>
+                        <div class="node"><h3>📖 Etimología de "Doctrina"</h3><p>Del latín <strong>doctrina</strong>: enseñanza, instrucción, conocimiento transmitido.</p><p style="margin-top: 6px;">Es esencialmente formativa: se aprende, se enseña, se interpreta y se aplica. Su conservación depende de procesos educativos, documentos oficiales, liderazgo ejemplar y práctica profesional (Michel, 2013).</p></div>
+                        <div class="node" style="grid-column: span 2; border-color: #ffd633;"><h3>📌 Definición de la Doctrina de la Policía Boliviana</h3><p>Conjunto sistemático y dinámico de principios, valores, normas, conocimientos, tradiciones, experiencias y criterios institucionales que orientan la formación, organización, decisión y actuación policial en cumplimiento de la misión constitucional (Policía Boliviana, 2025).</p><ul style="margin-top: 8px; columns: 2; column-gap: 30px;"><li><strong>Sistemático:</strong> coherencia entre componentes</li><li><strong>Dinámico:</strong> actualización frente a nuevas amenazas y demandas</li><li><strong>Institucional:</strong> orientación común para todo el personal</li></ul></div>
+                    `},
+                    { titulo: "🛡️ PRINCIPIOS, VALORES Y CARACTERÍSTICAS", tag: "III", contenido: `
+                        <div class="node"><h3>⚖️ Principios Institucionales</h3><ul><li>Legalidad</li><li>Disciplina</li><li>Jerarquía</li><li>Unidad</li><li>Profesionalismo</li><li>Imparcialidad</li><li>Responsabilidad</li><li>Respeto a los derechos humanos</li><li>Servicio a la sociedad</li><li>Uso racional de la fuerza</li></ul><p style="margin-top: 6px;">Criterios de control y coherencia institucional.</p></div>
+                        <div class="node"><h3>💎 Valores Institucionales</h3><ul><li>Honor</li><li>Honestidad</li><li>Lealtad</li><li>Respeto</li><li>Solidaridad</li><li>Valentía</li><li>Justicia</li><li>Integridad</li><li>Vocación de servicio</li><li>Compromiso</li></ul><p style="margin-top: 6px;">Disposiciones morales y rasgos de carácter profesional.</p></div>
+                        <div class="node"><h3>🏛️ Características Institucionales</h3><ul><li>Institución fundamental del Estado</li><li>Organizada y jerarquizada</li><li>Disciplinada</li><li>Profesional</li><li>Permanente</li><li>Alcance nacional</li><li>Orientada al servicio público</li></ul><p style="margin-top: 6px;">Aseguran continuidad operativa y unidad de mando.</p></div>
+                    `},
+                    { titulo: "📋 DEONTOLOGÍA POLICIAL Y DEBERES", tag: "IV", contenido: `
+                        <div class="node" style="grid-column: span 2;"><h3>🔍 Deontología Policial</h3><p>Conjunto de deberes, obligaciones y reglas éticas propias de la profesión policial. La eficacia se subordina a la legalidad y a la dignidad humana. Una actuación aparentemente exitosa pierde legitimidad cuando se obtiene mediante abuso, discriminación, corrupción o incumplimiento del deber (Aranguren, 1990).</p></div>
+                        <div class="node"><h3>📌 Deberes con la Disciplina</h3><p>Observar normas, horarios, procedimientos y órdenes legales. No es obediencia mecánica, sino cumplimiento consciente de obligaciones dentro del marco jurídico.</p></div>
+                        <div class="node"><h3>🇧🇴 Deberes con la Patria</h3><p>Proteger a la sociedad, respetar el orden constitucional, preservar la soberanía y anteponer el interés general a beneficios particulares.</p></div>
+                        <div class="node"><h3>🏛️ Deberes con la Institución</h3><p>Cuidar el prestigio, cumplir la normativa, usar responsablemente los bienes públicos, mantener reserva profesional y contribuir al mejoramiento del servicio.</p></div>
+                        <div class="node"><h3>👤 Deberes con los Superiores</h3><p>Respeto, comunicación veraz, cumplimiento de órdenes legales, asesoramiento profesional y observancia del conducto regular. La subordinación no elimina la responsabilidad individual.</p></div>
+                        <div class="node"><h3>🤝 Deberes con los Camaradas</h3><p>Solidaridad, respeto, cooperación, lealtad ética, apoyo operativo y corrección fraterna. La camaradería no justifica encubrir faltas o delitos.</p></div>
+                        <div class="node"><h3>👥 Deberes con los Subalternos</h3><p>Dirigir con justicia, capacitar, proteger, corregir de manera proporcional, reconocer méritos y evitar abusos de autoridad.</p></div>
+                        <div class="node"><h3>🏠 Deberes con la Familia</h3><p>Responsabilidad afectiva, económica y moral. Equilibrio entre servicio y vida familiar. Una base familiar estable favorece el desempeño profesional.</p></div>
+                        <div class="node"><h3>🌱 Deberes con la Madre Tierra</h3><p>Prevenir daños ambientales, respetar normas ecológicas, proteger recursos naturales y promover un uso responsable de bienes institucionales.</p></div>
+                    `},
+                    { titulo: "📚 FUENTES, CICLO Y GESTIÓN PDCA", tag: "V - VI", contenido: `
+                        <div class="node"><h3>📜 La Historia</h3><p>Conserva experiencias, decisiones, logros, errores, símbolos y procesos que explican la identidad institucional. Su estudio permite aprender del pasado y evitar la repetición de fallas (Molina Baeza et al., 1990).</p></div>
+                        <div class="node"><h3>⚖️ La Normativa</h3><p>Constitución, leyes, reglamentos, resoluciones y manuales que regulan la misión, organización y actuación policial. Define competencias, procedimientos, deberes y límites obligatorios.</p></div>
+                        <div class="node"><h3>🎭 Tradiciones y Costumbres</h3><p>Prácticas, ceremonias, símbolos, relatos y hábitos transmitidos. Fortalecen pertenencia y cohesión, siempre que sean compatibles con la legalidad, la ética y los derechos humanos.</p></div>
+                        <div class="node" style="grid-column: span 3; border-color: #ffd633; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: transparent; border: none; box-shadow: none; padding: 0;">
+                            <div class="node" style="background: #1f3f1f;"><h3>🔄 Ciclo de la Doctrina</h3><p>Proceso mediante el cual la institución identifica necesidades, produce o actualiza conocimientos, valida contenidos, difunde orientaciones, aplica la doctrina y evalúa sus resultados.</p><ul style="margin-top: 6px; columns: 2;"><li>Diagnóstico</li><li>Formulación</li><li>Validación</li><li>Aprobación</li><li>Difusión</li><li>Aplicación</li><li>Evaluación</li><li>Retroalimentación</li></ul></div>
+                            <div class="node" style="background: #1f3f1f;"><h3>🔄 Gestión PDCA</h3><ul><li><strong>Planificar (P):</strong> identificar necesidades y objetivos</li><li><strong>Hacer (D):</strong> elaborar y aplicar contenidos</li><li><strong>Verificar (C):</strong> evaluar resultados</li><li><strong>Actuar (A):</strong> corregir deficiencias y estandarizar mejoras</li></ul><p style="margin-top: 6px;">Sistema de mejora continua que vincula el conocimiento institucional con evidencias operativas, indicadores de desempeño, supervisión y aprendizaje organizacional (Policía Boliviana, 2025).</p></div>
+                        </div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN Y SÍNTESIS", tag: "VII", contenido: `
+                        <p>La historia y la doctrina de la Policía Boliviana constituyen componentes inseparables de la identidad institucional. El recorrido desde las formas iniciales de control comunitario y colonial hasta la consolidación de una institución profesional demuestra que la función policial se ha adaptado progresivamente a las necesidades del Estado y de la sociedad.</p>
+                        <p>La doctrina institucional integra la historia, la normativa, los principios, los valores, las tradiciones y la experiencia profesional en un marco común de pensamiento y actuación (Policía Boliviana, 2025). El conocimiento histórico no debe limitarse a la memorización de hechos o reformas, sino convertirse en una fuente de aprendizaje que fortalezca la identidad, permita interpretar la misión constitucional y oriente decisiones profesionales coherentes con la legalidad, la ética y el servicio a la sociedad.</p>
+                        <p>En conclusión, la doctrina policial adquiere verdadero valor cuando es comprendida, aplicada y evaluada en la práctica cotidiana. Sus fuentes, el ciclo doctrinal y la gestión mediante el modelo PDCA permiten actualizar conocimientos, corregir deficiencias y mantener una orientación institucional uniforme frente a nuevas demandas sociales y operativas.</p>
+                    `}
+                ]
+            },
+            // TEMA 2
+            {
+                titulo: "Patrullaje Policial",
+                icono: "🚔",
+                diapositivas: [
+                    { portada: true, titulo: "PATRULLAJE<br>POLICIAL", subtitulo: "SERVICIO PREVENTIVO Y ESTRATÉGICO" },
+                    { titulo: "📌 FUNDAMENTOS Y PRINCIPIOS", tag: "I", contenido: `
+                        <div class="node"><h3>🚔 Concepto</h3><p>Servicio preventivo, dinámico y territorial mediante el cual el personal policial mantiene presencia activa, observa el entorno, identifica riesgos, disuade conductas ilícitas y ejecuta intervenciones iniciales (Sanabria Oropeza, 2000).</p></div>
+                        <div class="node"><h3>⚖️ Principios Rectores</h3><ul><li><strong>Legalidad:</strong> fundamento normativo</li><li><strong>Necesidad:</strong> medidas indispensables</li><li><strong>Proporcionalidad:</strong> correspondencia riesgo-respuesta</li><li><strong>Oportunidad:</strong> momento adecuado</li><li><strong>Responsabilidad:</strong> asumir consecuencias</li></ul></div>
+                        <div class="node" style="grid-column: span 2; border-color: #ffd633;"><h3>🎯 Prevención, Visibilidad y Proximidad</h3><p>La visibilidad policial genera efecto preventivo cuando es estratégica, predecible para la comunidad y difícil de anticipar para el infractor. La proximidad establece vínculos profesionales con vecinos, comerciantes y organizaciones territoriales, facilitando la denuncia, mejorando la detección temprana de conflictos y permitiendo diseñar respuestas preventivas compartidas.</p></div>
+                    `},
+                    { titulo: "⚖️ MARCO JURÍDICO Y NORMATIVO", tag: "II", contenido: `
+                        <div class="node"><h3>📜 Constitución Política del Estado (2009)</h3><p>La Policía Boliviana tiene la misión específica de defender a la sociedad, conservar el orden público y cumplir las leyes en todo el territorio nacional. Esta misión delimita la finalidad del patrullaje y obliga a que cada actuación responda al interés público.</p></div>
+                        <div class="node"><h3>📋 Ley Orgánica de la Policía (1985)</h3><p>Desarrolla la naturaleza, organización, funciones y disciplina institucional. El patrullaje no es una actividad discrecional, sino un servicio sujeto a jerarquía, planificación, órdenes legales y responsabilidad profesional.</p></div>
+                        <div class="node"><h3>🛡️ Ley N.º 264 (2012)</h3><p>Concibe la seguridad ciudadana como un sistema de coordinación entre el nivel central, entidades territoriales, Policía y sociedad civil. Exige intercambio de información y planificación conjunta.</p></div>
+                        <div class="node"><h3>⚖️ Código de Procedimiento Penal (1999)</h3><p>Regula condiciones de aprehensión, actuación en flagrancia, preservación de elementos y comunicación con el Ministerio Público. El patrullero debe conocer estas reglas para no afectar la legalidad de la investigación.</p></div>
+                    `},
+                    { titulo: "📋 ORGANIZACIÓN Y PLANIFICACIÓN", tag: "III", contenido: `
+                        <div class="node"><h3>🏗️ Organización Operativa</h3><p>Distribuir autoridad, personal, medios, sectores y responsabilidades para garantizar continuidad y control del servicio. Debe precisar quién dirige, quién ejecuta y cómo se reportan las novedades (Sanabria Oropeza, 2000).</p></div>
+                        <div class="node"><h3>📊 Diagnóstico y Análisis de Riesgos</h3><p>Integra denuncias, llamadas de emergencia, partes policiales, mapas, horarios y percepción ciudadana. La información debe transformarse en prioridades operativas y no permanecer como simple registro histórico.</p></div>
+                        <div class="node"><h3>📝 Plan de Patrullaje</h3><p>Traduce el diagnóstico en objetivos, tareas, sectores, horarios, recursos, comunicaciones y medidas de seguridad. Debe ser comprensible, realista y flexible para adaptarse a los cambios.</p></div>
+                        <div class="node"><h3>🔍 Supervisión y Evaluación</h3><p>Verifica presencia, cumplimiento de tareas, disciplina, trato ciudadano y calidad de informes. Compara objetivos con resultados mediante indicadores cuantitativos y cualitativos.</p></div>
+                    `},
+                    { titulo: "🎯 OBJETIVOS, FUNCIONES Y RESPONSABILIDADES", tag: "IV", contenido: `
+                        <div class="node"><h3>🎯 Objetivo General</h3><p>Proteger a la comunidad mediante presencia, vigilancia y respuesta oportuna. De este propósito se derivan objetivos específicos de prevención, auxilio y mantenimiento del orden.</p></div>
+                        <div class="node"><h3>📋 Funciones Preventivas y de Auxilio</h3><p>La función preventiva incluye observación, identificación de riesgos y control disuasivo. La de auxilio comprende asistencia ante accidentes, violencia, emergencias médicas y situaciones de vulnerabilidad.</p></div>
+                        <div class="node"><h3>👮 Responsabilidades del Patrullero</h3><p>Conocer su sector, portar y verificar su equipo, mantener comunicación, cumplir órdenes legales, tratar dignamente a las personas y documentar las actuaciones. La omisión de una acción necesaria puede generar responsabilidad.</p></div>
+                        <div class="node"><h3>🤝 Trabajo en Equipo</h3><p>Se basa en comunicación, cobertura mutua y roles definidos. Durante una intervención, un integrante puede asumir contacto verbal, otro seguridad y observación, y otro comunicación y control del entorno.</p></div>
+                    `},
+                    { titulo: "🚔 MODALIDADES Y TÉCNICAS DE PATRULLAJE", tag: "V", contenido: `
+                        <div class="node"><h3>🚶 Patrullaje a Pie</h3><p>Permite observación detallada, contacto ciudadano y acceso a espacios congestionados. No debe subestimarse su capacidad disuasiva y de generación de confianza.</p></div>
+                        <div class="node"><h3>🚓 Patrullaje Motorizado</h3><p>Ofrece movilidad, cobertura y capacidad de transporte. No debe convertirse en una barrera con la comunidad; las detenciones estratégicas y recorridos cortos a pie incrementan la visibilidad real.</p></div>
+                        <div class="node"><h3>🏘️ Patrullaje Comunitario</h3><p>Modelo de gestión basado en proximidad, prevención, corresponsabilidad y solución de problemas. El ciudadano deja de ser un receptor pasivo y participa como fuente de información y aliado preventivo (Policía Boliviana, 2009).</p></div>
+                        <div class="node"><h3>🎯 Patrullaje Focalizado</h3><p>Concentra recursos en puntos de mayor riesgo identificados mediante análisis de información, sin descuidar la cobertura general del sector.</p></div>
+                    `},
+                    { titulo: "📡 COMUNICACIONES Y SEGURIDAD CIUDADANA", tag: "VI", contenido: `
+                        <div class="node"><h3>📻 Radio Patrulla 110</h3><p>Mecanismo de recepción, despacho y coordinación de requerimientos de emergencia. Clasifica llamadas, verifica datos, asigna la unidad más adecuada y mantiene seguimiento hasta el cierre.</p></div>
+                        <div class="node"><h3>🛡️ Seguridad Ciudadana</h3><p>Condición social e institucional que permite ejercer derechos con niveles aceptables de riesgo. La Ley N.º 264 la aborda mediante coordinación, prevención y participación, superando una visión exclusivamente represiva.</p></div>
+                        <div class="node"><h3>🚨 Prevención del Delito</h3><ul><li><strong>Primaria:</strong> población general y condiciones ambientales</li><li><strong>Secundaria:</strong> grupos, lugares o situaciones de mayor riesgo</li><li><strong>Terciaria:</strong> evitar reincidencia o repetición después del hecho</li></ul></div>
+                        <div class="node"><h3>📊 Indicadores y Evaluación</h3><p>Frecuencia, gravedad, concentración, repetición, tiempo de respuesta, percepción y satisfacción. La evaluación debe distinguir actividad de resultado para no confundir esfuerzo con impacto real.</p></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>El patrullaje policial constituye un servicio preventivo, estratégico y permanente que materializa la presencia del Estado en el territorio y vincula la seguridad ciudadana con la protección de las personas, el mantenimiento del orden público y el cumplimiento de la ley.</p>
+                        <p>Su eficacia no depende únicamente de recorrer un sector, sino de observar, identificar riesgos, prevenir hechos delictivos, intervenir oportunamente, comunicarse con la comunidad y documentar de forma responsable cada actuación (Sanabria Oropeza, 2000).</p>
+                        <p>Un patrullaje profesional integra prevención, proximidad comunitaria, legalidad, disciplina, trabajo en equipo, uso proporcional de la fuerza, acción directa, preservación del lugar del hecho y correcta elaboración de informes. La actuación policial alcanza legitimidad cuando combina eficacia operativa con respeto a la dignidad humana, rendición de cuentas y coordinación interinstitucional.</p>
+                    `}
+                ]
+            },
+            // TEMA 3
+            {
+                titulo: "Seguridad de Instalaciones",
+                icono: "🏢",
+                diapositivas: [
+                    { portada: true, titulo: "SEGURIDAD DE<br>INSTALACIONES", subtitulo: "PROTECCIÓN FÍSICA E INTEGRAL" },
+                    { titulo: "📌 DEFINICIÓN Y PILARES", tag: "I", contenido: `
+                        <div class="node"><h3>🏢 Seguridad Física</h3><p>Conjunto planificado de medidas humanas, técnicas, arquitectónicas y procedimentales destinadas a prevenir, detectar, retardar y responder ante actos que afecten personas, bienes e información (Moruno C., s. f.).</p></div>
+                        <div class="node"><h3>🏗️ Estructura del Sistema</h3><p>Diagnóstico de amenazas, identificación de activos críticos, análisis de vulnerabilidades, objetivos, niveles de protección, responsables y evaluación. Se organiza en capas sucesivas para complementarse.</p></div>
+                        <div class="node" style="grid-column: span 2; border-color: #ffd633;"><h3>🛡️ Pilares Fundamentales</h3><ul style="columns: 2;"><li><strong>Prevención:</strong> reduce probabilidad</li><li><strong>Disuasión:</strong> desalienta al agresor</li><li><strong>Detección:</strong> advierte oportunamente</li><li><strong>Retardo:</strong> gana tiempo</li><li><strong>Respuesta:</strong> neutraliza o contiene</li><li><strong>Recuperación:</strong> restablece normalidad</li></ul><p style="margin-top: 8px; font-style: italic; color: #ffd633;">Ningún pilar es suficiente por separado; su efectividad depende de la articulación sistémica.</p></div>
+                    `},
+                    { titulo: "🔗 SISTEMA DE SEGURIDAD INTEGRAL", tag: "II", contenido: `
+                        <div class="node"><h3>🔗 Definición</h3><p>Enfoque que considera la totalidad de riesgos y coordina medidas de protección bajo una dirección común: seguridad física, personal, documental, tecnológica, operativa y de continuidad (Arteaga Martín, s. f.).</p></div>
+                        <div class="node"><h3>👥 Medios Humanos</h3><p>Personal encargado de vigilar, controlar, informar, intervenir y coordinar. Su eficacia depende de selección, formación, disciplina, supervisión y conocimiento de protocolos.</p></div>
+                        <div class="node"><h3>📡 Medios Técnicos</h3><p>Videovigilancia, alarmas, sensores, controles biométricos, radios y botones de pánico. Su valor real depende del mantenimiento y la capacidad humana para interpretar alertas.</p></div>
+                        <div class="node"><h3>📋 Medios Organizativos</h3><p>Normas, funciones, procedimientos, registros, cadenas de mando y mecanismos de coordinación. Evitan arbitrariedad, duplicidad de funciones y respuestas improvisadas.</p></div>
+                    `},
+                    { titulo: "🚧 PROTECCIÓN PERIMETRAL", tag: "III", contenido: `
+                        <div class="node"><h3>🔔 Sistema Electrónico</h3><p>Detecta intentos de aproximación, intrusión, corte o escalamiento. Integra barreras infrarrojas, microondas, sensores de vibración y cámaras con analítica. Es la primera capa de defensa.</p></div>
+                        <div class="node"><h3>🎯 Funciones</h3><p>Delimitar, disuadir, detectar, canalizar, retardar y facilitar la intervención. El perímetro comunica que existe un espacio protegido y dirige el flujo hacia accesos autorizados.</p></div>
+                        <div class="node"><h3>🧱 Medios Pasivos Físicos</h3><p>Muros, cercas, puertas reforzadas, rejas, vidrios de seguridad y bolardos. Dificultan o canalizan el acceso sin requerir activación electrónica.</p></div>
+                        <div class="node"><h3>🔐 Medios Pasivos Mecánicos</h3><p>Cerraduras, cerrojos, candados, cilindros, barras antipánico y cajas fuertes. Actúan mediante resistencia mecánica y control de apertura.</p></div>
+                    `},
+                    { titulo: "📊 GESTIÓN DE RIESGOS", tag: "IV", contenido: `
+                        <div class="node"><h3>📐 Fórmula del Riesgo</h3><p style="font-size: 1.2rem; text-align: center; margin: 10px 0;"><strong>RIESGO = AMENAZA × VULNERABILIDAD</strong></p><p>El riesgo aumenta cuando una amenaza relevante coincide con una vulnerabilidad significativa. La evaluación debe examinar ambas dimensiones para determinar medidas adecuadas.</p></div>
+                        <div class="node"><h3>🎯 Estrategias de Manejo</h3><ul><li><strong>Evitar:</strong> suspender actividad peligrosa</li><li><strong>Reducir:</strong> aplicar controles</li><li><strong>Transferir:</strong> seguros o contratos</li><li><strong>Aceptar:</strong> riesgo residual justificado</li><li><strong>Monitorear:</strong> seguimiento continuo</li></ul></div>
+                        <div class="node"><h3>📋 Protocolo de Diagnóstico</h3><p>Recopilación documental, entrevistas, inspección física, revisión tecnológica, análisis de incidentes, matriz de riesgos y recomendaciones priorizadas.</p></div>
+                        <div class="node"><h3>🚨 Plan de Contingencia</h3><p>Define escenarios, niveles de activación, mando, comunicaciones, evacuación, protección de personas y activos, continuidad, recuperación y evaluación posterior.</p></div>
+                    `},
+                    { titulo: "🏦 SEGURIDAD EN ENTIDADES FINANCIERAS", tag: "V", contenido: `
+                        <div class="node"><h3>🏦 Función de Seguridad</h3><p>Prevenir y controlar riesgos contra personas, valores, información, instalaciones y continuidad del servicio. Incluye vigilancia, control de accesos, monitoreo y procedimientos de apertura y cierre.</p></div>
+                        <div class="node"><h3>🛡️ Protección Prioritaria</h3><p>Primero la vida e integridad de usuarios y trabajadores; luego dinero, equipos, documentos, datos e imagen institucional. La respuesta ante un atraco no debe exponer innecesariamente a las personas.</p></div>
+                        <div class="node"><h3>👁️ Mirar vs. Observar</h3><p><strong>Mirar:</strong> dirigir la vista de forma general.<br><strong>Observar:</strong> atención intencional, comparación, interpretación y registro de detalles relevantes. La observación debe ser sistemática y libre de prejuicios.</p></div>
+                        <div class="node"><h3>🗺️ Áreas de Seguridad</h3><ul><li><strong>Pública:</strong> recibe usuarios</li><li><strong>Controlada:</strong> limita circulación</li><li><strong>Restringida:</strong> protege operaciones</li><li><strong>Alta seguridad:</strong> bóvedas y sistemas críticos</li></ul></div>
+                    `},
+                    { titulo: "🚪 CONTROL DE ACCESOS Y PROCEDIMIENTOS", tag: "VI", contenido: `
+                        <div class="node"><h3>🚪 Esclusa de Doble Puerta</h3><p>Controla el ingreso mediante dos accesos interbloqueados: una puerta no abre mientras la otra permanezca abierta. Permite identificación, revisión y aislamiento momentáneo.</p></div>
+                        <div class="node"><h3>📡 Arco Detector de Metales</h3><p>Integra control físico y detección de objetos metálicos. La alarma no prueba por sí misma una conducta ilícita; activa una revisión respetuosa y proporcional.</p></div>
+                        <div class="node"><h3>🔑 Sistema N.I.A.</h3><p>Asigna identificación vinculada al área permitida, facilitando reconocimiento visual, control de circulación y detección de permanencias indebidas.</p></div>
+                        <div class="node"><h3>🔄 Procedimientos de Cierre</h3><p>Desalojo controlado, revisión de áreas, arqueo y resguardo de valores, cierre de accesos, activación de alarmas y comunicación de finalización al centro de monitoreo.</p></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>La seguridad de instalaciones constituye una función estratégica y permanente que exige integrar recursos humanos, medios técnicos, barreras físicas, procedimientos organizativos y mecanismos de gestión de riesgos.</p>
+                        <p>La protección eficaz no depende de una medida aislada, sino de la articulación coherente de acciones de prevención, disuasión, detección, retardo, respuesta y recuperación (Moruno C., s. f.).</p>
+                        <p>La actuación del personal de seguridad debe sustentarse en diagnósticos objetivos, protocolos actualizados, capacitación continua, observación profesional y respeto irrestricto al ordenamiento jurídico. La mejora continua y la evaluación periódica son condiciones esenciales para consolidar instalaciones seguras y resilientes.</p>
+                    `}
+                ]
+            },
+            // TEMA 4
+            {
+                titulo: "Introducción a la Investigación Criminal",
+                icono: "🔍",
+                diapositivas: [
+                    { portada: true, titulo: "INVESTIGACIÓN<br>CRIMINAL", subtitulo: "PROCESO TÉCNICO, CIENTÍFICO Y JURÍDICO" },
+                    { titulo: "📌 DEFINICIÓN Y CONCEPTOS GENERALES", tag: "I", contenido: `
+                        <div class="node"><h3>🔍 Investigación Policial</h3><p>Conjunto sistemático de actos técnicos, operativos y documentales ejecutados por personal policial competente para conocer un hecho presuntamente delictivo, verificar sus circunstancias e individualizar a sus autores (Osinaga, 1991).</p></div>
+                        <div class="node"><h3>⚖️ Actuaciones Iniciales</h3><p>Decisiones y diligencias urgentes que se activan desde la noticia criminis para proteger personas, preservar el lugar del hecho, impedir la pérdida de información y organizar la investigación.</p></div>
+                        <div class="node"><h3>🤝 Funciones del Ministerio Público y la Policía</h3><p>El Ministerio Público dirige funcionalmente la investigación y define la estrategia jurídica; la Policía Boliviana ejecuta diligencias técnico-operativas, preserva escenarios y recolecta elementos.</p></div>
+                        <div class="node"><h3>📋 Actos Iniciales</h3><p>Acción directa o intervención policial preventiva, denuncia y querella. Todos orientados a impedir la pérdida de información y encauzar legalmente el caso.</p></div>
+                    `},
+                    { titulo: "🏠 LUGAR DEL HECHO Y PROCESAMIENTO", tag: "II", contenido: `
+                        <div class="node"><h3>🏠 Concepto de Lugar del Hecho</h3><p>Espacio físico o virtual relacionado con la preparación, ejecución, resultado u ocultamiento de una conducta investigada. Puede ser primario o secundario, abierto o cerrado, fijo o móvil (Antón Barberá y de Luis y Turégano, s. f.).</p></div>
+                        <div class="node"><h3>🔒 Procesamiento</h3><p>Protección, observación, fijación, búsqueda, señalización, recolección, embalaje y entrega de indicios. Se documenta cada etapa mediante actas, fotografía, video, croquis y notas técnicas.</p></div>
+                        <div class="node"><h3>🔎 Inspección Técnica Ocular</h3><p>Examen sistemático, directo y especializado del lugar del hecho para reconocer su configuración, identificar indicios, establecer relaciones espaciales y orientar hipótesis investigativas.</p></div>
+                        <div class="node"><h3>🧪 Reactivos y Soluciones</h3><p>Sustancias y procedimientos empleados para hacer visibles impresiones latentes según el tipo de residuo, porosidad, color y estado del soporte. Se busca contraste suficiente y mínima afectación.</p></div>
+                    `},
+                    { titulo: "🧬 PAPILOSCOPIA Y DACTILOSCOPIA", tag: "III", contenido: `
+                        <div class="node"><h3>🧬 Papiloscopia</h3><p>Disciplina de identificación humana que estudia los diseños formados por crestas y surcos papilares en dedos, palmas y plantas (Rosset y Lago, s. f.).</p></div>
+                        <div class="node"><h3>📜 Principios</h3><ul><li><strong>Inmutabilidad:</strong> el diseño conserva sus rasgos durante la vida</li><li><strong>Perennidad:</strong> persiste desde la formación prenatal</li><li><strong>Variedad infinita:</strong> combinaciones únicas e individualizantes</li><li><strong>Universalidad:</strong> presente en todas las personas</li></ul></div>
+                        <div class="node"><h3>🌿 Ramas</h3><p>Dactiloscopia, palametoscopia, pelmatoscopia, queiloscopia, paloscopia y poroscopia. Cada una con técnicas de obtención y comparación específicas.</p></div>
+                        <div class="node"><h3>🔍 Sistema Argentino (Vucetich)</h3><p>Método decadactilar que organiza los dactilogramas en cuatro tipos fundamentales: arco, presilla interna, presilla externa y verticilo. Combina serie y sección en una fórmula individual.</p></div>
+                    `},
+                    { titulo: "📦 CADENA DE CUSTODIA", tag: "IV", contenido: `
+                        <div class="node"><h3>📦 Definición</h3><p>Sistema documentado de control que acompaña a indicios, evidencias y muestras desde su localización hasta su disposición final. Registra quién los tuvo, cuándo, dónde y en qué condiciones (Rivera, 2019).</p></div>
+                        <div class="node"><h3>⚙️ Reglas Generales</h3><p>Identificación inequívoca, mínima manipulación, embalaje compatible, sellado, rotulado, registro cronológico y entrega formal entre responsables. Cada transferencia debe documentarse.</p></div>
+                        <div class="node"><h3>🔗 Fases o Eslabones</h3><ul><li><strong>1. Colección:</strong> localización, fijación, levantamiento, embalaje y rotulado</li><li><strong>2. Custodia:</strong> recepción, almacenamiento y control de acceso</li><li><strong>3. Análisis:</strong> examen por laboratorio con métodos validados</li><li><strong>4. Disposición final:</strong> devolución, conservación o destrucción según decisión legal</li></ul></div>
+                        <div class="node"><h3>🏥 Autopsia Médico-Forense</h3><p>Examen sistemático externo e interno de un cadáver para establecer causa y mecanismo de muerte, estimar data e identificar lesiones (Núñez de Arco, 2007).</p></div>
+                    `},
+                    { titulo: "🤝 COORDINACIÓN INTERINSTITUCIONAL", tag: "V", contenido: `
+                        <div class="node"><h3>🤝 Finalidad</h3><p>Alcanzar una investigación objetiva, eficiente y respetuosa de derechos mediante la integración de capacidades institucionales. Obtener información de calidad, reducir tiempos y prevenir duplicidades.</p></div>
+                        <div class="node"><h3>📒 Cuaderno de Investigaciones</h3><p>Soporte físico o digital donde se incorporan de forma cronológica denuncias, informes, actas, requerimientos, resoluciones y pericias. Asegura memoria institucional y control de legalidad.</p></div>
+                        <div class="node"><h3>👥 Relación Fiscal e Investigador</h3><p>El fiscal orienta jurídicamente y controla legalidad; el investigador propone y ejecuta actos técnico-operativos, informa avances y sustenta necesidades. La comunicación debe ser continua y documentada.</p></div>
+                        <div class="node"><h3>📝 Informe Conclusivo</h3><p>Sintetiza actuaciones, metodología, resultados, elementos recolectados y conclusiones investigativas. Diferencia hechos verificados de hipótesis y señala limitaciones.</p></div>
+                    `},
+                    { titulo: "📋 INDICIO, EVIDENCIA Y PRUEBA", tag: "VI", contenido: `
+                        <div class="node"><h3>🔍 Indicio</h3><p>Signo inicialmente relacionado con el hecho. Adquiere valor investigativo cuando es localizado, documentado y relacionado racionalmente con una hipótesis del hecho.</p></div>
+                        <div class="node"><h3>🧪 Evidencia</h3><p>Elemento material, documental, digital o testimonial obtenido legalmente y vinculado con el hecho, susceptible de análisis y valoración.</p></div>
+                        <div class="node"><h3>⚖️ Prueba</h3><p>Resultado procesalmente incorporado y controvertido ante la autoridad jurisdiccional, apto para sustentar una decisión sobre los hechos.</p></div>
+                        <div class="node"><h3>📂 Clasificación</h3><ul><li><strong>Directa o testifical:</strong> percepción de una persona</li><li><strong>Circunstancial:</strong> hechos secundarios enlazados por inferencias</li><li><strong>Real, física o material:</strong> objeto o sustancia tangible</li></ul></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>La investigación criminal constituye un proceso técnico, científico, jurídico y coordinado que permite transformar la noticia de un hecho presuntamente delictivo en información objetiva, verificable y útil para la administración de justicia.</p>
+                        <p>Su eficacia depende de la correcta articulación entre el Ministerio Público, la Policía Boliviana y los especialistas forenses, así como del respeto irrestricto de los derechos y garantías constitucionales (Fiscalía General del Estado & Policía Boliviana, s. f.).</p>
+                        <p>La adecuada aplicación de la papiloscopia, la inspección técnica ocular, la cadena de custodia, la medicina legal y la coordinación interinstitucional fortalece la calidad de la investigación, reduce errores procedimentales y contribuye a que las conclusiones policiales y fiscales sean objetivas, fundamentadas y defendibles en juicio oral.</p>
+                    `}
+                ]
+            },
+            // TEMA 5
+            {
+                titulo: "Educación Vial e Investigación de Accidentes",
+                icono: "🚦",
+                diapositivas: [
+                    { portada: true, titulo: "EDUCACIÓN VIAL E<br>INVESTIGACIÓN DE ACCIDENTES", subtitulo: "PREVENCIÓN Y RECONSTRUCCIÓN TÉCNICA" },
+                    { titulo: "📌 CONSIDERACIONES GENERALES Y LEGALES", tag: "I", contenido: `
+                        <div class="node"><h3>⚖️ Jurisdicción y Competencia</h3><p><strong>Jurisdicción:</strong> potestad estatal de administrar justicia.<br><strong>Competencia:</strong> medida concreta de esa potestad, distribuida por materia, territorio, grado o función (Bolivia, 1993).</p></div>
+                        <div class="node"><h3>📜 Código Nacional de Tránsito</h3><p>Asigna funciones de regulación, control, investigación y sanción administrativa, articulando la actuación policial con otras autoridades (Ley N.° 3988).</p></div>
+                        <div class="node"><h3>⚖️ Responsabilidad Penal y Civil</h3><p><strong>Penal:</strong> conducta que encuadra en un delito con base en dolo o culpa.<br><strong>Civil:</strong> obligación de reparar daños personales, materiales o patrimoniales. Ambas pueden coexistir.</p></div>
+                        <div class="node"><h3>🚗 Elementos del Tránsito</h3><ul><li><strong>Factor humano:</strong> capacidades, decisiones y estados</li><li><strong>Factor vehículo:</strong> condiciones mecánicas y de seguridad</li><li><strong>Factor vía:</strong> diseño, señalización, iluminación y entorno</li></ul></div>
+                    `},
+                    { titulo: "🚦 NORMAS DE CIRCULACIÓN Y SEÑALIZACIÓN", tag: "II", contenido: `
+                        <div class="node"><h3>🚗 Circulación de Vehículos</h3><p>Desplazamiento controlado conforme al sentido autorizado, carril, señalización y condiciones de seguridad. El conductor debe conservar dominio del automotor y mantener distancia suficiente para reaccionar.</p></div>
+                        <div class="node"><h3>🚫 Prohibiciones</h3><p>Circular en sentido contrario, conducir bajo efectos de alcohol, realizar maniobras temerarias o utilizar vehículos en condiciones inseguras. Tienen carácter preventivo y pueden originar sanción o investigación.</p></div>
+                        <div class="node"><h3>🛑 Circulación Preferencial</h3><p>Régimen de prioridad otorgado a vehículos de emergencia. No elimina el deber de cautela y debe ejercerse con señales audibles o visuales cuando la normativa lo exige.</p></div>
+                        <div class="node"><h3>🪧 Clasificación de Señales</h3><ul><li><strong>Reglamentarias:</strong> imponen conductas obligatorias</li><li><strong>Preventivas:</strong> advierten riesgos</li><li><strong>Informativas:</strong> orientan sobre destinos y servicios</li></ul></div>
+                    `},
+                    { titulo: "⚠️ INFRACCIONES Y SANCIONES", tag: "III", contenido: `
+                        <div class="node"><h3>🚨 Concepto de Infracción</h3><p>Acción u omisión que vulnera una disposición de tránsito, sin perjuicio de que por su gravedad también pueda constituir delito (Clavijo Salinas, 2026). Requiere correspondencia entre hecho probado y norma infringida.</p></div>
+                        <div class="node"><h3>📊 Clasificación</h3><p>Según gravedad, conducta, riesgo generado o consecuencia. Permite graduar sanciones y priorizar controles preventivos según el nivel de peligro y la reincidencia.</p></div>
+                        <div class="node"><h3>💰 Clases de Sanciones</h3><ul><li>Multas</li><li>Suspensión o restricción de autorizaciones</li><li>Retención de documentos o vehículos</li><li>Otras medidas previstas legalmente</li></ul></div>
+                        <div class="node"><h3>👶 Menores de Edad</h3><p>Régimen especial de protección y responsabilidad. La autoridad adopta medidas de protección, identifica responsables y deriva el caso conforme a la ley aplicable.</p></div>
+                    `},
+                    { titulo: "🚑 INVESTIGACIÓN DE HECHOS DE TRÁNSITO", tag: "IV", contenido: `
+                        <div class="node"><h3>🚑 Accidente de Tránsito</h3><p>Suceso no intencional vinculado con la circulación que produce daños personales o materiales. Su denominación no excluye conductas imprudentes o antirreglamentarias (Clavijo Salinas, 2026).</p></div>
+                        <div class="node"><h3>🔍 Hecho de Tránsito</h3><p>Categoría amplia que comprende acontecimientos relacionados con la circulación, tengan o no resultado dañoso. Permite analizar infracciones e incidentes desde una perspectiva técnica.</p></div>
+                        <div class="node"><h3>📋 Terminología</h3><ul><li><strong>Colisión:</strong> encuentro violento entre vehículos</li><li><strong>Choque:</strong> impacto contra objeto fijo</li><li><strong>Atropello:</strong> impacto contra persona</li><li><strong>Vuelco:</strong> pérdida de estabilidad con rotación</li><li><strong>Embarrancamiento:</strong> caída por pendiente</li></ul></div>
+                        <div class="node"><h3>📐 Nomenclatura de Impactos</h3><p>Identificación de zonas de contacto mediante referencias frontal, posterior, lateral y angular para relacionar daños con trayectorias y validar la mecánica del accidente.</p></div>
+                    `},
+                    { titulo: "📝 ETAPAS DE LA INVESTIGACIÓN", tag: "V", contenido: `
+                        <div class="node"><h3>1️⃣ Averiguación de los Hechos</h3><p>Obtener información sobre participantes, secuencia, condiciones y consecuencias. Combina observación directa, entrevistas preliminares y verificaciones urgentes sin contaminar testimonios.</p></div>
+                        <div class="node"><h3>2️⃣ Anotación de los Hechos</h3><p>Fijación sistemática de observaciones, medidas, imágenes y declaraciones. Incluye medición de huellas, croquis, fotografía y levantamiento de indicios con cadena de custodia.</p></div>
+                        <div class="node"><h3>3️⃣ Análisis de los Hechos</h3><p>Integración razonada de indicios, declaraciones, daños, huellas y peritajes para formular una secuencia compatible con la evidencia. Separa datos observados, cálculos e inferencias.</p></div>
+                        <div class="node"><h3>4️⃣ Determinación de Causas</h3><ul><li><strong>Directa:</strong> desencadenante inmediato</li><li><strong>Mediata:</strong> condición previa que facilita el error</li><li><strong>Remota:</strong> antecedente estructural o distante</li></ul></div>
+                    `},
+                    { titulo: "🔗 EVOLUCIÓN DEL ACCIDENTE", tag: "VI", contenido: `
+                        <div class="node"><h3>⏱️ Cadena de Acontecimientos</h3><p>Secuencia temporal desde la aparición del peligro hasta la posición final. Se divide en puntos críticos para comprender percepción, decisión, impacto y descanso.</p></div>
+                        <div class="node"><h3>👁️ Punto de Sorpresa</h3><p>Instante en que el conductor percibe o debió percibir una situación inesperada de peligro. Su determinación depende de visibilidad, atención y aparición del riesgo.</p></div>
+                        <div class="node"><h3>🚫 Punto de No Escape</h3><p>Momento a partir del cual, dadas la velocidad, distancia y capacidad de maniobra, el accidente ya no puede evitarse físicamente.</p></div>
+                        <div class="node"><h3>💥 Punto de Mayor Contacto</h3><p>Fase de máxima interacción física entre cuerpos, donde se produce la principal transferencia de energía y suelen corresponder las deformaciones más intensas.</p></div>
+                        <div class="node"><h3>🛑 Punto de Descanso</h3><p>Posición final en la que vehículos, personas u objetos quedan inmóviles después del accidente. Debe fijarse antes de cualquier movimiento.</p></div>
+                        <div class="node"><h3>📝 Informe y Acciones Complementarias</h3><p>El informe expone antecedentes, metodología, hallazgos, análisis y conclusiones. Las acciones complementarias incluyen nuevas entrevistas, peritajes e inspecciones.</p></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>La educación vial y la investigación de hechos de tránsito requieren una visión integral que articule norma, técnica y prevención. El análisis del factor humano, del vehículo y de la vía permite comprender que los accidentes rara vez responden a una sola condición.</p>
+                        <p>La actuación policial debe preservar la vida, asegurar el lugar, registrar evidencia y construir explicaciones causales verificables, diferenciando infracción, causalidad y responsabilidad (Camberos B., s. f.).</p>
+                        <p>La aplicación ordenada de las etapas investigativas fortalece la objetividad del informe, facilita la intervención de autoridades competentes y permite transformar los hallazgos de cada caso en medidas de prevención vial.</p>
+                    `}
+                ]
+            },
+            // TEMA 6
+            {
+                titulo: "Procedimientos Policiales",
+                icono: "🚨",
+                diapositivas: [
+                    { portada: true, titulo: "PROCEDIMIENTOS<br>POLICIALES", subtitulo: "ACTUACIÓN OPERATIVA Y TÁCTICA" },
+                    { titulo: "📌 USO DE LA FUERZA Y ORDEN PÚBLICO", tag: "I", contenido: `
+                        <div class="node"><h3>🚨 Uso de la Fuerza</h3><p>Respuesta operativa que requiere valoración previa de la conducta observada, el nivel de riesgo, el entorno y los recursos disponibles. La intervención debe procurar control, seguridad y reducción del riesgo (Policía Boliviana, 2025).</p></div>
+                        <div class="node"><h3>🛡️ Mantenimiento del Orden</h3><p>Prevenir que una situación colectiva evolucione hacia escenarios de riesgo. Requiere observación de la dinámica, identificación de actores, reconocimiento de puntos críticos y coordinación entre equipos.</p></div>
+                        <div class="node"><h3>⚖️ Principios Rectores</h3><ul><li><strong>Legalidad:</strong> actuar dentro de atribuciones</li><li><strong>Necesidad:</strong> intervención indispensable</li><li><strong>Proporcionalidad:</strong> respuesta acorde al riesgo</li><li><strong>Oportunidad:</strong> momento adecuado</li></ul></div>
+                        <div class="node"><h3>📊 Pirámide Progresiva</h3><p>Modelo que ordena la respuesta policial de acuerdo con la evolución del comportamiento y el riesgo. No es una secuencia mecánica, sino una guía de adaptación que obliga a observar cambios y ajustar la intervención.</p></div>
+                    `},
+                    { titulo: "🛡️ ACCIÓN DIRECTA Y PRESERVACIÓN", tag: "II", contenido: `
+                        <div class="node"><h3>🚨 Acción Directa</h3><p>Respuesta policial inicial frente a un hecho que requiere intervención inmediata. Debe ser ordenada, observando qué ocurrió, quiénes están presentes y qué riesgos permanecen activos.</p></div>
+                        <div class="node"><h3>🏥 Atención a Víctimas</h3><p>Priorizar la seguridad, identificar riesgos activos y facilitar asistencia dentro de las capacidades del personal. Obtener información sin generar mayor afectación ni interferir con la atención de emergencia.</p></div>
+                        <div class="node"><h3>🔒 Preservación del Lugar</h3><p>Impedir que información material relevante sea alterada, destruida o contaminada. Controlar accesos, limitar desplazamientos y registrar novedades que puedan ser útiles para la investigación.</p></div>
+                        <div class="node"><h3>📝 Acta de Acción Directa</h3><p>Información clara, cronológica, objetiva y comprensible. Distinguir hechos observados de versiones de terceros, consignar actuaciones y evitar conclusiones no sustentadas.</p></div>
+                    `},
+                    { titulo: "🚔 OPERATIVOS ESPECIALIZADOS", tag: "III", contenido: `
+                        <div class="node"><h3>💊 Lucha contra el Narcotráfico</h3><p>Alto nivel de planificación, coordinación, reserva y análisis previo debido a los riesgos asociados a organizaciones, rutas, medios de transporte y mecanismos de evasión.</p></div>
+                        <div class="node"><h3>👤 Seguridad de Personas Importantes</h3><p>Anticipación de amenazas y vulnerabilidades. Requiere reconocimiento de lugares, análisis de rutas, identificación de puntos críticos y actualización permanente de información.</p></div>
+                        <div class="node"><h3>🏢 Seguridad Penitenciaria</h3><p>Medidas de observación, control, prevención y respuesta para mantener condiciones de seguridad dentro de un establecimiento, detectando conflictos emergentes y redes internas.</p></div>
+                        <div class="node"><h3>🛂 Control Migratorio</h3><p>Verificar identidad, documentación, movimientos y circunstancias que puedan requerir intervención de la autoridad competente. Evitar conclusiones precipitadas y comunicar oportunamente.</p></div>
+                    `},
+                    { titulo: "🧠 INTELIGENCIA BÁSICA POLICIAL", tag: "IV", contenido: `
+                        <div class="node"><h3>🧠 Definición</h3><p>Proceso mediante el cual datos obtenidos de distintas fuentes se seleccionan, valoran, integran y analizan hasta convertirse en conocimiento útil para la función policial (Policía Boliviana, 2025).</p></div>
+                        <div class="node"><h3>📊 Conceptos Básicos</h3><p>Dato, información, fuente, evaluación, análisis, inteligencia, amenaza y necesidad de conocimiento. El dato aislado adquiere mayor utilidad cuando es contextualizado y contrastado.</p></div>
+                        <div class="node"><h3>🔄 Ciclo de Producción</h3><p>Necesidad de conocimiento → obtención de datos → organización y valoración → análisis → elaboración del producto → difusión → retroalimentación.</p></div>
+                        <div class="node"><h3>📋 Clasificación</h3><p>Productos según el nivel de decisión: estratégico (largo plazo), operacional (planificación de operaciones) y táctico (necesidades inmediatas durante una intervención).</p></div>
+                    `},
+                    { titulo: "🔥 BOMBERÍA, SALVATAJE Y ALLANAMIENTOS", tag: "V", contenido: `
+                        <div class="node"><h3>🚒 Bombería y Salvataje</h3><p>Decisiones rápidas sustentadas en observación del entorno, identificación de peligros, priorización de personas expuestas y coordinación de recursos para evitar mayor afectación.</p></div>
+                        <div class="node"><h3>🚪 Allanamientos</h3><p>Aspectos operativos: planificación, identificación del objetivo, distribución de funciones, análisis de riesgos y documentación del procedimiento, sin atribuir requisitos legales concretos.</p></div>
+                        <div class="node"><h3>📋 Planificación</h3><p>La información previa reduce incertidumbre y permite prever escenarios, asignar funciones y establecer medidas de seguridad antes de una operación, evitando improvisaciones.</p></div>
+                        <div class="node"><h3>📝 Documentación</h3><p>Registrar cada actuación, los resultados obtenidos y las novedades relevantes para asegurar la trazabilidad del procedimiento y facilitar el control posterior.</p></div>
+                    `},
+                    { titulo: "📡 TECNOLOGÍA Y ANÁLISIS TERRITORIAL", tag: "VI", contenido: `
+                        <div class="node"><h3>💻 BOL-110, CADI y Videovigilancia</h3><p>Sistemas integrados para recibir alertas, priorizar incidentes, coordinar recursos y producir información para la toma de decisiones. Su eficacia depende de protocolos y mantenimiento.</p></div>
+                        <div class="node"><h3>🗺️ Georreferenciación del Delito</h3><p>Ubica incidentes, patrones y factores de riesgo en el espacio y el tiempo. Permite reconocer concentraciones, rutas, horarios y repetición de hechos para asignar patrullas.</p></div>
+                        <div class="node"><h3>📊 Análisis Territorial</h3><p>Integra datos cuantitativos con conocimiento operativo y comunitario para orientar acciones preventivas y evaluar resultados de manera inteligente.</p></div>
+                        <div class="node"><h3>🤝 Participación Ciudadana</h3><p>Escuelas de Seguridad Ciudadana, Brigadas Vecinales y Voluntariado Civil (GACIP) para fortalecer vínculos, capacidades preventivas y canales de cooperación.</p></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>Los procedimientos policiales integran actuaciones de naturaleza diversa, desde el uso de la fuerza y el orden público hasta la acción directa, los operativos especializados y la inteligencia.</p>
+                        <p>La utilidad de la inteligencia policial depende de convertir datos e información en conocimiento oportuno, pertinente y orientado a una necesidad concreta, lo que fortalece la planificación y la decisión institucional (Policía Boliviana, 2025; Santamaría Monzón, 2025).</p>
+                        <p>La actuación policial profesional puede fortalecerse mediante el análisis de información, pero el sustento jurídico específico de cada procedimiento requiere bibliografía especializada adicional cuando se pretendan desarrollar normas, requisitos o límites legales concretos.</p>
+                    `}
+                ]
+            },
+            // TEMA 7
+            {
+                titulo: "Fundamentos Jurídicos",
+                icono: "⚖️",
+                diapositivas: [
+                    { portada: true, titulo: "FUNDAMENTOS<br>JURÍDICOS", subtitulo: "ESTADO CONSTITUCIONAL DE DERECHO" },
+                    { titulo: "🏛️ ESTADO CONSTITUCIONAL DE DERECHO", tag: "I", contenido: `
+                        <div class="node"><h3>🏛️ Concepto</h3><p>Sistema político-jurídico en el que la Constitución posee fuerza normativa, organiza los órganos del poder, reconoce derechos y establece controles frente a posibles abusos (Mendoza, 2009).</p></div>
+                        <div class="node"><h3>⭐ Características</h3><ul><li>Supremacía constitucional</li><li>Separación y coordinación de funciones</li><li>Reconocimiento de derechos fundamentales</li><li>Control de constitucionalidad</li><li>Responsabilidad de servidores públicos</li></ul></div>
+                        <div class="node"><h3>📜 Principios Fundamentales</h3><p>Dignidad humana, libertad, igualdad, justicia, legalidad, seguridad jurídica, responsabilidad y control del poder.</p></div>
+                        <div class="node"><h3>👑 Supremacía Constitucional</h3><p>La Constitución ocupa la posición superior del ordenamiento jurídico. Toda norma, acto administrativo u orden institucional debe ser compatible con ella (Rivera Santibáñez, 2004).</p></div>
+                    `},
+                    { titulo: "📜 CONSTITUCIÓN POLÍTICA DEL ESTADO", tag: "II", contenido: `
+                        <div class="node"><h3>📜 Estructura</h3><p>Bases fundamentales, derechos, garantías, organización funcional y territorial, régimen económico y mecanismos de reforma. Facilita la localización de normas aplicables.</p></div>
+                        <div class="node"><h3>💎 Valores</h3><p>Justicia, igualdad, libertad, solidaridad, dignidad, unidad y paz social. Orientan prioridades operativas y exigen protección especial a personas vulnerables.</p></div>
+                        <div class="node"><h3>⚖️ Principios</h3><p>Legalidad, igualdad, pluralismo, seguridad jurídica, responsabilidad y respeto a los derechos. Permiten integrar el sistema y resolver tensiones.</p></div>
+                        <div class="node"><h3>🎯 Fines Esenciales del Estado</h3><p>Protección de la persona, preservación de la convivencia, realización de la justicia, seguridad, bienestar colectivo y cumplimiento de los derechos.</p></div>
+                    `},
+                    { titulo: "⚖️ PRINCIPIOS CONSTITUCIONALES DE LA FUNCIÓN POLICIAL", tag: "III", contenido: `
+                        <div class="node"><h3>📜 Legalidad</h3><p>Toda actuación policial debe estar autorizada por una norma vigente, ser ejecutada por autoridad competente y respetar el procedimiento establecido.</p></div>
+                        <div class="node"><h3>⚖️ Igualdad</h3><p>Brindar protección y aplicar la ley sin discriminación, adoptando medidas diferenciadas cuando existan condiciones objetivas de vulnerabilidad.</p></div>
+                        <div class="node"><h3>🛡️ Seguridad Jurídica</h3><p>Previsibilidad de las normas y de la actuación estatal. Procedimientos claros, decisiones motivadas y registros confiables.</p></div>
+                        <div class="node"><h3>📋 Debido Proceso</h3><p>Garantías destinadas a impedir decisiones arbitrarias: derecho a defensa, autoridad competente, presunción de inocencia, motivación y plazo razonable.</p></div>
+                        <div class="node"><h3>⚖️ Proporcionalidad</h3><p>Toda medida restrictiva debe ser idónea, necesaria y equilibrada respecto del beneficio esperado.</p></div>
+                        <div class="node"><h3>🧠 Razonabilidad</h3><p>Las decisiones deben apoyarse en hechos verificables, criterios objetivos y una relación lógica entre problema, finalidad y medida.</p></div>
+                    `},
+                    { titulo: "👤 DERECHOS FUNDAMENTALES Y GARANTÍAS", tag: "IV", contenido: `
+                        <div class="node"><h3>👤 Derechos Civiles</h3><p>Vida, integridad, libertad, privacidad, honra, propiedad y circulación. Toda restricción debe estar jurídicamente habilitada y ser estrictamente necesaria.</p></div>
+                        <div class="node"><h3>🗳️ Derechos Políticos</h3><p>Participar en la formación y control del poder público mediante voto, organización, deliberación y acceso a funciones públicas.</p></div>
+                        <div class="node"><h3>🏥 Derechos Sociales</h3><p>Salud, educación, trabajo, vivienda, seguridad social y protección de grupos vulnerables. La función policial contribuye a garantizar entornos seguros.</p></div>
+                        <div class="node"><h3>🛡️ Garantías Constitucionales</h3><p>Procedimientos y mecanismos de protección que permiten reclamar frente a actos u omisiones que lesionen derechos (Rivera Santibáñez, 2004).</p></div>
+                    `},
+                    { titulo: "📚 ORDENAMIENTO JURÍDICO Y APLICACIÓN", tag: "V", contenido: `
+                        <div class="node"><h3>🏛️ Jerarquía Normativa</h3><p>Ordena las disposiciones según su fuerza jurídica. Una norma inferior no puede modificar ni contradecir a otra superior (Mendoza, 2009).</p></div>
+                        <div class="node"><h3>🔺 Pirámide Normativa</h3><p>Constitución en la cúspide, luego leyes, reglamentos y actos particulares. La validez de cada nivel depende de su conformidad con los superiores.</p></div>
+                        <div class="node"><h3>⚖️ Control de Constitucionalidad</h3><p>Verifica que normas y actos se ajusten a la Constitución. Puede producir la inaplicación o expulsión de disposiciones incompatibles.</p></div>
+                        <div class="node"><h3>📖 Interpretación Jurídica</h3><p>Determina el sentido y alcance de una norma mediante criterios gramaticales, sistemáticos, históricos, teleológicos y constitucionales.</p></div>
+                    `},
+                    { titulo: "👮 FUNCIÓN PÚBLICA Y RESPONSABILIDAD", tag: "VI", contenido: `
+                        <div class="node"><h3>👮 Función Pública Policial</h3><p>Actividad estatal permanente destinada a proteger a la sociedad, conservar el orden, hacer cumplir la ley y auxiliar a la población (Mendoza, 2009).</p></div>
+                        <div class="node"><h3>📋 Deberes Constitucionales</h3><p>Respetar y proteger derechos, cumplir la Constitución, servir al interés general, actuar con imparcialidad y someterse al control.</p></div>
+                        <div class="node"><h3>⚖️ Responsabilidad Administrativa y Disciplinaria</h3><p><strong>Administrativa:</strong> incumplimiento de normas de gestión y uso de recursos.<br><strong>Disciplinaria:</strong> infracciones al régimen interno y deberes profesionales.</p></div>
+                        <div class="node"><h3>⚖️ Responsabilidad Penal y Civil</h3><p><strong>Penal:</strong> conducta que reúne los elementos de un delito.<br><strong>Civil:</strong> reparación de daños patrimoniales o extrapatrimoniales causados por conducta ilícita.</p></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>Los fundamentos jurídicos de la función policial demuestran que la autoridad legítima no se define únicamente por la capacidad de imponer decisiones, sino por la obligación de actuar dentro de la Constitución, respetar los derechos fundamentales y responder por los resultados de cada intervención.</p>
+                        <p>El Estado Constitucional de Derecho convierte la legalidad, la igualdad, la seguridad jurídica, el debido proceso, la proporcionalidad y la razonabilidad en criterios operativos que deben estar presentes desde la planificación hasta la evaluación del servicio (Mendoza, 2009).</p>
+                        <p>El conocimiento jurídico no constituye un complemento accesorio del servicio policial, sino una competencia profesional esencial. Un policía jurídicamente formado puede identificar límites, justificar decisiones, reducir riesgos de responsabilidad y fortalecer la legitimidad institucional.</p>
+                    `}
+                ]
+            },
+            // TEMA 8
+            {
+                titulo: "Derechos Humanos y Función Policial",
+                icono: "🕊️",
+                diapositivas: [
+                    { portada: true, titulo: "DERECHOS HUMANOS<br>Y FUNCIÓN POLICIAL", subtitulo: "MARCO ÉTICO, JURÍDICO Y OPERATIVO" },
+                    { titulo: "📜 HISTORIA Y SISTEMA", tag: "I", contenido: `
+                        <div class="node"><h3>🌍 Ámbito Universal</h3><p>Cilindro de Ciro, Carta Magna, Declaración de 1789 y Declaración Universal de los Derechos Humanos (1948). La dignidad y la igualdad son fundamento de libertad, justicia y paz.</p></div>
+                        <div class="node"><h3>🇧🇴 Ámbito Nacional</h3><p>Revolución de 1952, periodos dictatoriales, retorno a la democracia y Constitución Política del Estado de 2009. La memoria de las vulneraciones fortalece la necesidad de controles.</p></div>
+                        <div class="node"><h3>📜 Declaración Universal</h3><p>Reconocimiento de la dignidad y de los derechos iguales e inalienables de todas las personas como base de la libertad, la justicia y la paz (ONU, 1948).</p></div>
+                        <div class="node"><h3>📊 Generaciones de Derechos</h3><ul><li><strong>Civiles y políticos:</strong> vida, integridad, libertad, privacidad</li><li><strong>Económicos, sociales y culturales:</strong> trabajo, salud, educación</li><li><strong>Solidaridad y tecnológicos:</strong> paz, desarrollo, ambiente, datos personales</li></ul></div>
+                    `},
+                    { titulo: "🛡️ MECANISMOS DE PROTECCIÓN", tag: "II", contenido: `
+                        <div class="node"><h3>🌐 Sistema Universal (ONU)</h3><p>Tratados, comités, procedimientos especiales y mecanismos de revisión. Establecen obligaciones y criterios que influyen en la práctica policial.</p></div>
+                        <div class="node"><h3>🌎 Sistemas Regionales</h3><p>Interamericano (CIDH y Corte IDH), Europeo, Africano y Árabe. Adaptan la protección a contextos geográficos específicos.</p></div>
+                        <div class="node"><h3>🇧🇴 Sistema Nacional</h3><p>Defensoría del Pueblo y Garantías Jurisdiccionales: acciones de libertad, amparo constitucional, protección de privacidad, inconstitucionalidad, cumplimiento y acción popular.</p></div>
+                        <div class="node"><h3>🚫 Prohibición Absoluta de la Tortura</h3><p>Ninguna emergencia, orden superior o presión operativa puede justificarla. La obediencia debida no exime responsabilidad (ONU, 1984).</p></div>
+                    `},
+                    { titulo: "👥 GRUPOS EN SITUACIÓN DE VULNERABILIDAD", tag: "III", contenido: `
+                        <div class="node"><h3>👶 Niñez y Adolescencia</h3><p>Interés superior, no discriminación, derecho a ser escuchados, supervivencia y desarrollo (ONU, 1989). Reducir tiempos de espera y evitar exposición mediática.</p></div>
+                        <div class="node"><h3>🏳️‍🌈 Comunidad LGTB</h3><p>Garantizar identidad, privacidad, igualdad y libre desarrollo de la personalidad. Excluir burlas, exposiciones y registros basados en prejuicios.</p></div>
+                        <div class="node"><h3>♿ Personas con Discapacidad</h3><p>Accesibilidad física, comunicacional y procedimental. Ajustes razonables y eliminación de barreras. Preguntar qué apoyo necesita la persona.</p></div>
+                        <div class="node"><h3>👴 Adultos Mayores</h3><p>Derecho a seguridad, salud, autonomía y vida digna. Considerar riesgos de abandono, violencia patrimonial y deterioro sensorial.</p></div>
+                        <div class="node"><h3>👩 Mujeres e Igualdad de Género</h3><p>Marco de la CEDAW e instrumentos regionales para erradicar la discriminación y la violencia de género (ONU, 1979).</p></div>
+                        <div class="node"><h3>⚖️ Enfoque de Género</h3><p>Identificar desigualdades, relaciones de poder y patrones de violencia que afectan de manera desproporcionada a las mujeres.</p></div>
+                    `},
+                    { titulo: "💪 USO DE LA FUERZA Y MANTENIMIENTO DEL ORDEN", tag: "IV", contenido: `
+                        <div class="node"><h3>⚖️ Marco Ético y Normativo</h3><p>El uso de la fuerza es una facultad excepcional vinculada al deber de proteger la vida, hacer cumplir la ley y restablecer el orden (CICR, s. f.).</p></div>
+                        <div class="node"><h3>📜 Principios de Robert Peel</h3><p>La misión policial es prevenir el delito y el desorden; la eficacia depende de la cooperación pública; la fuerza se emplea solo cuando la persuasión resulta insuficiente.</p></div>
+                        <div class="node"><h3>📋 Código de Conducta (FEHCL)</h3><p>Deberes de servicio a la comunidad, protección de la dignidad, respeto de derechos, uso excepcional de la fuerza, confidencialidad y prohibición de corrupción (ONU, 1979).</p></div>
+                        <div class="node"><h3>⚖️ Principios del Uso de la Fuerza</h3><ul><li><strong>Legalidad:</strong> base normativa y objetivo legítimo</li><li><strong>Necesidad:</strong> solo cuando otros medios resultan ineficaces</li><li><strong>Proporcionalidad:</strong> equilibrio entre amenaza y respuesta</li><li><strong>Precaución:</strong> minimizar daños</li><li><strong>Rendición de cuentas:</strong> registro y revisión</li></ul></div>
+                    `},
+                    { titulo: "🎯 USO DIFERENCIADO Y PROGRESIVO", tag: "V", contenido: `
+                        <div class="node"><h3>📊 Modelo de Intervención</h3><p>Relaciona la percepción de riesgo, la conducta del sujeto y las opciones tácticas disponibles: cooperación, resistencia pasiva, resistencia activa, agresión no letal y agresión potencialmente letal.</p></div>
+                        <div class="node"><h3>⚖️ Respuesta Gradual</h3><p>Prioriza presencia, comunicación, control y medios menos letales. La progresividad no obliga a recorrer mecánicamente todos los niveles; exige elegir la respuesta mínima eficaz.</p></div>
+                        <div class="node"><h3>🤝 Gestión de Conflictos</h3><p>Prevenir escalamiento mediante información, negociación, comunicación y coordinación. Distinguir participantes pacíficos, personas vulnerables, observadores y quienes cometen actos violentos.</p></div>
+                        <div class="node"><h3>🏟️ Aglomeración, Multitud y Disturbios</h3><ul><li><strong>Aglomeración:</strong> concentración circunstancial sin coordinación significativa</li><li><strong>Multitud:</strong> interacción, finalidad o identidad compartida</li><li><strong>Disturbio:</strong> conductas que alteran gravemente el orden (leve o grave)</li></ul></div>
+                    `},
+                    { titulo: "🛡️ INTERVENCIÓN TÁCTICA Y DERECHOS HUMANOS", tag: "VI", contenido: `
+                        <div class="node"><h3>🎯 Objetivo Legítimo</h3><p>Restablecer el orden con el menor daño posible. Requiere mando claro, identificación de unidades, medios autorizados, advertencias y rutas de evacuación.</p></div>
+                        <div class="node"><h3>🛡️ Respeto Irrestricto</h3><p>No impide actuar frente a violencia; determina la forma profesional de hacerlo y prohíbe castigos colectivos, disparos indiscriminados y tratos humillantes.</p></div>
+                        <div class="node"><h3>📋 Documentación</h3><p>Registrar cada intervención, las órdenes emitidas, las técnicas aplicadas, las lesiones y la asistencia prestada para permitir la revisión posterior.</p></div>
+                        <div class="node"><h3>⚖️ Rendición de Cuentas</h3><p>Toda aplicación de fuerza debe ser susceptible de explicación y revisión. La documentación protege derechos y permite evaluar si la respuesta fue legal y proporcional.</p></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>Los derechos humanos aplicados a la función policial constituyen una estructura práctica de decisión que vincula historia, normas, protección diferenciada, ética profesional y empleo legítimo de la fuerza.</p>
+                        <p>La evolución universal y nacional demuestra que el poder estatal adquiere legitimidad cuando se somete a límites, controles y garantías (ONU, 1948).</p>
+                        <p>La eficacia policial no se contrapone al respeto de derechos: una intervención planificada, técnica y controlada protege mejor a la ciudadanía, reduce riesgos para el personal y fortalece la confianza pública.</p>
+                    `}
+                ]
+            },
+            // TEMA 9
+            {
+                titulo: "Derecho Penal y Procesal Penal",
+                icono: "⚖️",
+                diapositivas: [
+                    { portada: true, titulo: "DERECHO PENAL Y<br>PROCESAL PENAL", subtitulo: "APLICADOS A LA FUNCIÓN POLICIAL" },
+                    { titulo: "📌 FUNDAMENTOS Y PRINCIPIOS", tag: "I", contenido: `
+                        <div class="node"><h3>⚖️ Derecho Penal</h3><p>Conjunto de normas que define las conductas consideradas delitos, establece consecuencias jurídicas y fija límites al poder punitivo del Estado (Miguel Harb, s. f.).</p></div>
+                        <div class="node"><h3>📋 Derecho Procesal Penal</h3><p>Regula los actos, etapas, sujetos, plazos y garantías mediante los cuales se investiga un hecho, se determina la responsabilidad y se ejecutan las decisiones judiciales (Bolivia, 1999).</p></div>
+                        <div class="node"><h3>⚖️ Principios Rectores</h3><ul><li><strong>Legalidad:</strong> fundamento en norma previa</li><li><strong>Presunción de inocencia:</strong> tratar como no culpable</li><li><strong>Debido proceso:</strong> garantías de investigación y juzgamiento</li><li><strong>Objetividad:</strong> investigar lo incriminatorio y lo exculpatorio</li><li><strong>Proporcionalidad:</strong> intensidad acorde al riesgo</li><li><strong>Non bis in idem:</strong> no doble persecución por el mismo hecho</li></ul></div>
+                        <div class="node"><h3>🛡️ Respeto a los Derechos Humanos</h3><p>Protección de la vida e integridad, prohibición de tortura, trato digno, igualdad, privacidad y acceso a garantías (Bolivia, 2009).</p></div>
+                    `},
+                    { titulo: "👮 FUNCIÓN POLICIAL EN EL PROCESO PENAL", tag: "II", contenido: `
+                        <div class="node"><h3>🤝 Órgano Auxiliar del Ministerio Público</h3><p>La Policía ejecuta diligencias bajo dirección funcional fiscal. Combina conducción jurídica y capacidad operativa especializada (Bolivia, 1999).</p></div>
+                        <div class="node"><h3>🛡️ Prevención y Protección de Víctimas</h3><p>Evitar la consumación del delito, reducir riesgos, neutralizar amenazas e impedir nuevas agresiones. Valorar el riesgo de la víctima y activar medidas de resguardo.</p></div>
+                        <div class="node"><h3>🔒 Preservación del Lugar</h3><p>Evitar alteraciones, contaminación o pérdida de información. La recolección de indicios debe ser técnica, selectiva, documentada y compatible con la cadena de custodia.</p></div>
+                        <div class="node"><h3>🚨 Aprehensión en Flagrancia</h3><p>Intervención inmediata frente a una persona sorprendida durante la comisión del hecho o en circunstancias próximas. Exige inmediatez temporal y relación objetiva con el evento.</p></div>
+                    `},
+                    { titulo: "🔍 POLICÍA JUDICIAL E INVESTIGACIÓN PRELIMINAR", tag: "III", contenido: `
+                        <div class="node"><h3>🔍 Concepto</h3><p>Unidades y servidores que desarrollan funciones de investigación penal bajo dirección del Ministerio Público. Su alcance incluye averiguación inicial, identificación de personas y conservación de fuentes de prueba.</p></div>
+                        <div class="node"><h3>📋 Investigación Preliminar</h3><p>Fase inicial destinada a verificar la existencia del hecho, identificar posibles responsables, proteger a las víctimas y asegurar elementos que podrían perderse.</p></div>
+                        <div class="node"><h3>🚪 Requisa Personal y de Vehículos</h3><p>Medida de búsqueda limitada cuando existen razones legalmente relevantes. Debe respetar dignidad, proporcionalidad y documentación. No puede basarse en prejuicios.</p></div>
+                        <div class="node"><h3>📦 Cadena de Custodia</h3><p>Sistema de identificación, registro, embalaje, traslado, almacenamiento y entrega que asegura la trazabilidad de una evidencia (Bolivia, 1999).</p></div>
+                        <div class="node"><h3>🔬 Coordinación con el IDIF</h3><p>Aplicar conocimientos científicos a la investigación mediante pericias médicas, biológicas, químicas, balísticas y documentológicas.</p></div>
+                    `},
+                    { titulo: "⚖️ JURISDICCIÓN, COMPETENCIA Y ACCIÓN PENAL", tag: "IV", contenido: `
+                        <div class="node"><h3>🏛️ Jurisdicción Penal</h3><p>Potestad estatal de conocer y resolver conflictos derivados de hechos delictivos mediante jueces y tribunales (Bolivia, 1999).</p></div>
+                        <div class="node"><h3>📋 Competencia Territorial y Funcional</h3><p>Distribuye la jurisdicción según territorio, materia, etapa o función. Permite asignar cada actuación a la autoridad legalmente habilitada.</p></div>
+                        <div class="node"><h3>⚖️ Acción Penal Pública</h3><p>Corresponde a delitos cuya persecución es promovida por el Ministerio Público en defensa del interés social.</p></div>
+                        <div class="node"><h3>⚖️ Acción Penal a Instancia de Parte</h3><p>Exige una manifestación inicial de la persona legitimada para activar la persecución, después de la cual interviene el Ministerio Público.</p></div>
+                        <div class="node"><h3>⚖️ Acción Penal Privada</h3><p>Delitos cuya persecución depende principalmente de la iniciativa de la persona ofendida.</p></div>
+                        <div class="node"><h3>🔄 Conversión y Extinción</h3><p>Modificación de la modalidad de ejercicio o fin de la posibilidad de continuar la persecución por causas legalmente previstas.</p></div>
+                    `},
+                    { titulo: "👤 DERECHOS Y GARANTÍAS EN LA INVESTIGACIÓN", tag: "V", contenido: `
+                        <div class="node"><h3>👤 Derechos del Imputado</h3><p>Conocer el hecho atribuido, contar con defensa, guardar silencio, ser tratado dignamente, comunicarse y cuestionar las actuaciones (Bolivia, 2009).</p></div>
+                        <div class="node"><h3>🛡️ Derechos de la Víctima</h3><p>Protección, información, trato digno, participación, reparación y acceso a mecanismos institucionales.</p></div>
+                        <div class="node"><h3>⚖️ Derecho a la Defensa y a Guardar Silencio</h3><p>Asistencia técnica y contradicción. El silencio no puede interpretarse como confesión (Bolivia, 1999).</p></div>
+                        <div class="node"><h3>🚫 Prohibición de Obtención Ilícita de Pruebas</h3><p>Prohibido obtener pruebas mediante tortura, coacción, invasiones arbitrarias o engaños incompatibles con derechos.</p></div>
+                        <div class="node"><h3>🏛️ Control Jurisdiccional</h3><p>Un juez revisa la legalidad de medidas, restricciones y actuaciones realizadas durante la investigación.</p></div>
+                    `},
+                    { titulo: "🧠 TEORÍA DEL DELITO Y MEDIDAS COERCITIVAS", tag: "VI", contenido: `
+                        <div class="node"><h3>🧠 Conducta</h3><p>Comportamiento humano voluntario, activo u omisivo, que constituye el punto de partida del análisis del delito (Roxin, s. f.).</p></div>
+                        <div class="node"><h3>📋 Tipicidad</h3><p>Correspondencia entre la conducta observada y la descripción legal de un delito.</p></div>
+                        <div class="node"><h3>⚖️ Antijuridicidad</h3><p>Contradicción de la conducta típica con el orden jurídico. Puede estar justificada por legítima defensa o estado de necesidad.</p></div>
+                        <div class="node"><h3>👤 Culpabilidad</h3><p>Atribución personal del hecho antijurídico a quien podía comprender su ilicitud y actuar de otra manera.</p></div>
+                        <div class="node"><h3>👥 Autoría y Participación</h3><p>Distinción según el dominio del hecho y la forma concreta de contribución de cada interviniente.</p></div>
+                        <div class="node"><h3>📊 Iter Criminis</h3><p>Fases del desarrollo del delito: idea, preparación, ejecución, tentativa y consumación.</p></div>
+                        <div class="node"><h3>🚨 Medidas Coercitivas</h3><p>Arresto, aprehensión, detención en flagrancia, incautación de objetos y preservación de evidencias. Deben aplicarse con base legal, necesidad, proporcionalidad y control.</p></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>El Derecho Penal y el Derecho Procesal Penal constituyen un sistema inseparable para la función policial. El primero delimita las conductas penalmente relevantes; el segundo define las vías legítimas para investigarlas y probarlas.</p>
+                        <p>La eficacia policial no puede evaluarse únicamente por el número de aprehensiones o evidencias colectadas. Una actuación profesional combina resultados con respeto de derechos, fundamentación, proporcionalidad, objetividad y trazabilidad (Bolivia, 1999).</p>
+                        <p>La preservación del lugar del hecho, la cadena de custodia, la correcta diferenciación entre arresto y aprehensión y la protección equilibrada de víctima e imputado son condiciones de legitimidad y no simples formalidades.</p>
+                    `}
+                ]
+            },
+            // TEMA 10
+            {
+                titulo: "Género y Violencia Intrafamiliar",
+                icono: "🏠",
+                diapositivas: [
+                    { portada: true, titulo: "GÉNERO Y VIOLENCIA<br>INTRAFAMILIAR", subtitulo: "PROTECCIÓN, PREVENCIÓN E INVESTIGACIÓN" },
+                    { titulo: "📜 MARCO JURÍDICO NACIONAL", tag: "I", contenido: `
+                        <div class="node"><h3>📜 Constitución Política del Estado (2009)</h3><p>Artículo 15.II: El Estado debe prevenir, eliminar y sancionar la violencia de género y generacional, garantizando a las mujeres una vida libre de violencia.</p></div>
+                        <div class="node"><h3>📋 Ley N.º 734 (1985)</h3><p>Estructura la naturaleza, misión, funciones y atribuciones institucionales. Fundamenta la intervención policial preventiva, auxiliadora e investigativa.</p></div>
+                        <div class="node"><h3>⚖️ Ley N.º 348 (2013)</h3><p>Ley Integral para Garantizar a las Mujeres una Vida Libre de Violencia. Define la violencia, reconoce múltiples formas de agresión y distribuye responsabilidades.</p></div>
+                        <div class="node"><h3>📋 Ley N.º 260 (2012)</h3><p>Regula la función fiscal y la dirección de la investigación penal. Coordinación fiscal-policial con objetividad, celeridad y protección de víctimas.</p></div>
+                    `},
+                    { titulo: "🌍 MARCO JURÍDICO INTERNACIONAL", tag: "II", contenido: `
+                        <div class="node"><h3>🌍 CEDAW (ONU, 1979)</h3><p>Obliga a eliminar normas, prácticas y estereotipos que produzcan discriminación contra la mujer.</p></div>
+                        <div class="node"><h3>📋 Recomendación General N.º 19</h3><p>Reconoció que la violencia basada en el sexo es una forma de discriminación que impide a las mujeres disfrutar derechos en igualdad (ONU, 1992).</p></div>
+                        <div class="node"><h3>🌎 Convención de Belém do Pará (OEA, 1994)</h3><p>Define la violencia contra la mujer en los ámbitos público y privado y reconoce el derecho a una vida libre de violencia.</p></div>
+                        <div class="node"><h3>⚖️ Debida Diligencia</h3><p>Los Estados deben actuar con debida diligencia para prevenir, investigar y sancionar la violencia contra la mujer.</p></div>
+                    `},
+                    { titulo: "📖 MARCO CONCEPTUAL", tag: "III", contenido: `
+                        <div class="node"><h3>📖 Definición de Violencia (Ley N.º 348)</h3><p>Toda acción u omisión, abierta o encubierta, que causa muerte, sufrimiento o daño físico, sexual, psicológico, económico o patrimonial a una mujer, por el solo hecho de ser mujer.</p></div>
+                        <div class="node"><h3>👤 Derechos Humanos</h3><p>Facultades y garantías inherentes a toda persona, universales, indivisibles, interdependientes y exigibles.</p></div>
+                        <div class="node"><h3>⚖️ Género</h3><p>Roles, expectativas, relaciones y significados socialmente construidos respecto de mujeres y hombres.</p></div>
+                        <div class="node"><h3>🚨 Violencia de Género</h3><p>Violencia dirigida contra una persona por razones vinculadas con el género o que la afecta de manera desproporcionada.</p></div>
+                    `},
+                    { titulo: "📊 TIPOS DE VIOLENCIA CONTRA LAS MUJERES", tag: "IV", contenido: `
+                        <div class="node"><h3>👊 Violencia Física</h3><p>Acción que ocasiona lesión o daño corporal interno, externo o ambos, temporal o permanente.</p></div>
+                        <div class="node"><h3>🧠 Violencia Psicológica</h3><p>Acciones sistemáticas de desvalorización, intimidación, control, aislamiento, amenazas o humillación.</p></div>
+                        <div class="node"><h3>🚫 Violencia Sexual</h3><p>Conducta que vulnera el derecho a decidir libremente sobre la vida sexual mediante fuerza, intimidación o coerción.</p></div>
+                        <div class="node"><h3>💰 Violencia Patrimonial y Económica</h3><p>Control, limitación, daño o sustracción de recursos, ingresos, documentos o bienes.</p></div>
+                        <div class="node"><h3>💔 Violencia Feminicida</h3><p>Forma extrema de violencia que viola el derecho fundamental a la vida y puede culminar en muerte violenta por razones de género.</p></div>
+                        <div class="node"><h3>📱 Violencia Mediática y Simbólica</h3><p>Difusión de mensajes o imágenes que promueven explotación, humillación o discriminación; y patrones que legitiman la inferiorización.</p></div>
+                    `},
+                    { titulo: "🚨 INTERVENCIÓN POLICIAL", tag: "V", contenido: `
+                        <div class="node"><h3>🎯 Ámbito de Aplicación</h3><p>Hechos de violencia contra mujeres y miembros de la familia en espacios públicos o privados, independientemente de convivencia actual o vínculo formal.</p></div>
+                        <div class="node"><h3>🛡️ Prevención</h3><p>Identificar factores de riesgo, modificar condiciones que favorecen la violencia y fortalecer redes de protección antes de que ocurra o se repita el daño.</p></div>
+                        <div class="node"><h3>🔍 Detección</h3><p>Reconocer indicadores físicos, emocionales, conductuales, sociales y contextuales aun cuando la víctima no formule una denuncia directa.</p></div>
+                        <div class="node"><h3>🚨 Acción Directa</h3><p>Respuesta inicial destinada a proteger, controlar la situación, identificar participantes, preservar el lugar y comunicar a la autoridad competente.</p></div>
+                    `},
+                    { titulo: "📋 RECEPCIÓN DE LA DENUNCIA Y ACTOS INVESTIGATIVOS", tag: "VI", contenido: `
+                        <div class="node"><h3>📝 Recepción de la Denuncia</h3><p>Acto de acceso a la justicia que debe ser sencillo, inmediato, gratuito, confidencial y libre de discriminación.</p></div>
+                        <div class="node"><h3>🚫 No Revictimización</h3><p>Evitar repeticiones innecesarias del relato, culpabilización, confrontaciones indebidas y exposición de información íntima.</p></div>
+                        <div class="node"><h3>🏠 Espacio Adecuado</h3><p>Entrevista en ambiente privado, seguro, accesible y sin presencia del agresor.</p></div>
+                        <div class="node"><h3>🔍 Actos Investigativos</h3><ul><li>Recepción de la declaración con preguntas abiertas</li><li>Documentación de respuestas de la víctima</li><li>Investigación preliminar</li><li>Recolección de indicios y evidencias</li><li>Certificado médico forense</li><li>Cadena de custodia</li></ul></div>
+                        <div class="node"><h3>⚖️ Etapas Procesales</h3><p>Etapa preliminar, informe preliminar, etapa preparatoria, informe conclusivo y juicio oral.</p></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>El estudio de género y violencia intrafamiliar demuestra que la respuesta policial eficaz depende de la integración entre normas, conceptos, habilidades de atención y técnica investigativa.</p>
+                        <p>La Constitución Política del Estado establece el derecho de las mujeres a vivir libres de violencia; la Ley N.º 348 desarrolla un sistema integral; la Ley Orgánica del Ministerio Público y el Código de Procedimiento Penal ordenan la investigación; y los instrumentos internacionales incorporan estándares de igualdad y debida diligencia.</p>
+                        <p>La actuación profesional requiere escuchar sin juzgar, evaluar riesgo, evitar formalismos, preservar evidencias, coordinar con Fiscalía y servicios de apoyo, documentar objetivamente y mantener la cadena de custodia.</p>
+                    `}
+                ]
+            },
+            // TEMA 11
+            {
+                titulo: "Legislación Policial y Seguridad Ciudadana",
+                icono: "📜",
+                diapositivas: [
+                    { portada: true, titulo: "LEGISLACIÓN POLICIAL<br>Y SEGURIDAD CIUDADANA", subtitulo: "MARCO NORMATIVO Y GESTIÓN PÚBLICA" },
+                    { titulo: "🏛️ BLOQUE DE CONSTITUCIONALIDAD", tag: "I", contenido: `
+                        <div class="node"><h3>📜 Constitución Política del Estado (2009)</h3><p>Norma suprema del ordenamiento jurídico. Define los derechos que deben protegerse, fija límites al poder público y exige que toda intervención sea legal, necesaria y proporcional.</p></div>
+                        <div class="node"><h3>⚖️ Ley N.º 264 «Para una Vida Segura» (2012)</h3><p>Organiza la seguridad ciudadana como una responsabilidad coordinada y participativa, integrando planificación, prevención, tecnología e información.</p></div>
+                        <div class="node"><h3>📋 D.S. N.º 1436</h3><p>Desarrolla los mecanismos de aplicación de la Ley N.º 264 y la estructura del Sistema Nacional de Seguridad Ciudadana.</p></div>
+                        <div class="node"><h3>🎯 Políticas de Seguridad</h3><p>Cualquier plan de prevención, patrullaje, control o investigación debe formularse a partir de objetivos constitucionales: protección de la sociedad, orden público, cumplimiento de leyes y respeto de derechos.</p></div>
+                    `},
+                    { titulo: "⚖️ LEYES SECTORIALES ESPECÍFICAS", tag: "II", contenido: `
+                        <div class="node"><h3>🍺 Ley N.° 259 y D.S. N.° 1347</h3><p>Control al expendio y consumo de bebidas alcohólicas. Regulación de horarios y restricciones en espacios públicos para prevenir daños sociales.</p></div>
+                        <div class="node"><h3>🚫 Ley N° 263 y D.S. N° 1486</h3><p>Prevención, protección y sanción de la trata y tráfico de personas. Detección temprana, protección inmediata y coordinación especializada.</p></div>
+                        <div class="node"><h3>👩 Ley N° 348 y D.S. N° 2145</h3><p>Mecanismos e instituciones de protección para garantizar a las mujeres una vida libre de violencia. Atención inmediata, valoración de riesgo y coordinación interinstitucional.</p></div>
+                        <div class="node"><h3>📜 Otras Normas</h3><p>Normas complementarias que pueden incidir en la labor policial según la naturaleza del servicio. Su aplicación exige identificar la fuente vigente y la autoridad competente.</p></div>
+                    `},
+                    { titulo: "🏛️ INSTITUCIONALIDAD POLICIAL Y RÉGIMEN DISCIPLINARIO", tag: "III", contenido: `
+                        <div class="node"><h3>📋 Ley N.º 734 (Ley Orgánica)</h3><p>Define la estructura orgánica, misión constitucional, atribuciones y mando policial. Proporciona continuidad institucional y evita duplicidad de funciones.</p></div>
+                        <div class="node"><h3>⚖️ Ley N.° 101 (Régimen Disciplinario)</h3><p>Tipifica faltas leves y graves, establece sanciones y preserva la disciplina e institucionalidad. Su aplicación debe respetar legalidad, tipicidad, debido proceso y proporcionalidad.</p></div>
+                        <div class="node"><h3>🏛️ Órganos Disciplinarios</h3><p>Fiscalía Policial y Tribunales Disciplinarios (Departamentales y Superior). Aseguran especialización, imparcialidad y control en la determinación de responsabilidades.</p></div>
+                        <div class="node"><h3>🤝 Desconcentración Policial</h3><p>Distribuye servicios, recursos y capacidad operativa hacia unidades territoriales (EPIs y Módulos Policiales) sin romper la unidad de mando (R.A. N.° 272/2014 y R.M. N.° 097/2015).</p></div>
+                    `},
+                    { titulo: "👥 PARTICIPACIÓN CIUDADANA Y TECNOLOGÍA", tag: "IV", contenido: `
+                        <div class="node"><h3>🤝 Filosofía Comunitaria</h3><p>Modelo proactivo basado en la alianza entre Policía, autoridades locales y vecindario para la resolución compartida de problemas.</p></div>
+                        <div class="node"><h3>📋 Mecanismos de Participación</h3><p>Escuelas de Seguridad Ciudadana, Brigadas Vecinales, Brigadas Escolares y Voluntariado Civil (GACIP).</p></div>
+                        <div class="node"><h3>💻 Tecnología e Inteligencia</h3><p>Plataforma Integrada BOL-110, Centros Automáticos de Despacho Integral (CADI) y Videovigilancia para recibir alertas, priorizar incidentes y coordinar recursos.</p></div>
+                        <div class="node"><h3>🗺️ Análisis Territorial</h3><p>Georreferenciación del delito y tecnologías de rastreo para la prevención inteligente. Permite reconocer concentraciones, rutas, horarios y repetición de hechos.</p></div>
+                    `},
+                    { titulo: "📋 SISTEMAS DE LA LEY N.° 1178 (SAFCO)", tag: "V", contenido: `
+                        <div class="node"><h3>📊 Sistemas para Planificar y Organizar</h3><p>Sistema de Planificación Integral del Estado (SPIE), Programación de Operaciones (POA), Organización Administrativa (SOA) y Presupuesto (SP).</p></div>
+                        <div class="node"><h3>⚙️ Sistemas para Ejecutar</h3><p>Administración de Personal (SAP), Administración de Bienes y Servicios (SABS), Tesorería y Crédito Público (STCP) y Contabilidad Integrada (SCI).</p></div>
+                        <div class="node"><h3>🔍 Sistemas para Controlar</h3><p>Control gubernamental interno y externo posterior bajo la rectoría de la Contraloría General del Estado.</p></div>
+                        <div class="node"><h3>⚖️ Responsabilidad por la Función Pública</h3><p>Surge cuando una acción u omisión contraria al ordenamiento produce consecuencias disciplinarias, de gestión, patrimoniales o penales (Bolivia, 1990).</p></div>
+                    `},
+                    { titulo: "⚖️ TIPOLOGÍA DE RESPONSABILIDAD", tag: "VI", contenido: `
+                        <div class="node"><h3>📋 Responsabilidad Administrativa</h3><p>Incumplimiento del ordenamiento jurídico-administrativo y de las normas que regulan la conducta funcionaria. Se determina mediante procedimiento y prueba (Ley N.° 101).</p></div>
+                        <div class="node"><h3>📊 Responsabilidad Ejecutiva</h3><p>Gestión deficiente o negligente de la máxima autoridad ejecutiva o de quien ejerce funciones de dirección.</p></div>
+                        <div class="node"><h3>💰 Responsabilidad Civil</h3><p>Daño económico computable en dinero al Estado (resarcimiento). Requiere establecer conducta, daño, cuantificación y vínculo causal.</p></div>
+                        <div class="node"><h3>⚖️ Responsabilidad Penal</h3><p>Comisión de delitos tipificados en el Código Penal. Su determinación corresponde a autoridades competentes y exige investigación, prueba y debido proceso.</p></div>
+                        <div class="node"><h3>📜 Causales de Exención y Prescripción</h3><p>Las causales de exención deben interpretarse restrictivamente y acreditarse objetivamente. La prescripción limita temporalmente el ejercicio de acciones (Bolivia, 1990).</p></div>
+                        <div class="node"><h3>🛡️ Principio de Prueba</h3><p>Decisiones adoptadas con fundamento técnico y orientadas al beneficio público dentro de la competencia, documentadas para su revisión posterior.</p></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>La legislación policial y de seguridad ciudadana conforma un sistema integral que articula supremacía constitucional, leyes sectoriales, organización institucional, desconcentración territorial, participación ciudadana, tecnología, administración pública y responsabilidad funcional.</p>
+                        <p>El desempeño policial profesional exige conocimiento normativo, criterio jurídico, capacidad de análisis territorial, sensibilidad frente a víctimas y rigor administrativo (Bolivia, 2009; Bolivia, 2012; Bolivia, 1990).</p>
+                        <p>La legitimidad institucional se fortalece cuando las intervenciones son oportunas, eficaces y respetuosas de derechos; cuando los recursos se utilizan con planificación y transparencia; y cuando las faltas o daños son investigados mediante procedimientos imparciales.</p>
+                    `}
+                ]
+            },
+            // TEMA 12
+            {
+                titulo: "Expresión Oral, Ética y Relaciones Humanas",
+                icono: "🗣️",
+                diapositivas: [
+                    { portada: true, titulo: "EXPRESIÓN ORAL, ÉTICA<br>Y RELACIONES HUMANAS", subtitulo: "COMUNICACIÓN Y LIDERAZGO POLICIAL" },
+                    { titulo: "⚖️ DEONTOLOGÍA Y DOCTRINA INSTITUCIONAL", tag: "I", contenido: `
+                        <div class="node"><h3>📖 Deontología</h3><p>Disciplina que estudia los deberes, obligaciones y estándares de conducta propios de una profesión. En el ámbito policial traduce los valores en exigencias concretas (Cortina, 2003).</p></div>
+                        <div class="node"><h3>🏛️ Doctrina Policial</h3><p>Sistema institucional de ideas, normas, valores y experiencias que da unidad al pensamiento y a la acción policial (Policía Boliviana, 2018).</p></div>
+                        <div class="node"><h3>🤝 Vocación de Servicio</h3><p>Disposición consciente y permanente para atender necesidades colectivas, proteger derechos y contribuir a la convivencia pacífica.</p></div>
+                        <div class="node"><h3>📜 Código de Ética</h3><p>Guía vinculante para resolver dilemas profesionales. Relaciona valores, deberes, prohibiciones y responsabilidades con situaciones concretas del servicio.</p></div>
+                    `},
+                    { titulo: "👑 LIDERAZGO POLICIAL", tag: "II", contenido: `
+                        <div class="node"><h3>👑 Definición</h3><p>Capacidad de orientar personas y equipos hacia el cumplimiento legítimo de la misión, integrando autoridad, competencia técnica, ejemplo personal y responsabilidad (Bass y Bass, 2008).</p></div>
+                        <div class="node"><h3>⚖️ Mando y Subordinación</h3><p>Mandar supone ejercer autoridad formal; la subordinación voluntaria surge cuando el personal reconoce competencia, justicia y ejemplo en quien dirige.</p></div>
+                        <div class="node"><h3>🔄 Obediencia Reflexiva</h3><p>Cumplir órdenes comprendiendo su finalidad, legalidad y límites. Se diferencia de la obediencia ciega porque admite análisis profesional y rechazo de instrucciones ilícitas.</p></div>
+                        <div class="node"><h3>👥 Jefe Coercitivo vs. Líder Institucional</h3><p>El primero depende del temor y la amenaza; el segundo combina autoridad legal con influencia positiva, ejemplo y desarrollo del personal (Chiavenato, 2020).</p></div>
+                    `},
+                    { titulo: "📋 ESTILOS DE LIDERAZGO", tag: "III", contenido: `
+                        <div class="node"><h3>👑 Liderazgo Autocrático</h3><p>Puede ser necesario en operaciones de alto riesgo, tiempo mínimo y necesidad de coordinación estricta. Exige órdenes breves, roles definidos y supervisión directa.</p></div>
+                        <div class="node"><h3>🗳️ Liderazgo Democrático</h3><p>Incorpora conocimientos y perspectivas del equipo. Útil en proyectos preventivos, diagnóstico comunitario y coordinación interinstitucional.</p></div>
+                        <div class="node"><h3>🕊️ Liderazgo Laissez-Faire</h3><p>Mínima intervención del líder. Puede permitir autonomía a especialistas competentes, pero en una patrulla sin objetivos ni control genera dispersión.</p></div>
+                        <div class="node"><h3>🌟 Liderazgo Transformacional</h3><p>Busca elevar motivación, sentido de misión, innovación y desarrollo profesional. Moviliza a los integrantes para superar intereses inmediatos (Bass y Bass, 2008).</p></div>
+                    `},
+                    { titulo: "📜 CORRESPONDENCIA Y DOCUMENTACIÓN POLICIAL", tag: "IV", contenido: `
+                        <div class="node"><h3>📜 Definición</h3><p>Comunicaciones escritas que circulan dentro y fuera de la institución para transmitir órdenes, solicitudes, informes, respuestas y decisiones (Cabanellas, 2015).</p></div>
+                        <div class="node"><h3>⭐ Características</h3><p>Formalidad, claridad, concisión, objetividad, exactitud, oportunidad, jerarquía, trazabilidad y reserva cuando corresponde.</p></div>
+                        <div class="node"><h3>📊 Clasificación</h3><p>Por naturaleza (informativa, dispositiva, consultiva, solicitante, de coordinación o respuesta) y por nivel de confidencialidad (ordinaria o reservada).</p></div>
+                        <div class="node"><h3>📋 Documentación Policial</h3><p>Actas, informes, partes, formularios, libros y órdenes que acreditan la actividad policial. Deben ser auténticas, íntegras, legibles, cronológicas y seguras.</p></div>
+                    `},
+                    { titulo: "🤝 RELACIONES HUMANAS Y TRATO SOCIAL", tag: "V", contenido: `
+                        <div class="node"><h3>🤝 Relaciones Humanas</h3><p>Estudian la interacción entre personas, grupos, institución y comunidad. Su calidad influye en cooperación, clima laboral, legitimidad y prevención de conflictos (Chiavenato, 2020).</p></div>
+                        <div class="node"><h3>🌐 Relaciones Públicas</h3><p>Función estratégica de comunicación que identifica públicos, analiza percepciones, informa, escucha y construye relaciones de confianza.</p></div>
+                        <div class="node"><h3>😊 Buen Trato</h3><p>Práctica profesional basada en dignidad, igualdad, cortesía, empatía, paciencia y ausencia de discriminación. No significa renunciar a la firmeza.</p></div>
+                        <div class="node"><h3>📋 Normas de Trato Social</h3><p>Saludo, puntualidad, presentación, lenguaje, respeto de jerarquías, discreción y comportamiento en actos públicos.</p></div>
+                    `},
+                    { titulo: "🗣️ EXPRESIÓN ORAL Y ESCRITA", tag: "VI", contenido: `
+                        <div class="node"><h3>🗣️ Comunicación</h3><p>Proceso mediante el cual emisor y receptor intercambian significados a través de mensajes, canales y códigos dentro de un contexto (Policía Boliviana, 2021).</p></div>
+                        <div class="node"><h3>📖 Lenguaje y Gramática</h3><p>Vocabulario preciso, sintaxis clara, ortografía adecuada, coherencia y ausencia de ambigüedad. Distinguir hechos observados, declaraciones y conclusiones.</p></div>
+                        <div class="node"><h3>🎤 Oratoria</h3><p>Arte y técnica de comunicar oralmente con claridad, estructura, seguridad y capacidad de influencia. Comprende preparación del contenido, dominio de la voz y lenguaje corporal.</p></div>
+                        <div class="node"><h3>📝 Estructura del Discurso</h3><ul><li><strong>Introducción:</strong> capta atención y presenta propósito</li><li><strong>Desarrollo:</strong> ordena argumentos y evidencias</li><li><strong>Conclusión:</strong> sintetiza y orienta la acción</li></ul></div>
+                        <div class="node"><h3>😰 Miedo Escénico</h3><p>Respuesta de ansiedad ante la exposición pública. Se reduce mediante preparación, práctica gradual, respiración y dominio temático.</p></div>
+                        <div class="node"><h3>🎙️ Lenguaje y Voz</h3><p>Volumen, ritmo, tono, articulación, pausas y énfasis. Una voz firme no requiere gritar; la autoridad comunicativa se sostiene en claridad y respeto.</p></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>La formación policial integral exige comprender que la ética, el liderazgo, la documentación, las relaciones humanas y la expresión no son contenidos independientes, sino dimensiones de una misma competencia profesional.</p>
+                        <p>La deontología orienta el deber; la doctrina da identidad y coherencia; el liderazgo organiza y moviliza; la correspondencia y documentación preservan trazabilidad; las relaciones humanas legitiman el contacto con la ciudadanía; y la comunicación permite que decisiones, órdenes y actuaciones sean comprendidas y verificables (Policía Boliviana, 2018; Bolivia, 2004).</p>
+                        <p>La calidad del servicio policial se consolida cuando estas dimensiones se aplican simultáneamente bajo criterios de legalidad, disciplina consciente, respeto a la dignidad y responsabilidad institucional.</p>
+                    `}
+                ]
+            },
+            // TEMA 13
+            {
+                titulo: "Psicología General y Aplicada",
+                icono: "🧠",
+                diapositivas: [
+                    { portada: true, titulo: "PSICOLOGÍA GENERAL<br>Y APLICADA", subtitulo: "COMPRENSIÓN DE LA CONDUCTA HUMANA" },
+                    { titulo: "📌 INTRODUCCIÓN A LA PSICOLOGÍA", tag: "I", contenido: `
+                        <div class="node"><h3>🧠 Concepto</h3><p>Disciplina científica que estudia la conducta observable y los procesos internos como percepción, memoria, pensamiento, motivación y emoción (Morris y Maisto, 2014).</p></div>
+                        <div class="node"><h3>🔄 Concepción Bio-Psico-Social</h3><p>El ser humano es una unidad en la que interactúan condiciones orgánicas, procesos psicológicos y relaciones sociales (Zimbardo y Gerrig, 2005).</p></div>
+                        <div class="node"><h3>📊 Campos de Acción</h3><p>Clínica, educativa, laboral, social, comunitaria, jurídica, forense, penitenciaria y de investigación (Santrock, 2019).</p></div>
+                        <div class="node"><h3>👮 Aplicación Policial</h3><p>Fortalece la comunicación profesional, la entrevista, la atención a víctimas, la prevención de violencia y el cuidado de la salud mental del servidor policial.</p></div>
+                    `},
+                    { titulo: "🧩 FUNCIONES Y PROCESOS PSICOLÓGICOS", tag: "II", contenido: `
+                        <div class="node"><h3>👁️ Sensación</h3><p>Proceso inicial por el cual los receptores sensoriales detectan estímulos y los convierten en señales nerviosas (Myers, 2010).</p></div>
+                        <div class="node"><h3>🧠 Percepción</h3><p>Organiza e interpreta la información sensorial para otorgarle significado. Influida por expectativas, experiencias y contexto (Zimbardo y Gerrig, 2005).</p></div>
+                        <div class="node"><h3>🎯 Atención</h3><p>Capacidad de seleccionar información relevante y mantener recursos mentales sobre una tarea o estímulo. Disminuye por fatiga y estrés.</p></div>
+                        <div class="node"><h3>💾 Memoria</h3><p>Permite codificar, almacenar y recuperar información. El recuerdo es una reconstrucción susceptible a olvidos y sugerencias (Myers, 2010).</p></div>
+                        <div class="node"><h3>📚 Aprendizaje</h3><p>Cambio relativamente estable en la conducta o conocimiento como resultado de la experiencia (Bandura, 1987).</p></div>
+                        <div class="node"><h3>💭 Pensamiento y Lenguaje</h3><p>El pensamiento permite representar problemas, formar conceptos y razonar; el lenguaje organiza y comunica significados (Santrock, 2019).</p></div>
+                        <div class="node"><h3>❤️ Motivación y Emoción</h3><p>La motivación orienta la conducta hacia metas; la emoción integra cambios fisiológicos, experiencias subjetivas y tendencias de acción (Goleman, 1996).</p></div>
+                    `},
+                    { titulo: "🗣️ PSICOLOGÍA DEL TESTIMONIO", tag: "III", contenido: `
+                        <div class="node"><h3>📖 Concepto General</h3><p>Narración sobre hechos experimentados o conocidos por una persona. Su valoración considera condiciones de observación, tiempo, estado emocional e influencia de terceros (Feldman, 2011).</p></div>
+                        <div class="node"><h3>👤 Entrevista a Sospechoso</h3><p>Orientada a obtener información verificable mediante trato legal, respeto de derechos, escucha activa y preguntas no coercitivas (Ekman, 2003).</p></div>
+                        <div class="node"><h3>🚫 Interferencias en la Percepción</h3><p>Poca iluminación, distancia, ruido, miedo, presencia de armas y atención focalizada pueden reducir la cantidad y precisión de la información (Myers, 2010).</p></div>
+                        <div class="node"><h3>📝 Pautas para Entrevistar Testigos</h3><p>Establecer rapport, solicitar relato libre, formular preguntas abiertas, evitar sugestiones, respetar pausas y registrar las palabras del testigo.</p></div>
+                        <div class="node"><h3>🎭 Gestos y Mentira</h3><p>El análisis de gestos puede aportar indicios sobre emoción o tensión, pero no permite diagnosticar mentira de forma automática. Debe basarse en cambios respecto de la conducta habitual y corroboración (Ekman, 2003).</p></div>
+                        <div class="node"><h3>🧪 Simulación, Disimulación y Sobresimulación</h3><p>Presentar o exagerar síntomas falsos (simulación), ocultar o minimizar síntomas (disimulación) o amplificar síntomas reales (sobresimulación). Requieren evaluación especializada.</p></div>
+                    `},
+                    { titulo: "👤 PERSONALIDAD", tag: "IV", contenido: `
+                        <div class="node"><h3>👤 Concepto</h3><p>Patrones relativamente estables de pensamiento, emoción y conducta que distinguen a una persona. Se desarrollan mediante interacción entre temperamento, aprendizaje y contexto social (Morris y Maisto, 2014).</p></div>
+                        <div class="node"><h3>🧬 Características y Factores</h3><p>Relativa estabilidad, coherencia y singularidad. Intervienen herencia, temperamento, crianza, aprendizaje, cultura y experiencias críticas (Santrock, 2019).</p></div>
+                        <div class="node"><h3>⚖️ Carácter, Temperamento y Personalidad</h3><p><strong>Temperamento:</strong> disposiciones emocionales con base biológica.<br><strong>Carácter:</strong> hábitos, valores y formas aprendidas de actuar.<br><strong>Personalidad:</strong> integración de ambos con cogniciones y relaciones sociales.</p></div>
+                        <div class="node"><h3>🎭 Clases de Temperamento</h3><p>Sanguíneo, colérico, melancólico y flemático. Deben utilizarse con prudencia, porque simplifican la diversidad humana y no sustituyen una evaluación psicológica contemporánea.</p></div>
+                    `},
+                    { titulo: "🔍 PSICOLOGÍA FORENSE Y CRIMINAL", tag: "V", contenido: `
+                        <div class="node"><h3>🔍 Psicología Forense</h3><p>Aplica conocimientos y métodos psicológicos a cuestiones legales y judiciales. Interviene en evaluación, asesoramiento e informes técnicos (American Psychological Association).</p></div>
+                        <div class="node"><h3>⚖️ Diferencia con Psiquiatría Forense</h3><p>La psicología se centra en evaluación psicológica, conducta y cognición; la psiquiatría es una especialidad médica orientada al diagnóstico y tratamiento de trastornos mentales, incluyendo medicamentos.</p></div>
+                        <div class="node"><h3>🧠 Personalidad Criminal</h3><p>Campo de análisis de rasgos, aprendizajes y cogniciones vinculados con determinados delitos. No existe una categoría clínica única ni una relación determinista (Beck, 2000).</p></div>
+                        <div class="node"><h3>👥 Concepto Diferencial del Delincuente</h3><p>Clasificaciones históricas: anormales (psicótico, psicópata, neurótico) y normales (por crisis, profesionales refractarios al trabajo, por instintos primitivos). Son orientativas e históricas; no reemplazan la individualización del caso.</p></div>
+                        <div class="node"><h3>😠 Agresividad y Violencia</h3><p><strong>Agresividad:</strong> disposición o tendencia a responder de manera hostil o dañina.<br><strong>Violencia:</strong> uso intencional de fuerza física o poder con posibilidad de causar daño (OMS, 2002).</p></div>
+                    `},
+                    { titulo: "💚 PRIMEROS AUXILIOS PSICOLÓGICOS (PAP)", tag: "VI", contenido: `
+                        <div class="node"><h3>💚 ¿Qué son los PAP?</h3><p>Acciones inmediatas de protección, escucha, orientación y enlace con recursos dirigidas a personas afectadas por crisis (OMS, 2012).</p></div>
+                        <div class="node"><h3>🤝 Contención Emocional</h3><p>Acompañamiento que ayuda a recuperar estabilidad básica mediante presencia serena, validación, límites seguros y orientación concreta.</p></div>
+                        <div class="node"><h3>👮 Contribución del Policía</h3><p>Trato digno, reducción de riesgos, comunicación clara, protección de la privacidad, derivación oportuna y prevención de revictimización.</p></div>
+                        <div class="node"><h3>📋 Componentes del PAP</h3><p>Evaluar seguridad y necesidades urgentes, establecer contacto respetuoso, escuchar sin presionar, brindar información, facilitar apoyos sociales y vincular con servicios.</p></div>
+                        <div class="node"><h3>⚡ Desencadenantes de Crisis</h3><p>Violencia, muerte, accidente, desastre, pérdida, ruptura, detención, amenaza o acumulación de estrés.</p></div>
+                        <div class="node"><h3>🧠 Salud Mental</h3><p>Estado dinámico de bienestar que permite reconocer capacidades, afrontar tensiones, trabajar y participar en la comunidad (OMS).</p></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>El estudio de la psicología general y aplicada fortalece la función policial porque permite comprender de manera científica los procesos que intervienen en la percepción, el recuerdo, la emoción, la motivación, la personalidad y la conducta social.</p>
+                        <p>Esta comprensión contribuye a realizar entrevistas menos sugestivas, interpretar con cautela las señales no verbales, atender crisis con humanidad, prevenir la escalada de conflictos y reconocer los límites entre observación policial y diagnóstico especializado (Feldman, 2011; Morris y Maisto, 2014).</p>
+                        <p>Un servidor policial formado en estos principios mejora la calidad de la investigación, protege a víctimas y ciudadanos, y fortalece su propio autocuidado frente a las exigencias de la profesión.</p>
+                    `}
+                ]
+            },
+            // TEMA 14
+            {
+                titulo: "Soporte Vital Básico",
+                icono: "🏥",
+                diapositivas: [
+                    { portada: true, titulo: "SOPORTE VITAL<br>BÁSICO", subtitulo: "PRIMERA RESPUESTA ANTE EMERGENCIAS" },
+                    { titulo: "📌 INTRODUCCIÓN Y ATENCIÓN DE HEMORRAGIAS", tag: "I", contenido: `
+                        <div class="node"><h3>🏥 Soporte Vital Básico</h3><p>Conjunto de actuaciones iniciales destinadas a reconocer amenazas inmediatas para la vida, mantener funciones esenciales y reducir el deterioro hasta que se reciba atención sanitaria (Chiarelli, s. f.).</p></div>
+                        <div class="node"><h3>🩸 Atención de Hemorragias</h3><p>Reconocer la pérdida de sangre, determinar su gravedad y aplicar medidas de control. La valoración considera mecanismo de lesión, cantidad aparente, localización y estado general.</p></div>
+                        <div class="node"><h3>💓 Pulsos y Puntos de Presión</h3><p>El pulso aporta información sobre circulación y perfusión. Los puntos de presión comprimen una arteria principal contra una estructura ósea (Rouvière y Delmas, s. f.).</p></div>
+                        <div class="node"><h3>🔍 Evaluación de la Situación</h3><p>Identificar peligros para el rescatador, la víctima y terceros; determinar número de afectados; reconocer el mecanismo del evento y solicitar recursos.</p></div>
+                        <div class="node"><h3>🩹 Descubrimiento de la Herida</h3><p>Exponer únicamente el área necesaria para identificar la fuente del sangrado, respetando la dignidad y evitando movimientos innecesarios.</p></div>
+                        <div class="node"><h3>📊 Signos y Síntomas</h3><p>Sangrado visible, palidez, piel fría, sudoración, debilidad, mareo, ansiedad, respiración rápida y disminución del nivel de conciencia.</p></div>
+                    `},
+                    { titulo: "🩸 CARACTERÍSTICAS DE LA HEMORRAGIA", tag: "II", contenido: `
+                        <div class="node"><h3>💧 Capilar</h3><p>Rezumado superficial y difuso. Característica de abrasiones y lesiones poco profundas. Generalmente la pérdida es lenta y limitada.</p></div>
+                        <div class="node"><h3>🩸 Venosa</h3><p>Flujo continuo, de color rojo oscuro, sin patrón pulsátil. Una vena de gran calibre puede producir pérdidas importantes.</p></div>
+                        <div class="node"><h3>❤️ Arterial</h3><p>Sangre rojo brillante que sale a presión o de forma pulsátil. Puede ocasionar pérdida sanguínea rápida y comprometer la vida en pocos minutos.</p></div>
+                        <div class="node"><h3>🔍 Verificación de Heridas</h3><p>En lesiones penetrantes, verificar la presencia de más de una herida sin realizar exploraciones invasivas. Buscar entrada y salida de forma sistemática.</p></div>
+                        <div class="node"><h3>🩹 Colocación de Apósito</h3><p>Material limpio o estéril que se coloca directamente sobre una herida para absorber sangre, proteger el tejido y facilitar la compresión.</p></div>
+                        <div class="node"><h3>🩸 Control de Hemorragias</h3><p>Proceso escalonado: presión directa, vendaje de presión, empaquetadura, agentes hemostáticos o torniquete táctico cuando estén indicados.</p></div>
+                    `},
+                    { titulo: "⚡ SHOCK Y OBJETIVOS DEL TRATAMIENTO", tag: "III", contenido: `
+                        <div class="node"><h3>⚡ Shock</h3><p>Estado de insuficiencia circulatoria en el que los tejidos no reciben oxígeno y nutrientes suficientes. Puede aparecer por pérdida de sangre, alteraciones neurológicas o fallas cardíacas (Manual Merck, s. f.).</p></div>
+                        <div class="node"><h3>🔍 Identificación de Signos</h3><p>Piel fría, pálida y húmeda; taquicardia; hipotensión (puede aparecer tardíamente); respiración acelerada y alteración del estado mental.</p></div>
+                        <div class="node"><h3>📊 Tipos Principales</h3><p><strong>Hipovolémico:</strong> disminución crítica del volumen circulante.<br><strong>Neurogénico:</strong> pérdida del tono vascular por alteración del sistema nervioso.</p></div>
+                        <div class="node"><h3>🛡️ Manejo del Shock</h3><p>Solicitar asistencia médica, controlar hemorragias, mantener vía aérea y respiración, reducir pérdidas de calor y colocar en posición segura.</p></div>
+                        <div class="node"><h3>🎯 Objetivos del Tratamiento</h3><p>Detener o reducir la pérdida de sangre, preservar la perfusión de órganos vitales, prevenir el shock, proteger la herida y facilitar el traslado oportuno.</p></div>
+                        <div class="node"><h3>🩸 Hemorragia Interna y Externa</h3><p><strong>Externa:</strong> visible a través de una herida.<br><strong>Interna:</strong> ocurre dentro del organismo sin ser evidente. Sospechar por mecanismo de alta energía, dolor intenso, palidez o taquicardia.</p></div>
+                    `},
+                    { titulo: "🫁 VERIFICACIÓN DE VÍAS AÉREAS", tag: "IV", contenido: `
+                        <div class="node"><h3>🫁 Verificación</h3><p>Determinar si el aire puede pasar libremente desde boca y nariz hacia los pulmones. En persona inconsciente, la lengua puede obstruir; también sangre, vómito o cuerpos extraños (Jacobs, s. f.).</p></div>
+                        <div class="node"><h3>🚫 Obstrucción Parcial</h3><p>Todavía existe paso de aire. La persona puede toser, emitir sonidos o respirar con dificultad. Si la tos es efectiva, se favorece que continúe tosiendo.</p></div>
+                        <div class="node"><h3>⛔ Obstrucción Total</h3><p>Paso de aire mínimo o inexistente. La víctima no puede hablar, toser eficazmente ni respirar. Requiere maniobras de desobstrucción inmediatas.</p></div>
+                        <div class="node"><h3>💨 Respiración Artificial</h3><p>Conjunto de maniobras para ventilar los pulmones de una persona que no respira por sí misma. Mantener vía aérea abierta, sellado adecuado y ventilaciones suficientes (Jacobs, s. f.).</p></div>
+                        <div class="node"><h3>😷 Boca a Boca</h3><p>Sellar la boca de la víctima con la del rescatador y administrar aire exhalado. Observar elevación del tórax. Preferible usar barreras o dispositivos.</p></div>
+                        <div class="node"><h3>🛡️ Boca a Dispositivo / Mascarilla</h3><p>Utilizar elementos diseñados para conducir el aire y reducir el contacto directo. Mejoran el sellado y la protección biológica.</p></div>
+                    `},
+                    { titulo: "❤️ REANIMACIÓN CARDIOPULMONAR (RCP)", tag: "V", contenido: `
+                        <div class="node"><h3>❤️ RCP</h3><p>Conjunto de maniobras destinadas a mantener temporalmente la circulación y la oxigenación cuando una persona está inconsciente y no respira normalmente (Jacobs, s. f.).</p></div>
+                        <div class="node"><h3>📊 RCP Básica en Adultos</h3><p>Compresiones torácicas de alta calidad, minimización de interrupciones y uso temprano de desfibrilador externo automático (DEA) cuando esté disponible.</p></div>
+                        <div class="node"><h3>⚡ DEA</h3><p>Dispositivo que analiza el ritmo cardíaco y administra una descarga eléctrica si es necesario. Seguir sus indicaciones hasta el relevo médico.</p></div>
+                        <div class="node"><h3>🔄 Secuencia</h3><p>Verificar respuesta y respiración, activar emergencias, iniciar compresiones, usar DEA y continuar hasta que llegue ayuda especializada.</p></div>
+                        <div class="node"><h3>🛡️ Integración</h3><p>Los respondientes entrenados pueden integrar ventilaciones de rescate conforme al protocolo vigente y al equipo disponible.</p></div>
+                        <div class="node"><h3>📋 Registro</h3><p>Documentar las maniobras realizadas, el tiempo transcurrido y el estado de la víctima al momento del relevo.</p></div>
+                    `},
+                    { titulo: "📋 CLASIFICACIÓN DE HERIDAS Y MANEJO INICIAL", tag: "VI", contenido: `
+                        <div class="node"><h3>🩹 Abrasivas</h3><p>Afectan principalmente capas superficiales por fricción. Requieren limpieza y cobertura.</p></div>
+                        <div class="node"><h3>🔪 Cortantes</h3><p>Bordes definidos producidos por objetos afilados. Valorar profundidad y estructuras comprometidas.</p></div>
+                        <div class="node"><h3>📍 Punzantes</h3><p>Orificio relativamente pequeño con posible trayecto profundo. No minimizar por el tamaño externo.</p></div>
+                        <div class="node"><h3>🔫 Por Arma de Fuego</h3><p>Heridas penetrantes de alta complejidad. Pueden asociarse a trayectos, cavitación, hemorragia interna y múltiples estructuras lesionadas.</p></div>
+                        <div class="node"><h3>🧼 Manejo Inicial</h3><p>Higiene de manos o guantes, control del sangrado, limpieza superficial cuando sea apropiado y cobertura con material limpio o estéril.</p></div>
+                        <div class="node"><h3>🚫 Objetos Empalados</h3><p>No retirar en el lugar. Estabilizar el objeto con material acolchado, controlar el sangrado alrededor y organizar atención médica urgente.</p></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>El soporte vital básico constituye una competencia esencial para la primera respuesta policial porque permite actuar durante los minutos iniciales de una emergencia, cuando el control de una hemorragia, la permeabilidad de la vía aérea, la prevención del shock o el inicio de la reanimación cardiopulmonar pueden modificar de manera decisiva la evolución de la víctima.</p>
+                        <p>Estas intervenciones no son acciones aisladas: forman parte de una secuencia de valoración, priorización, ejecución técnica, reevaluación y coordinación con los servicios de salud (Jacobs, s. f.; Chiarelli, s. f.; Werner, s. f.).</p>
+                        <p>El dominio de estas competencias fortalece la capacidad del personal policial para intervenir de manera técnica, responsable y segura. La capacitación práctica y la actualización periódica de protocolos deben acompañar el conocimiento conceptual.</p>
+                    `}
+                ]
+            },
+            // TEMA 15
+            {
+                titulo: "Metodología de la Investigación Científica",
+                icono: "🔬",
+                diapositivas: [
+                    { portada: true, titulo: "METODOLOGÍA DE LA<br>INVESTIGACIÓN CIENTÍFICA", subtitulo: "PROCESO SISTEMÁTICO Y VERIFICABLE" },
+                    { titulo: "📌 PLANTEAMIENTO DEL PROBLEMA", tag: "I", contenido: `
+                        <div class="node"><h3>🔍 Planteamiento del Problema</h3><p>Transforma una situación general en un problema investigable. Precisa qué ocurre, a quién afecta, en qué contexto y por qué es necesario estudiarlo (Hernández Sampieri et al., 2014).</p></div>
+                        <div class="node"><h3>🆔 Identificación del Problema</h3><p>Reconocer una situación concreta que presenta una brecha entre una condición esperada y una realidad observada. Examinar antecedentes, datos y síntomas (Bernal, 2016).</p></div>
+                        <div class="node"><h3>📝 Descripción del Problema</h3><p>Desarrollar características, antecedentes, magnitud, contexto, población afectada y posibles relaciones entre variables (Tamayo y Tamayo, 2004).</p></div>
+                        <div class="node"><h3>❓ Pregunta de Investigación</h3><p>Expresa de forma interrogativa el núcleo del problema y orienta la búsqueda de evidencia. Debe ser clara, delimitada, viable y susceptible de respuesta científica.</p></div>
+                    `},
+                    { titulo: "🎯 JUSTIFICACIÓN Y DELIMITACIÓN", tag: "II", contenido: `
+                        <div class="node"><h3>🎯 Justificación</h3><p>Explica por qué la investigación es necesaria, pertinente y útil. Demuestra relevancia en términos de aporte al conocimiento, solución de problemas y beneficio social (Hernández Sampieri et al., 2014).</p></div>
+                        <div class="node"><h3>👥 Justificación Social</h3><p>Beneficios para la población, grupos específicos o convivencia comunitaria. En el ámbito policial se relaciona con seguridad ciudadana, protección de derechos y prevención del delito.</p></div>
+                        <div class="node"><h3>⚙️ Justificación Técnica</h3><p>Mejora de procedimientos, métodos, instrumentos, protocolos, recursos o capacidades operativas (Bernal, 2016).</p></div>
+                        <div class="node"><h3>🏛️ Justificación Institucional</h3><p>Fortalece el cumplimiento de funciones, objetivos, políticas y procesos internos de una organización.</p></div>
+                        <div class="node"><h3>⚖️ Justificación Jurídica</h3><p>Relación del problema con normas, competencias, derechos, obligaciones y procedimientos legales aplicables.</p></div>
+                        <div class="node"><h3>📏 Delimitación</h3><p>Establece los límites del estudio: temática, espacial y temporal (Bernal, 2016). Evita investigaciones excesivamente amplias.</p></div>
+                    `},
+                    { titulo: "🎯 OBJETIVOS DE LA INVESTIGACIÓN", tag: "III", contenido: `
+                        <div class="node"><h3>🎯 Objetivos</h3><p>Expresan los resultados cognoscitivos que se pretende alcanzar. Se derivan del problema y se formulan con verbos claros: describir, identificar, analizar, determinar, comparar o evaluar (Hernández Sampieri et al., 2014).</p></div>
+                        <div class="node"><h3>🎯 Objetivo General</h3><p>Sintetiza el propósito principal del estudio y responde directamente a la pregunta central. Debe ser único, amplio pero concreto.</p></div>
+                        <div class="node"><h3>📋 Objetivos Específicos</h3><p>Descomponen el objetivo general en resultados parciales y ordenados. Cada uno contribuye al logro del propósito central y se vincula con información que pueda obtenerse (Tamayo y Tamayo, 2004).</p></div>
+                        <div class="node"><h3>🔗 Coherencia Metodológica</h3><p>La pregunta orienta los objetivos; los objetivos determinan qué información se necesita; el enfoque y el diseño establecen cómo obtenerla; los instrumentos permiten registrar datos; y el análisis conduce a conclusiones.</p></div>
+                    `},
+                    { titulo: "📚 SUSTENTO TEÓRICO", tag: "IV", contenido: `
+                        <div class="node"><h3>📚 Sustento Teórico</h3><p>Reúne conceptos, teorías, antecedentes, normas y referentes institucionales necesarios para comprender el problema y orientar el análisis (Hernández Sampieri et al., 2014).</p></div>
+                        <div class="node"><h3>📖 Marco Conceptual</h3><p>Define los términos fundamentales que serán utilizados y precisa su significado dentro del estudio. Evita ambigüedades (Bernal, 2016).</p></div>
+                        <div class="node"><h3>🧠 Marco Teórico</h3><p>Integra enfoques, proposiciones y antecedentes científicos que explican o permiten comprender el fenómeno. Relaciona conceptos y orienta hipótesis o categorías.</p></div>
+                        <div class="node"><h3>⚖️ Marco Legal</h3><p>Identifica y analiza las disposiciones normativas relacionadas con el objeto de estudio. Establece jerarquía y relación con funciones y procedimientos.</p></div>
+                        <div class="node"><h3>🏛️ Marco Institucional</h3><p>Describe la organización, competencias, estructura, misión y procesos relacionados con el objeto de estudio (Bernal, 2016).</p></div>
+                    `},
+                    { titulo: "🔬 METODOLOGÍA GENERAL", tag: "V", contenido: `
+                        <div class="node"><h3>🔬 Enfoque de Investigación</h3><p><strong>Cuantitativo:</strong> medición, variables y análisis numérico.<br><strong>Cualitativo:</strong> comprensión de significados, experiencias y contextos.<br><strong>Mixto:</strong> integra ambos tipos de evidencia (Hernández Sampieri et al., 2014).</p></div>
+                        <div class="node"><h3>📋 Tipo y Diseño</h3><p><strong>Tipo:</strong> descriptivo, correlacional, explicativo o aplicado.<br><strong>Diseño:</strong> experimental o no experimental; transversal o longitudinal (Bernal, 2016).</p></div>
+                        <div class="node"><h3>👥 Población y Muestra</h3><p><strong>Población:</strong> conjunto total de unidades que cumplen los criterios definidos.<br><strong>Muestra:</strong> subconjunto seleccionado para obtener información.</p></div>
+                        <div class="node"><h3>🛠️ Técnicas de Investigación</h3><p>Observación, entrevista y encuesta. Su selección depende del enfoque, la fuente de datos y el tipo de evidencia requerida (Bernal, 2016).</p></div>
+                        <div class="node"><h3>📋 Instrumentos</h3><p>Guía de observación, guía de entrevista y cuestionario. Deben traducir los objetivos y variables en indicadores observables (Hernández Sampieri et al., 2014).</p></div>
+                        <div class="node"><h3>📊 Análisis e Interpretación</h3><p>Organizar, clasificar, comparar y relacionar los datos; explicar qué significan los hallazgos dentro del problema y el sustento teórico.</p></div>
+                    `},
+                    { titulo: "📝 PROPUESTA, CONCLUSIONES Y REFERENCIAS", tag: "VI", contenido: `
+                        <div class="node"><h3>📝 Propuesta de la Investigación</h3><p>Respuesta aplicada que se formula cuando los resultados justifican una intervención, mejora, protocolo, plan o programa (Bernal, 2016).</p></div>
+                        <div class="node"><h3>🎯 Título y Objetivo de la Propuesta</h3><p>El título expresa de manera breve la intervención planteada. El objetivo define el cambio o resultado práctico que se pretende alcanzar.</p></div>
+                        <div class="node"><h3>⚙️ Desarrollo de la Propuesta</h3><p>Describe componentes, actividades, responsables, recursos, cronograma, forma de ejecución y mecanismos de seguimiento.</p></div>
+                        <div class="node"><h3>✅ Conclusiones</h3><p>Proposiciones finales derivadas del análisis. Responden de forma directa a cada objetivo y señalan los hallazgos más relevantes (Bernal, 2016).</p></div>
+                        <div class="node"><h3>📋 Recomendaciones</h3><p>Acciones prácticas, ajustes institucionales, nuevas investigaciones o medidas preventivas a partir de las conclusiones.</p></div>
+                        <div class="node"><h3>📚 Referencias y Anexos</h3><p>Registran de manera normalizada las fuentes utilizadas (APA 7). Los anexos reúnen materiales complementarios: instrumentos, matrices, autorizaciones, tablas extensas.</p></div>
+                    `},
+                    { conclusion: true, titulo: "✅ CONCLUSIÓN", tag: "VII", contenido: `
+                        <p>La metodología de la investigación científica ofrece una estructura lógica para convertir problemas institucionales y sociales en procesos sistemáticos de producción de conocimiento.</p>
+                        <p>En el ámbito policial, su aplicación fortalece la capacidad de diagnosticar fenómenos, evaluar procedimientos y formular decisiones sustentadas en evidencia (Hernández Sampieri et al., 2014; Bernal, 2016; Tamayo y Tamayo, 2004).</p>
+                        <p>La calidad de una investigación depende de la coherencia interna: el problema conduce a preguntas y objetivos claros; el sustento teórico proporciona conceptos y marcos de interpretación; la metodología produce datos pertinentes; el análisis responde a los objetivos; y las conclusiones se derivan de los resultados obtenidos.</p>
+                    `}
+                ]
+            }
+        ];
+
+        // ===== LÓGICA DE LA APLICACIÓN =====
+        let currentTemaIndex = -1;
+        let currentSlideIndex = 0;
+        let totalSlides = 0;
+        let isAnimating = false;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const menuContainer = document.getElementById('menuContainer');
+        const menuGrid = document.getElementById('menuGrid');
+        const slidesContainer = document.getElementById('slidesContainer');
+        const navControls = document.getElementById('navControls');
+        const progressBar = document.getElementById('progressBar');
+        const btnBackMenu = document.getElementById('btnBackMenu');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const counter = document.getElementById('counter');
+
+        // Generar menú
+        temas.forEach((tema, index) => {
+            const div = document.createElement('div');
+            div.className = 'menu-item';
+            div.innerHTML = `<span class="num">${index + 1}</span> <span>${tema.icono} ${tema.titulo}</span>`;
+            div.onclick = () => abrirTema(index);
+            menuGrid.appendChild(div);
+        });
+
+        // Generar diapositivas para un tema
+        function abrirTema(index) {
+            currentTemaIndex = index;
+            currentSlideIndex = 0;
+            const tema = temas[index];
+            totalSlides = tema.diapositivas.length;
+
+            slidesContainer.innerHTML = '';
+
+            tema.diapositivas.forEach((slideData, sIndex) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'slide';
+                slideDiv.dataset.index = sIndex;
+
+                if (slideData.portada) {
+                    slideDiv.style.cssText = 'justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at 50% 30%, #1f3f1f, #0a120a);';
+                    slideDiv.innerHTML = `
+                        <div class="portada-logo"><img src="cefotes.png" alt="Logo CEFOTES"></div>
+                        <div class="badge-tema">UNIDAD TEMÁTICA N° ${index + 1}</div>
+                        <h1 class="titulo-portada">${slideData.titulo}</h1>
+                        <div class="subtitulo-portada">${slideData.subtitulo}</div>
+                        <div style="margin-top: 15px; color: #e6c84c; font-size: 1.1rem; letter-spacing: 4px; font-weight: 300;">POLICÍA BOLIVIANA</div>
+                        <div style="margin-top: 25px; color: #d4c28a; font-size: 0.95rem; border-top: 1px solid #e6c84c60; padding-top: 15px; width: 70%;">
+                            <span style="display: inline-block; margin: 0 12px;">📜 ${tema.titulo.split(' ')[0]}</span>
+                        </div>
+                    `;
+                } else if (slideData.conclusion) {
+                    slideDiv.innerHTML = `
+                        <img src="unipol.png" alt="Logo UNIPOL" class="logo-unipol">
+                        <div class="slide-title">${slideData.titulo} <span>${slideData.tag}</span></div>
+                        <div class="card-conclusion">${slideData.contenido}</div>
+                        <div class="footer-slide"><span>CEFOTES - Formación Técnico Superior</span><span class="num">${sIndex + 1} / ${totalSlides}</span></div>
+                    `;
+                } else {
+                    // Detecta si hay 2 o 3 columnas para ajustar el grid
+                    const numNodes = (slideData.contenido.match(/<div class="node/g) || []).length;
+                    const gridCols = numNodes <= 2 ? '1fr 1fr' : '1fr 1fr 1fr';
+                    slideDiv.innerHTML = `
+                        <img src="unipol.png" alt="Logo UNIPOL" class="logo-unipol">
+                        <div class="slide-title">${slideData.titulo} <span>${slideData.tag}</span></div>
+                        <div class="map-grid" style="grid-template-columns: ${gridCols};">${slideData.contenido}</div>
+                        <div class="footer-slide"><span>CEFOTES - Formación Técnico Superior</span><span class="num">${sIndex + 1} / ${totalSlides}</span></div>
+                    `;
+                }
+                slidesContainer.appendChild(slideDiv);
+            });
+
+            menuContainer.classList.add('hidden');
+            slidesContainer.classList.add('active');
+            navControls.classList.add('active');
+            progressBar.classList.add('active');
+            btnBackMenu.classList.add('active');
+
+            const firstSlide = slidesContainer.querySelector('.slide[data-index="0"]');
+            if (firstSlide) firstSlide.classList.add('active');
+            updateUI();
+        }
+
+        function volverAlMenu() {
+            menuContainer.classList.remove('hidden');
+            slidesContainer.classList.remove('active');
+            navControls.classList.remove('active');
+            progressBar.classList.remove('active');
+            btnBackMenu.classList.remove('active');
+            slidesContainer.innerHTML = '';
+            currentTemaIndex = -1;
+            currentSlideIndex = 0;
+        }
+
+        function updateUI() {
+            counter.textContent = (currentSlideIndex + 1) + ' / ' + totalSlides;
+            progressBar.style.width = ((currentSlideIndex + 1) / totalSlides * 100) + '%';
+        }
+
+        function showSlide(newIndex, direction = 'next') {
+            if (isAnimating || newIndex === currentSlideIndex || newIndex < 0 || newIndex >= totalSlides) return;
+            isAnimating = true;
+
+            const slides = slidesContainer.querySelectorAll('.slide');
+            const currentSlide = slides[currentSlideIndex];
+            const nextSlide = slides[newIndex];
+
+            slides.forEach(s => s.classList.remove('active', 'salir-izquierda', 'entrar-derecha'));
+
+            if (direction === 'next') {
+                currentSlide.classList.add('salir-izquierda');
+                nextSlide.classList.add('entrar-derecha');
+                void nextSlide.offsetWidth;
+                nextSlide.classList.remove('entrar-derecha');
+                nextSlide.classList.add('active');
+            } else {
+                currentSlide.style.transform = 'translateX(60px) scale(0.98)';
+                currentSlide.style.opacity = '0';
+                nextSlide.style.transform = 'translateX(-60px) scale(0.98)';
+                nextSlide.style.opacity = '0';
+                void nextSlide.offsetWidth;
+                nextSlide.style.transform = 'translateX(0) scale(1)';
+                nextSlide.style.opacity = '1';
+                nextSlide.classList.add('active');
+            }
+
+            currentSlideIndex = newIndex;
+            updateUI();
+
+            setTimeout(() => { isAnimating = false; }, 580);
+        }
+
+        function nextSlide() { if (currentSlideIndex < totalSlides - 1) showSlide(currentSlideIndex + 1, 'next'); }
+        function prevSlide() { if (currentSlideIndex > 0) showSlide(currentSlideIndex - 1, 'prev'); }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        btnBackMenu.addEventListener('click', volverAlMenu);
+
+        document.addEventListener('keydown', (e) => {
+            if (currentTemaIndex === -1) return;
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+            else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prevSlide(); }
+        });
+
+        slidesContainer.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        slidesContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) { if (diff > 0) nextSlide(); else prevSlide(); }
+        }, { passive: true });
+    </script>
+</body>
+</html>
